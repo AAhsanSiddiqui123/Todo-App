@@ -1,0 +1,30 @@
+.mainContainer{
+    width: 100%;
+}
+
+.inputDiv{
+    display: flex;
+    box-sizing: border-box;
+    margin-top: 10px;
+}
+
+.inputDiv input {
+    width: 80%;
+    padding: 10px;
+    border: none;
+    border: solid 1px lightgray;
+    margin-right: 1px;
+}
+
+.inputDiv button{
+    width: 20%;
+    font-size: 30px;
+    background-color: #8C49E6;
+    color: white;
+    border: none;
+}
+
+ul{
+    list-style-position: inside;
+    padding-left: 0;
+}

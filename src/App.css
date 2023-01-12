@@ -1,0 +1,45 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.App {
+  background-color: rgb(255, 255, 255);
+  padding: 20px;
+  max-height: 550px;
+  overflow: auto;
+  padding-bottom: 36px;
+}
+
+
+.mainContainer {
+  position: relative;
+  width: 30%;
+  margin: auto;
+  margin-top: 70px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  height: 40px;
+  width: 100%;
+  display: flex;
+  padding-left: 20px;
+  padding-right: 20px;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  background-color: white;
+}
+
+
+.footer button{
+  width: 20%;
+  height: 30px;
+  background-color: #8C49E6;
+  color: white;
+  border: none;
+}

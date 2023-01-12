@@ -27,7 +27,6 @@ export default class ToDoItems extends Component {
   }
 
   deleteHandler = (id) => {
-    // console.log(this.state.inputArray);
     let newArray = this.state.inputArray.filter((curr) => {
       return curr.id !== id;
     })

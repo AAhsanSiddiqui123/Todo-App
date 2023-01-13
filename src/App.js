@@ -1,6 +1,5 @@
 
 import './App.css';
-import ToDoItems from "./components/toDoItems";
 import React, {Component } from 'react';
 
 

@@ -12,7 +12,7 @@ export default class List extends Component {
     }
 
     render() {
-
+        console.log("sdasdsd")
         return (
             <div className={style.listContainer}>
                 <li className={style.listitems}>

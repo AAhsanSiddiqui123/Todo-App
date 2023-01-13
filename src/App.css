@@ -14,9 +14,9 @@
 
 
 .mainContainer {
+  margin: auto;
   position: relative;
   width: 30%;
-  margin: auto;
   margin-top: 70px;
 }
 

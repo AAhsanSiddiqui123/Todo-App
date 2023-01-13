@@ -70,7 +70,6 @@ export default class ToDoItems extends Component {
             })
           }
         </ul>
-
       </Fragment>
 
     )

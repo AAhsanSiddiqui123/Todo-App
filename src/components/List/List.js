@@ -8,6 +8,7 @@ export default class List extends Component {
 
     deleteHandler = () => {
         this.props.fun(this.props.id)
+        
     }
 
     render() {

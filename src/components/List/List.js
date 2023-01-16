@@ -1,26 +1,31 @@
-import React, {Component } from 'react';
+import React, { } from 'react';
 import style from "./List.module.css";
 
 
 
-export default class List extends Component {
+function List (props){
 
-
-    deleteHandler = () => {
-        this.props.fun(this.props.id)
-        
+    function clickHandler (e) {
+        if (e.target.classList.contains('closeBtn')) {
+            props.deleteFun(props.id)
+        } else {
+            props.updateFun(props.id)
+        }
     }
 
-    render() {
-        console.log("sdasdsd")
-        return (
-            <div className={style.listContainer}>
-                <li className={style.listitems}>
-                    <p>{this.props.value}</p>
-                    <button onClick={this.deleteHandler}>✖</button>
-                </li>
-            </div>
-        )
-    }
+
+    return (
+        <div className="listContainer" style={{ cursor: "pointer" }} onClick={clickHandler} >
+
+        <li className={style.listitems}>
+            <p>{props.value}</p>
+            <button className='closeBtn'>✖</button>
+        </li>
+
+    </div>
+    )
+
 
 }
+
+export default List

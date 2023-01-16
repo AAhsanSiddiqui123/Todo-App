@@ -20,7 +20,6 @@ export default class App extends Component{
     return (
       
       <div className='mainContainer'>
-     <h1>Ahsan </h1>
     </div>
   );
 }

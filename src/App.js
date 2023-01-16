@@ -2,6 +2,8 @@
 import './App.css';
 import ToDoItems from "./components/toDoItems";
 import React, { Component, useState } from 'react';
+import axios from 'axios';
+
 
 
 function App() {
@@ -9,8 +11,14 @@ function App() {
   const [clear, setClear] = useState(false)
 
 
-  function clearHandler() {
-    setClear(!clear)
+  async function clearHandler() {
+
+   let test = await axios({
+      method: 'get',
+      url: 'https://jsonplaceholder.typicode.com/todos',
+    })
+
+    console.log(test.data);
   }
 
   return (

@@ -1,0 +1,35 @@
+
+.listitems{
+    background-color: #e4e0e0;
+    list-style: none;
+    width: 100%;
+    margin-top: 5px;
+    padding:8px;
+    display: flex;
+    position: relative;
+    /* box-sizing: border-box; */
+
+}
+
+.listitems button{
+    width: 15%;
+    height: 100%;
+    border: none;
+    background-color: #E74D3D;
+    color: rgb(255, 255, 255);
+    font-size: 20px;  
+    border-radius: 3px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    
+}
+
+.listitems button:hover{
+    background-color: #e74532;
+    cursor: pointer;    
+}
+
+.listitems:hover{
+    background-color: rgb(179, 176, 176);
+}

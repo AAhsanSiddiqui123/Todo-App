@@ -2,11 +2,13 @@ import React, { Fragment, useState, useEffect } from 'react';
 import style from "./toDoItems.module.css";
 import List from "./List/List";
 import Form from './Form/Form';
+import { axiosService } from "../Services/axios.service";
+import { Get_AllUser_url, Delete_User_url, Post_User_url, Patch_User_url } from "../Services/url"
 
 
 function ToDoItems(props) {
 
-  const [inputChange, setInput] = useState("ygyyy");
+  const [inputChange, setInput] = useState("");
   const [inputArray, setinputArray] = useState([]);
   const [updatedId, setupdatedId] = useState("");
   const [isUpdate, setisUpdate] = useState(false);
@@ -23,20 +25,47 @@ function ToDoItems(props) {
   function submitHandler(e) {
     e.preventDefault();
 
+    // find if the id is already available or not then update
     let valueFound = inputArray.find((curr) => {
       return curr.id === updatedId
     })
 
     if (valueFound) {
-      valueFound.value = inputChange
+      console.log(`${Patch_User_url}/${updatedId}`);
+      const obj = {
+        name: inputChange
+      }
+      axiosService({
+        method: "PATCH",
+        url: `${Patch_User_url}/${updatedId}`,
+        body: obj,
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      })
+      valueFound.name = inputChange
       setupdatedId("")
 
     } else if (inputChange) {
-      setisUpdate(false)
-      inputArray.push({
-        value: inputChange,
+    // if id not found then add elemetn to the array
+      setisUpdate(false);
+
+      const obj = {
+        name: inputChange,
         id: Math.random()
+      }
+      axiosService({
+        method: "POST",
+        url: Post_User_url,
+        body: obj,
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
       })
+
+      setinputArray([...inputArray, obj])
+
+
     } else {
       return
     }
@@ -48,6 +77,18 @@ function ToDoItems(props) {
 
 
   function deleteHandler(id) {
+    const obj = {
+      id: id
+    }
+    axiosService({
+      method: "DELETE",
+      url: `${Delete_User_url}/${id}`,
+      body: obj,
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    })
+
     let newArray = inputArray.filter((curr) => {
       return curr.id !== id;
     })
@@ -70,10 +111,21 @@ function ToDoItems(props) {
     setisUpdate(toggle)
   }
 
+  /////////////////////////////////////////////////////////useEffect///////////////////////////////////////////////
+
   useEffect(() => {
     setinputArray([])
     setInput("")
   }, [props])
+
+  useEffect(() => {
+    axiosService({ url: Get_AllUser_url }).then((res) => {
+      setinputArray(res.data)
+      console.log(res.data);
+    }).catch((err) => {
+      console.log(err);
+    })
+  }, [])
 
   return (
     <Fragment>
@@ -98,7 +150,7 @@ function ToDoItems(props) {
         {
           inputArray.map((curr) => {
             return <List
-              value={curr.value}
+              value={curr.name}
               deleteFun={deleteHandler}
               updateFun={updateHandler}
               id={curr.id}

@@ -1,17 +1,25 @@
 import React, { Fragment, useState, useEffect } from 'react';
+
 import style from "./toDoItems.module.css";
 import List from "./List/List";
 import Form from './Form/Form';
 import { axiosService } from "../Services/axios.service";
 import { Get_AllUser_url, Delete_User_url, Post_User_url, Patch_User_url } from "../Services/url"
+import { useSelector, useDispatch } from 'react-redux';
+import { magageStateAction } from '../Store/manageState';
+import {todoActionCreater} from "../Store/todoItemsList";
+
 
 
 function ToDoItems(props) {
 
+
+  const dispatch = useDispatch();
+  const isupdate = useSelector((state) => state.update.isupdate);
+  const updatedId = useSelector((state) => state.update.updatedId);
+  const inputArray = useSelector((state) => state.todoReducer.dataArray);
+
   const [inputChange, setInput] = useState("");
-  const [inputArray, setinputArray] = useState([]);
-  const [updatedId, setupdatedId] = useState("");
-  const [isUpdate, setisUpdate] = useState(false);
 
 
   function changeHandler(value) {
@@ -20,18 +28,14 @@ function ToDoItems(props) {
 
 
   /////////////////////////////////////////////////////////submit///////////////////////////////////////////////
-
-
+  
+  
   function submitHandler(e) {
+    dispatch(magageStateAction.formUpdateHandler(false))
+  
     e.preventDefault();
 
-    // find if the id is already available or not then update
-    let valueFound = inputArray.find((curr) => {
-      return curr.id === updatedId
-    })
-
-    if (valueFound) {
-      console.log(`${Patch_User_url}/${updatedId}`);
+    if (updatedId) {
       const obj = {
         name: inputChange
       }
@@ -43,12 +47,15 @@ function ToDoItems(props) {
           'Content-type': 'application/json; charset=UTF-8',
         },
       })
-      valueFound.name = inputChange
-      setupdatedId("")
+
+      dispatch(todoActionCreater.updateHandler({updatedId , inputChange}))
+      dispatch(magageStateAction.foundUpdateIdHandler(""))
+
 
     } else if (inputChange) {
     // if id not found then add elemetn to the array
-      setisUpdate(false);
+    dispatch(magageStateAction.formUpdateHandler(false))
+
 
       const obj = {
         name: inputChange,
@@ -62,14 +69,13 @@ function ToDoItems(props) {
           'Content-type': 'application/json; charset=UTF-8',
         },
       })
-
-      setinputArray([...inputArray, obj])
+      dispatch(todoActionCreater.listHandler([...inputArray, obj]))
 
 
     } else {
       return
     }
-    setisUpdate(false)
+    dispatch(magageStateAction.formUpdateHandler(false))
     setInput()
   }
 
@@ -93,7 +99,7 @@ function ToDoItems(props) {
       return curr.id !== id;
     })
 
-    setinputArray(newArray)
+    dispatch(todoActionCreater.listHandler(newArray))
   }
 
 
@@ -103,29 +109,30 @@ function ToDoItems(props) {
   function updateHandler(id) {
     if (toggle) {
       toggle = false;
-      setupdatedId('')
+      dispatch(magageStateAction.foundUpdateIdHandler(""))
     } else {
       toggle = true;
-      setupdatedId(id)
+      dispatch(magageStateAction.foundUpdateIdHandler(id))
     }
-    setisUpdate(toggle)
+    dispatch(magageStateAction.formUpdateHandler(toggle))
   }
 
   /////////////////////////////////////////////////////////useEffect///////////////////////////////////////////////
 
   useEffect(() => {
-    setinputArray([])
+    dispatch(todoActionCreater.listHandler([]))
     setInput("")
-  }, [props])
+  }, [props, dispatch])
 
   useEffect(() => {
+    
     axiosService({ url: Get_AllUser_url }).then((res) => {
-      setinputArray(res.data)
-      console.log(res.data);
+      dispatch(todoActionCreater.listHandler(res.data))
+
     }).catch((err) => {
       console.log(err);
     })
-  }, [])
+  }, [dispatch])
 
   return (
     <Fragment>
@@ -133,7 +140,7 @@ function ToDoItems(props) {
       <div className={style.mainContainer}>
         <form onSubmit={submitHandler}>
           <div className={style.inputDiv}>
-            {isUpdate ? <Form
+            {isupdate ? <Form
               val={inputChange}
               fun={changeHandler}
               sign="/"

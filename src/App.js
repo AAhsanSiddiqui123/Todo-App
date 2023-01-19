@@ -22,7 +22,7 @@ return (
       <ToDoItems clearVal={clear} />
     </div>
     <div className="footer">
-       
+      <p>Click To Erase All Todo</p>
       <button onClick={clearHandler}>Clear All</button>
     </div>
   </div>

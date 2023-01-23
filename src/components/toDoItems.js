@@ -8,11 +8,9 @@ import { Get_AllUser_url, Delete_User_url, Post_User_url, Patch_User_url } from 
 import { useSelector, useDispatch } from 'react-redux';
 import { magageStateAction } from '../Store/manageState';
 import {todoActionCreater} from "../Store/todoItemsList";
-
-
+import {sendUserRequest} from "../Store/todoItemsList"
 
 function ToDoItems(props) {
-
 
   const dispatch = useDispatch();
   const isupdate = useSelector((state) => state.update.isupdate);
@@ -21,11 +19,9 @@ function ToDoItems(props) {
 
   const [inputChange, setInput] = useState("");
 
-
   function changeHandler(value) {
     setInput(value.target.value)
   }
-
 
   /////////////////////////////////////////////////////////submit///////////////////////////////////////////////
   
@@ -125,13 +121,7 @@ function ToDoItems(props) {
   }, [props, dispatch])
 
   useEffect(() => {
-    
-    axiosService({ url: Get_AllUser_url }).then((res) => {
-      dispatch(todoActionCreater.listHandler(res.data))
-
-    }).catch((err) => {
-      console.log(err);
-    })
+      dispatch(sendUserRequest(Get_AllUser_url))
   }, [dispatch])
 
   return (

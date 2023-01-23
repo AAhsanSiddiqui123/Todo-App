@@ -1,4 +1,6 @@
 import { createSlice, current } from '@reduxjs/toolkit';
+import { axiosService } from "../Services/axios.service";
+
 
 const initialCounterState = { dataArray: [] };
 
@@ -24,14 +26,22 @@ const toDoItems = createSlice({
       }
 
       state.dataArray[indexdValue] = obj
-  
-      console.log(obj);
     },
-
 
 
   },
 });
+
+export const sendUserRequest = (url)=>{
+  return (dispatch)=>{
+    axiosService({ url}).then((res) => {
+      dispatch(todoActionCreater.listHandler(res.data))
+
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
+}
 
 export const todoActionCreater = toDoItems.actions;
 

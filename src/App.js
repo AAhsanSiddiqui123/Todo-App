@@ -1,7 +1,7 @@
 
 import './App.css';
 import ToDoItems from "./components/toDoItems";
-import React, { Component, useState } from 'react';
+import React, {  useState } from 'react';
 
 
 function App() {

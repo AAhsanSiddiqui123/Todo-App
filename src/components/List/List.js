@@ -3,15 +3,14 @@ import style from "./List.module.css";
 
 
 
-function List (props){
+function List(props) {
 
-    function clickHandler (e) {
+
+    function clickHandler(e) {
         if (e.target.classList.contains('closeBtn')) {
             props.deleteFun(props.id)
-            console.log(props.id);
         } else {
             props.updateFun(props.id);
-            console.log(props.id);
         }
     }
 
@@ -19,12 +18,12 @@ function List (props){
     return (
         <div className="listContainer" style={{ cursor: "pointer" }} onClick={clickHandler} >
 
-        <li className={style.listitems}>
-            <p>{props.value}</p>
-            <button className='closeBtn'>✖</button>
-        </li>
+            <li className={style.listitems}>
+                <p>{props.value}</p>
+                <button className='closeBtn'>✖</button>
+            </li>
 
-    </div>
+        </div>
     )
 
 

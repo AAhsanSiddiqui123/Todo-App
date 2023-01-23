@@ -9,7 +9,7 @@ function ToDoItems(props) {
   const [inputChange, setInput] = useState("");
   const [inputArray, setinputArray] = useState([]);
   const [updatedId, setupdatedId] = useState("");
-  const [isUpdate, setisUpdate] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
 
 
   function changeHandler(value) {
@@ -22,29 +22,33 @@ function ToDoItems(props) {
   function submitHandler(e) {
     e.preventDefault();
 
-    let valueFound = inputArray.find((curr) => {
+    let indexdValue = inputArray.findIndex((curr) => {
       return curr.id === updatedId
     })
 
-    if (valueFound) {
-      valueFound.value = inputChange
-      setupdatedId("")
+    if (updatedId) {
+      let obj = {
+        ...inputArray[indexdValue],
+        value: inputChange
+      }
+      let updatedArray = [...inputArray]
+      updatedArray[indexdValue] = obj;
+
+      setinputArray(updatedArray)
+      setupdatedId('')
 
     } else if (inputChange) {
-      setisUpdate(false)
+      setIsEdit(false)
 
-      setinputArray((pre)=>{
-
-        return pre.concat({
-          value: inputChange,
-          id: Math.random()
-        })
-      })
+      setinputArray([...inputArray,{
+        value: inputChange,
+        id: Math.random()
+      }])
 
     } else {
       return
     }
-    setisUpdate(false)
+    setIsEdit(false)
     setInput()
   }
 
@@ -62,16 +66,14 @@ function ToDoItems(props) {
 
   /////////////////////////////////////////////////////////update///////////////////////////////////////////////
 
-  let toggle = true;
   function updateHandler(id) {
-    if (toggle) {
-      toggle = false;
+    if (isEdit) {
+      setIsEdit(!isEdit)
       setupdatedId('')
     } else {
-      toggle = true;
+      setIsEdit(!isEdit)
       setupdatedId(id)
     }
-    setisUpdate(toggle)
   }
 
   useEffect(() => {
@@ -85,15 +87,11 @@ function ToDoItems(props) {
       <div className={style.mainContainer}>
         <form onSubmit={submitHandler}>
           <div className={style.inputDiv}>
-            {isUpdate ? <Form
-              val={inputChange}
-              fun={changeHandler}
-              sign="/"
-            /> : <Form
-              val={inputChange}
-              fun={changeHandler}
-              sign="+"
-            />}
+            {<Form
+              value={inputChange}
+              changeHandler={changeHandler}
+              edit={isEdit}
+            /> }
           </div>
         </form>
       </div>

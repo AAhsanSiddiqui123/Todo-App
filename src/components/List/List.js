@@ -8,8 +8,10 @@ function List (props){
     function clickHandler (e) {
         if (e.target.classList.contains('closeBtn')) {
             props.deleteFun(props.id)
+            console.log(props.id);
         } else {
-            props.updateFun(props.id)
+            props.updateFun(props.id);
+            console.log(props.id);
         }
     }
 

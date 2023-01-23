@@ -6,7 +6,7 @@ import Form from './Form/Form';
 
 function ToDoItems(props) {
 
-  const [inputChange, setInput] = useState("ygyyy");
+  const [inputChange, setInput] = useState("");
   const [inputArray, setinputArray] = useState([]);
   const [updatedId, setupdatedId] = useState("");
   const [isUpdate, setisUpdate] = useState(false);
@@ -18,7 +18,6 @@ function ToDoItems(props) {
 
 
   /////////////////////////////////////////////////////////submit///////////////////////////////////////////////
-
 
   function submitHandler(e) {
     e.preventDefault();
@@ -33,10 +32,15 @@ function ToDoItems(props) {
 
     } else if (inputChange) {
       setisUpdate(false)
-      inputArray.push({
-        value: inputChange,
-        id: Math.random()
+
+      setinputArray((pre)=>{
+
+        return pre.concat({
+          value: inputChange,
+          id: Math.random()
+        })
       })
+
     } else {
       return
     }

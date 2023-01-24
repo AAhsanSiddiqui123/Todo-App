@@ -1,19 +1,20 @@
 import React, { Fragment, useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { axiosService } from "../Services/axios.service";
 
 import style from "./toDoItems.module.css";
 import List from "./List/List";
 import Form from './Form/Form';
-import { axiosService } from "../Services/axios.service";
 import { Get_AllUser_url, Delete_User_url, Post_User_url, Patch_User_url } from "../Services/url"
-import { useSelector, useDispatch } from 'react-redux';
 import { magageStateAction } from '../Store/manageState';
-import {todoActionCreater} from "../Store/todoItemsList";
-import {sendUserRequest} from "../Store/todoItemsList"
+import { todoActionCreater } from "../Store/todoItemsList";
+import { sendUserRequest } from "../Store/todoItemsList";
+import {productList} from "../Store/action"
 
 function ToDoItems(props) {
 
   const dispatch = useDispatch();
-  const isupdate = useSelector((state) => state.update.isupdate);
+  const isEdit = useSelector((state) => state.update.isEdit);
   const updatedId = useSelector((state) => state.update.updatedId);
   const inputArray = useSelector((state) => state.todoReducer.dataArray);
 
@@ -24,11 +25,13 @@ function ToDoItems(props) {
   }
 
   /////////////////////////////////////////////////////////submit///////////////////////////////////////////////
-  
+
   
   function submitHandler(e) {
+    
+    dispatch({type: "test_Saga"})
+
     dispatch(magageStateAction.formUpdateHandler(false))
-  
     e.preventDefault();
 
     if (updatedId) {
@@ -44,13 +47,13 @@ function ToDoItems(props) {
         },
       })
 
-      dispatch(todoActionCreater.updateHandler({updatedId , inputChange}))
+      dispatch(todoActionCreater.updateHandler({ updatedId, inputChange }))
       dispatch(magageStateAction.foundUpdateIdHandler(""))
 
 
     } else if (inputChange) {
-    // if id not found then add elemetn to the array
-    dispatch(magageStateAction.formUpdateHandler(false))
+      // if id not found then add elemetn to the array
+      dispatch(magageStateAction.formUpdateHandler(false))
 
 
       const obj = {
@@ -101,16 +104,14 @@ function ToDoItems(props) {
 
   /////////////////////////////////////////////////////////update///////////////////////////////////////////////
 
-  let toggle = true;
   function updateHandler(id) {
-    if (toggle) {
-      toggle = false;
+    if (isEdit) {
+      dispatch(magageStateAction.formUpdateHandler(!isEdit))
       dispatch(magageStateAction.foundUpdateIdHandler(""))
     } else {
-      toggle = true;
+      dispatch(magageStateAction.formUpdateHandler(!isEdit))
       dispatch(magageStateAction.foundUpdateIdHandler(id))
     }
-    dispatch(magageStateAction.formUpdateHandler(toggle))
   }
 
   /////////////////////////////////////////////////////////useEffect///////////////////////////////////////////////
@@ -121,7 +122,7 @@ function ToDoItems(props) {
   }, [props, dispatch])
 
   useEffect(() => {
-      dispatch(sendUserRequest(Get_AllUser_url))
+    dispatch(sendUserRequest(Get_AllUser_url))
   }, [dispatch])
 
   return (
@@ -130,14 +131,10 @@ function ToDoItems(props) {
       <div className={style.mainContainer}>
         <form onSubmit={submitHandler}>
           <div className={style.inputDiv}>
-            {isupdate ? <Form
+            {<Form
               val={inputChange}
-              fun={changeHandler}
-              sign="/"
-            /> : <Form
-              val={inputChange}
-              fun={changeHandler}
-              sign="+"
+              changeHandler={changeHandler}
+              edit={isEdit}
             />}
           </div>
         </form>

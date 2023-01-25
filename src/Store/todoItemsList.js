@@ -1,5 +1,4 @@
 import { createSlice, current } from '@reduxjs/toolkit';
-import { axiosService } from "../Services/axios.service";
 
 
 const initialCounterState = { dataArray: [] };
@@ -9,12 +8,12 @@ const toDoItems = createSlice({
   initialState: initialCounterState,
   reducers: {
 
-    listHandler(state, action) {   
+    listHandler(state, action) { 
+      console.log(action.payload); 
       state.dataArray = action.payload;
     },
 
     updateHandler(state, action) {
-
       let initialArray = current(state.dataArray)
       let indexdValue = initialArray.findIndex((curr) => {
         return curr.id === action.payload.updatedId
@@ -32,16 +31,7 @@ const toDoItems = createSlice({
   },
 });
 
-export const sendUserRequest = (url)=>{
-  return (dispatch)=>{
-    axiosService({ url}).then((res) => {
-      dispatch(todoActionCreater.listHandler(res.data))
 
-    }).catch((err) => {
-      console.log(err);
-    })
-  }
-}
 
 export const todoActionCreater = toDoItems.actions;
 

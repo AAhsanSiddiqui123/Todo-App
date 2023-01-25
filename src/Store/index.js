@@ -3,7 +3,10 @@ import createSagaMiddleware from 'redux-saga';
 
 import manageStateReducer from './manageState';
 import toDoItemsReducer from "./todoItemsList";
-import UserSaga from "./getUserSaga"
+import UserSaga from "./sagas/getUserSaga";
+import deleteSaga from "./sagas/deleteUserSaga";
+import addSaga from "./sagas/addUserSaga";
+import updateSaga from "./sagas/updateUserSaga"
 
 
 const sagaMiddleware = createSagaMiddleware();
@@ -25,5 +28,9 @@ const store = configureStore({
 );
 
 sagaMiddleware.run(UserSaga);
+sagaMiddleware.run(deleteSaga);
+sagaMiddleware.run(addSaga);
+sagaMiddleware.run(updateSaga);
+
 
 export default store;

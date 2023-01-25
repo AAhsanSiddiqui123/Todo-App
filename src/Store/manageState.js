@@ -12,13 +12,7 @@ const magageState = createSlice({
 
     foundUpdateIdHandler(state, action) {
       state.updatedId = action.payload
-    },
-
-    testSaga(state, action){
-      console.log(action.data);
     }
-
-
 
   },
 });

@@ -1,15 +1,11 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { axiosService } from "../Services/axios.service";
 
 import style from "./toDoItems.module.css";
 import List from "./List/List";
 import Form from './Form/Form';
-import { Get_AllUser_url, Delete_User_url, Post_User_url, Patch_User_url } from "../Services/url"
 import { magageStateAction } from '../Store/manageState';
 import { todoActionCreater } from "../Store/todoItemsList";
-import { sendUserRequest } from "../Store/todoItemsList";
-import {productList} from "../Store/action"
 
 function ToDoItems(props) {
 
@@ -26,49 +22,38 @@ function ToDoItems(props) {
 
   /////////////////////////////////////////////////////////submit///////////////////////////////////////////////
 
-  
+
   function submitHandler(e) {
-    
-    dispatch({type: "test_Saga"})
 
     dispatch(magageStateAction.formUpdateHandler(false))
     e.preventDefault();
 
     if (updatedId) {
-      const obj = {
-        name: inputChange
-      }
-      axiosService({
-        method: "PATCH",
-        url: `${Patch_User_url}/${updatedId}`,
-        body: obj,
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
+      dispatch({
+        type: "update_saga", action: {
+          id: updatedId,
+          inputValue: inputChange
+        }
       })
 
-      dispatch(todoActionCreater.updateHandler({ updatedId, inputChange }))
       dispatch(magageStateAction.foundUpdateIdHandler(""))
-
 
     } else if (inputChange) {
       // if id not found then add elemetn to the array
       dispatch(magageStateAction.formUpdateHandler(false))
 
-
       const obj = {
         name: inputChange,
         id: Math.random()
       }
-      axiosService({
-        method: "POST",
-        url: Post_User_url,
-        body: obj,
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
+
+      dispatch({
+        type: "add_saga", action: {
+          list: inputArray,
+          item: obj,
+          inputValue: inputChange
+        }
       })
-      dispatch(todoActionCreater.listHandler([...inputArray, obj]))
 
 
     } else {
@@ -82,23 +67,13 @@ function ToDoItems(props) {
 
 
   function deleteHandler(id) {
-    const obj = {
-      id: id
-    }
-    axiosService({
-      method: "DELETE",
-      url: `${Delete_User_url}/${id}`,
-      body: obj,
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-      },
+    dispatch({
+      type: "delete_saga", action: {
+        id: id,
+        inputArray: inputArray
+      }
     })
 
-    let newArray = inputArray.filter((curr) => {
-      return curr.id !== id;
-    })
-
-    dispatch(todoActionCreater.listHandler(newArray))
   }
 
 
@@ -122,7 +97,7 @@ function ToDoItems(props) {
   }, [props, dispatch])
 
   useEffect(() => {
-    dispatch(sendUserRequest(Get_AllUser_url))
+    dispatch({ type: "user_saga", action: "payload" })
   }, [dispatch])
 
   return (
@@ -141,7 +116,7 @@ function ToDoItems(props) {
       </div>
 
       <ul>
-        {
+        {inputArray &&
           inputArray.map((curr) => {
             return <List
               value={curr.name}

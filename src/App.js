@@ -1,31 +1,20 @@
 
 import './App.css';
-import ToDoItems from "./components/toDoItems";
 import React, {  useState } from 'react';
+import NavBar from "./components/common/AppBar"
 
 
 
 
 function App() {
 
-  const [clear, setClear] = useState(false)
-  function clearHandler() {
-    setClear(!clear)
-  }
+
 
 
 return (
-
-  <div className='mainContainer'>
-    <div className="App">
-      <h1 style={{ margin: "0" }}>Todo App</h1>
-      <ToDoItems clearVal={clear} />
-    </div>
-    <div className="footer">
-      <p>Click To Erase All Todo</p>
-      <button onClick={clearHandler}>Clear All</button>
-    </div>
-  </div>
+<div className='mainContainer'>
+ <NavBar />
+</div>
 );
 
 }

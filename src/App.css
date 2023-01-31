@@ -14,12 +14,12 @@
 }
 
 
-.mainContainer {
+/* .mainContainer {
   position: relative;
   width: 30%;
   margin: auto;
   margin-top: 70px;
-}
+} */
 
 .footer {
   position: absolute;
@@ -43,4 +43,10 @@
   background-color: #8C49E6;
   color: white;
   border: none;
+}
+
+.mainContainer{
+  max-width: 70%;
+  background-color: rgb(138, 102, 102);
+  margin: auto;
 }

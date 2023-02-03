@@ -50,3 +50,7 @@
   background-color: rgb(138, 102, 102);
   margin: auto;
 }
+.css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
+  overflow: unset !important;
+  padding: 20px ;
+}

@@ -3,9 +3,11 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
+import SideBarDropDown from "../components/common/sideBarDropDown/SideBarDropDown";
 
 import style from "./HeroSection.module.css"
 import MovieCard from "../components/common/Card"
+import SideVarDropDown1 from "../components/common/sideBarDropDown/SideVarDropDown1"
 
 
 export default function FixedContainer() {
@@ -19,7 +21,10 @@ export default function FixedContainer() {
 
                     <Grid container spacing={2}>
                         <Grid item lg={3} md={3} sm={12} xs={12}>
-                            <div style={{ backgroundColor: 'lightBlue' }} >xs=8</div>
+                            <div style={{ backgroundColor: ''}} >
+                                <SideBarDropDown />
+                                <SideVarDropDown1 />
+                                </div>
                         </Grid>
                         <Grid item lg={9} md={9} sm={12} xs={12}>
                             <div style={{ backgroundColor: 'white' }} className={style.wraper}>

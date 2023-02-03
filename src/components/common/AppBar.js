@@ -99,6 +99,7 @@ function NavBar() {
                                 display: { xs: 'block', md: 'none' },
                             }}
                         >
+                            <Box>
                                 {pages.map((page, i) => (
                                     <li style={{ listStyle: "none" }}
                                         key={i}
@@ -108,7 +109,7 @@ function NavBar() {
                                         {page}
                                     </li>
                                 ))}
-                            
+                            </Box>
                         </Menu>
                     </Box>
                     <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />

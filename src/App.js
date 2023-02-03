@@ -1,7 +1,8 @@
 
 import './App.css';
-import React, {  useState } from 'react';
-import NavBar from "./components/common/AppBar"
+import React, { useState } from 'react';
+import NavBar from "./components/common/AppBar";
+import FixedContainer from "./pages/HeroSection"
 
 
 
@@ -11,11 +12,12 @@ function App() {
 
 
 
-return (
-<div className='mainContainer'>
- <NavBar />
-</div>
-);
+    return (
+        <>
+            <NavBar />
+            <FixedContainer />
+        </>
+    );
 
 }
 

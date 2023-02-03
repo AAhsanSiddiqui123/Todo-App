@@ -14,7 +14,16 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 
-const pages = ['Movies', 'TV Shows', 'People'];
+import BasicMenu from "./Menu"
+
+const pages = [<BasicMenu
+    title={"Movie"}
+/>,
+<BasicMenu
+    title={"TV Shows"}
+/>, <BasicMenu
+    title={"People"}
+/>];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function NavBar() {
@@ -37,10 +46,11 @@ function NavBar() {
     };
 
     return (
-        <AppBar position="static">
-            <Container maxWidth="xl" sx={{ backgroundColor: "#032541" }}>
+        <AppBar position="static" sx={{ backgroundColor: "#032541" }}>
+
+            <Container sx={{ backgroundColor: "#032541" }} style={{ maxWidth: "75%" }}>
+
                 <Toolbar disableGutters>
-                    {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
                     <Typography
                         variant="h6"
                         noWrap
@@ -89,11 +99,16 @@ function NavBar() {
                                 display: { xs: 'block', md: 'none' },
                             }}
                         >
-                            {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page}</Typography>
-                                </MenuItem>
-                            ))}
+                                {pages.map((page, i) => (
+                                    <li style={{ listStyle: "none" }}
+                                        key={i}
+                                        onClick={handleCloseNavMenu}
+                                        sx={{ my: 2, color: 'white', display: 'block' }}
+                                    >
+                                        {page}
+                                    </li>
+                                ))}
+                            
                         </Menu>
                     </Box>
                     <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -116,14 +131,14 @@ function NavBar() {
                         LOGO
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {pages.map((page) => (
-                            <Button
-                                key={page}
+                        {pages.map((page, i) => (
+                            <li style={{ listStyle: "none" }}
+                                key={i}
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >
                                 {page}
-                            </Button>
+                            </li>
                         ))}
                     </Box>
 

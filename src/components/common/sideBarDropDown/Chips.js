@@ -25,10 +25,10 @@ export default function Chips() {
     { key: 12, label: 'Romance' },
     { key: 13, label: 'Science Fiction' },
     { key: 14, label: 'TV Movie' },
-    { key: 11, label: 'Thriller' },
-    { key: 12, label: 'War' },
-    { key: 13, label: 'Western' },
-    { key: 14, label: 'TV Movie' },
+    { key: 15, label: 'Thriller' },
+    { key: 16, label: 'War' },
+    { key: 17, label: 'Western' },
+    { key: 18, label: 'TV Movie' },
   ]);
   return (
     <Box

@@ -2,16 +2,25 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import { useSelector, useDispatch } from 'react-redux';
+
 
 export default function BasicMenu(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const dispatch = useDispatch();
+
+
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
+  const handleClose = (e) => {
+    console.log(e.nativeEvent.target.outerText)
+    dispatch({ type: "user_saga", action: "payload" })
     setAnchorEl(null);
   };
+
+
 
   return (
     <div>
@@ -34,9 +43,10 @@ export default function BasicMenu(props) {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem  onClick={handleClose}>{props.val1}</MenuItem>
+        <MenuItem  onClick={handleClose}>{props.val2}</MenuItem>
+        <MenuItem  onClick={handleClose}>{props.val3}</MenuItem>
+        <MenuItem  onClick={handleClose}>{props.val4}</MenuItem>
       </Menu>
     </div>
   );

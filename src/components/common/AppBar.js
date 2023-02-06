@@ -16,14 +16,27 @@ import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 
 import BasicMenu from "./Menu"
 
-const pages = [<BasicMenu
+const pages = [
+<BasicMenu
     title={"Movie"}
+    val1={ "Popular"}
+    val2={ "Now Playing"}
+    val3={ "Up Comming"}
+    val4={ "Top Rated"}
 />,
 <BasicMenu
     title={"TV Shows"}
+    val1={ "Popular"}
+    val2={ "Airing Today"}
+    val3={ "On Tv"}
+    val4={ "Top Rated"}
+
 />, <BasicMenu
     title={"People"}
-/>];
+ 
+/>];   
+
+
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function NavBar() {

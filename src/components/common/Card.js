@@ -10,31 +10,32 @@ import style from "../../pages/HeroSection.module.css"
 import CircularStatic from "./RatingLoader"
 
 
-export default function MovieCard() {
+export default function MovieCard(props) {
+    console.log(props)
     return (
-        <div className={style.card}>
-            <Card sx={{ minHeight: "100%" }}>
+        // <div className={style.card}>
+            <Card sx={{ height: "400px"}}>
                 <CardMedia
                     component="img"
                     alt="green iguana"
-                    height="140"
-                    image="https://mui.com/static/images/cards/contemplative-reptile.jpg"
+                    height="300"
+                    image={`https://image.tmdb.org/t/p/w500/${props.data.poster_path}`}
                 />
+                <CircularStatic />
                 <CardContent>
-                    <CircularStatic />
-                    <Typography gutterBottom variant="h5" component="div">
-                        Lizard
+                    <Typography gutterBottom variant="h7" component="div" >
+                        <strong>{props.data.original_title}</strong>
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                        Lizards are a widespread group of squamate reptiles, with over 6,000
-                        species, ranging across all continents except Antarctica
+                    <Typography gutterBottom variant="h8" component="div" >
+                        {props.data.release_date}
                     </Typography>
+
                 </CardContent>
-                <CardActions>
+                {/* <CardActions>
                     <Button size="small">Share</Button>
                     <Button size="small">Learn More</Button>
-                </CardActions>
+                </CardActions> */}
             </Card>
-        </div>
+        // </div>
     );
 }

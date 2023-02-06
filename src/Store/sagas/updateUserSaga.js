@@ -1,5 +1,5 @@
 import { takeEvery, put } from 'redux-saga/effects'
-import { todoActionCreater } from '../todoItemsList';
+import { movieActionCreater } from '../reducers/movieReducer';
 import { Patch_User_url } from "../../Services/url"
 import { axiosService } from "../../Services/axios.service"
 
@@ -22,7 +22,7 @@ function* updateUserSaga(action) {
     console.log(action.action);
 
     yield put({
-        type: todoActionCreater.updateHandler, payload: {
+        type: movieActionCreater.updateHandler, payload: {
             updatedId: action.action.id,
             inputChange: action.action.inputValue
         }

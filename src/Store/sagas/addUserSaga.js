@@ -1,5 +1,5 @@
 import { takeEvery, put } from 'redux-saga/effects'
-import { todoActionCreater } from '../todoItemsList';
+import { movieActionCreater } from '../reducers/movieReducer';
 import { Post_User_url } from "../../Services/url"
 import { axiosService } from "../../Services/axios.service"
 
@@ -19,7 +19,7 @@ function* addUserSaga(action) {
 
     console.log("testing");
 
-    yield put({ type: todoActionCreater.listHandler, payload:  [...action.action.list, action.action.item] });
+    yield put({ type: movieActionCreater.listHandler, payload:  [...action.action.list, action.action.item] });
 }
 
 function* addSaga() {

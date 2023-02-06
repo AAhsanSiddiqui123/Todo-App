@@ -1,8 +1,8 @@
 
 import './App.css';
 import React, { useState } from 'react';
-import NavBar from "./components/common/AppBar";
-import FixedContainer from "./pages/HeroSection"
+
+import RoutesMain from "./Routes"
 
 
 
@@ -10,12 +10,11 @@ import FixedContainer from "./pages/HeroSection"
 function App() {
 
 
-
-
     return (
         <>
-            <NavBar />
-            <FixedContainer />
+       { <RoutesMain ></RoutesMain>}
+            {/* <NavBar />
+            <FixedContainer /> */}
         </>
     );
 

@@ -4,6 +4,8 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import SideBarDropDown from "../components/common/sideBarDropDown/SideBarDropDown0";
+import { useSelector, useDispatch } from 'react-redux';
+
 
 import style from "./HeroSection.module.css"
 import MovieCard from "../components/common/Card"
@@ -14,8 +16,11 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 
 export default function FixedContainer() {
-    const [drop1, setDrop1] = React.useState(false)
-    const [drop2, setDrop2] = React.useState(false)
+    const [drop1, setDrop1] = React.useState(false);
+    const [drop2, setDrop2] = React.useState(false);
+
+    const moviesArray = useSelector((state) => state.movieReducer.moviesArray);
+    console.log(moviesArray)
 
     return (
         <React.Fragment>
@@ -30,14 +35,14 @@ export default function FixedContainer() {
                             {/* <div style={{ backgroundColor: '' }} > */}
 
                             <Paper style={{ border: "solid 1px lightgrey", borderRadius: "6px", }}>
-                                <div style={{ height: "50px", cursor: "pointer", display: "flex", alignItems: "center" }} onClick={() => { return setDrop1(!drop1) }}>
+                                <div style={{ height: "60px", cursor: "pointer", display: "flex", alignItems: "center" }} onClick={() => { return setDrop1(!drop1) }}>
                                     <p>Sort</p>
                                 </div>
                                 {drop1 && <SideBarDropDown />}
                             </Paper>
 
                             <Paper style={{marginTop: "14px" , border: "solid 1px lightgrey", borderRadius: "6px" }}>
-                                <div style={{ height: "50px", cursor: "pointer", display: "flex", alignItems: "center",justifyContent: "space-between", paddingRight:"8px", paddingLeft:"8px" }} onClick={() => { return setDrop2(!drop2) }}>
+                                <div style={{ height: "60px", cursor: "pointer", display: "flex", alignItems: "center",justifyContent: "space-between", paddingRight:"8px", paddingLeft:"8px" }} onClick={() => { return setDrop2(!drop2) }}>
                                     <p>Filter</p> 
                                     <ChevronRightIcon />
                                 </div>
@@ -49,21 +54,15 @@ export default function FixedContainer() {
                         </Grid>
                         <Grid item lg={8} md={8} sm={12} xs={12}>
                             <div style={{ backgroundColor: 'white' }} className={style.wraper}>
-                                <MovieCard />
-                                <MovieCard />
-                                <MovieCard />
-                                <MovieCard />
-                                <MovieCard />
-                                <MovieCard />
-                                <MovieCard />
-                                <MovieCard />
-                                <MovieCard />
-                                <MovieCard />
-                                <MovieCard />
-                                <MovieCard />
-                                <MovieCard />
-                                <MovieCard />
+                                {moviesArray.map((curr)=>{
+                                    // console.loc(curr)
+                                    return <MovieCard
+                                        key={curr.id}
+                                        data= {curr}
+                                    />
 
+                                })}
+               
                             </div>
                         </Grid>
 

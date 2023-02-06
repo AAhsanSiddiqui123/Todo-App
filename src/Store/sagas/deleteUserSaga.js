@@ -1,5 +1,5 @@
 import { takeEvery, put } from 'redux-saga/effects'
-import { todoActionCreater } from '../todoItemsList';
+import { movieActionCreater } from '../reducers/movieReducer';
 import { Delete_User_url } from "../../Services/url"
 import { axiosService } from "../../Services/axios.service"
 
@@ -22,7 +22,7 @@ function* deleteUserSaga(action) {
     })
     
     console.log(payload);
-    yield put({ type: todoActionCreater.listHandler, payload });
+    yield put({ type: movieActionCreater.listHandler, payload });
 }
 
 function* deleteSaga() {

@@ -20,9 +20,9 @@ const pages = [
 <BasicMenu
     title={"Movie"}
     val1={ "Popular"}
-    val2={ "Now Playing"}
-    val3={ "Up Comming"}
-    val4={ "Top Rated"}
+    val2={ "NowPlaying"}
+    val3={ "UpComming"}
+    val4={ "TopRated"}
 />,
 <BasicMenu
     title={"TV Shows"}

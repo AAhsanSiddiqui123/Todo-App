@@ -1,22 +1,21 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment } from 'react';
 import { Route, Routes } from 'react-router';
-import AppBar from "./components/common/AppBar";
-import HeroSection from "./pages/HeroSection";
+
+import MainCardContainer from "./pages/HeroSection";
+
+import LandingPage from "./pages/LandingPage"
 
 
 
 const RoutesMain = () => {
 
-
     let routs;
-
     // if ("admin" === "admin") {
 
         routs = (<Routes>
-            {/* <Route path="/" element={<AdminLayout />} > */}
-                <Route path="/home" element={<AppBar />} />
-                <Route path="/hero" element={<HeroSection />} />
-            {/* </Route> */}
+            <Route path="/movie" element={<LandingPage />} >
+                <Route path="/movie" element={<MainCardContainer />} />
+            </Route>
         </Routes>)
 
     // } else {

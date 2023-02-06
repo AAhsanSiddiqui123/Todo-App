@@ -11,7 +11,6 @@ import CircularStatic from "./RatingLoader"
 
 
 export default function MovieCard(props) {
-    console.log(props)
     return (
         // <div className={style.card}>
             <Card sx={{ height: "400px"}}>

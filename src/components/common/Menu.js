@@ -9,17 +9,20 @@ export default function BasicMenu(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const dispatch = useDispatch();
 
-
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = (e) => {
-    console.log(e.nativeEvent.target.outerText)
-    dispatch({ type: "user_saga", action: "payload" })
+    let selectedOption = e.nativeEvent.target.outerText;
+    if(selectedOption === "Popular"){
+      dispatch({ type: "user_saga", action: "payload" })
+    }else if(selectedOption === "NowPlaying"){
+      console.log("j;lh")
+    }
+
     setAnchorEl(null);
   };
-
 
 
   return (

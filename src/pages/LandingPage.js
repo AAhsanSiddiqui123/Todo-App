@@ -6,16 +6,12 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
-import { useSelector, useDispatch } from 'react-redux';
 
 import style from "./HeroSection.module.css"
 import SideBar from '../components/common/SideBar';
-import MainCardContainer from "./HeroSection";
 
 export default function FixedContainer() {
 
-    const moviesArray = useSelector((state) => state.movieReducer.moviesArray);
-    console.log(moviesArray)
 
     return (
         <React.Fragment>
@@ -28,9 +24,6 @@ export default function FixedContainer() {
 
                     <Grid container spacing={2}>
                         <SideBar />
-                        {/* <MainCardContainer 
-                        moviesArray = {moviesArray}
-                        /> */}
                         <Outlet />
                     </Grid>
                 </Box>

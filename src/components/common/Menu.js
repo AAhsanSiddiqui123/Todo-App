@@ -3,9 +3,11 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 
 
 export default function BasicMenu(props) {
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const dispatch = useDispatch();
 
@@ -15,10 +17,17 @@ export default function BasicMenu(props) {
   };
   const handleClose = (e) => {
     let selectedOption = e.nativeEvent.target.outerText;
+    console.log(selectedOption)
     if(selectedOption === "Popular"){
-      dispatch({ type: "user_saga", action: "payload" })
+      navigate("/movie")     
+
     }else if(selectedOption === "NowPlaying"){
-      console.log("j;lh")
+    
+      navigate("/movie/nowplaying")
+    }else if(selectedOption === "UpComming"){  
+      navigate("/movie/upcomming")
+    }else if(selectedOption === "TopRated"){  
+      navigate("/movie/toprated")
     }
 
     setAnchorEl(null);

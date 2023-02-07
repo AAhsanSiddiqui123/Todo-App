@@ -1,14 +1,15 @@
 import { takeEvery, put } from 'redux-saga/effects'
 import { movieActionCreater } from '../reducers/movieReducer';
-import { Get_AllPopular_url } from "../../Services/url"
+import { Get_UpCommingMovie_url } from "../../Services/url"
 import { axiosService } from "../../Services/axios.service"
 
 
-function* getPopularMovie(a) {
-    
+function* getUpcomminMovie(action) {
+    console.log(action.action);
+
     let payload = yield axiosService({
         method: "GET",
-        url: `${Get_AllPopular_url}/popular`,
+        url: `${Get_UpCommingMovie_url}/upcoming`,
         headers: {
             'Content-type': 'application/json; charset=UTF-8',
         },
@@ -17,11 +18,10 @@ function* getPopularMovie(a) {
     
     
     yield put({ type: movieActionCreater.listHandler, payload });
-
 }
 
-function* PopularMovieSaga() {
-    yield takeEvery("popularMovie_saga", getPopularMovie)
+function* upCommingMovieSaga() {
+    yield takeEvery("UpCommingMovie_saga", getUpcomminMovie)
 }
 
-export default PopularMovieSaga;
+export default upCommingMovieSaga;

@@ -89,6 +89,7 @@ function valuetext(value) {
 export default function NestedDropDown() {
 
   const [value, setValue] = React.useState(dayjs('2014-08-18T21:11:54'));
+
   const handleChangeDate = (newValue) => {
     setValue(newValue);
   };
@@ -120,16 +121,37 @@ export default function NestedDropDown() {
     setValueSlider2(newValue);
   };
 
+  ////Show me
+  const [showme, setShowMe] = React.useState('Everything');
+  const showMeHandler = (event) => {
+    // setShowMe(event.target.value);
+  };
+
+  ////Availablity
+  const [availchecked, setToglleAvailablityChecked] = React.useState(true);
+  const AvailablityHandler = (event) => {
+    console.log(event.target.checked);
+    setToglleAvailablityChecked(event.target.checked);
+  };
+  ////Release Dates
+  const [releseDatesChecked, setToggleReleaseDates] = React.useState(true);
+  const releaseDateHandler = (event) => {
+    console.log(event)
+    setToggleReleaseDates(event.target.checked);
+  };
+
+
   return (
     <div>
-      <FormControl sx={{ p:1 , width: "100%" }} style={{ overflow: "unset" }}>
+      <FormControl sx={{ p: 1, width: "100%" }} style={{ overflow: "unset" }}>
         {<FormControl >
-
+          <p>Show me</p>
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
             defaultValue="female"
             name="radio-buttons-group"
             sx={{ mb: 2.5 }}
+            onChange={showMeHandler}
           >
             <FormControlLabel
               sx={{ mb: -2 }}
@@ -139,33 +161,46 @@ export default function NestedDropDown() {
             />
             <FormControlLabel
               sx={{ mb: -2 }}
-              disabled
               value="Movies Haven't Seen"
               control={<Radio />}
               label="Movies Haven't Seen"
             />
             <FormControlLabel
               sx={{ mb: -2 }}
-              disabled
               value="Movies I Have Seen"
               control={<Radio />}
               label="Movies I Have Seen"
             />
           </RadioGroup>
 
-
+          {/* //////////////////////////////////////////////////////////////////////////////////////////////// */}
           <hr />
-          <FormGroup>
+          <FormGroup >
             <FormLabel sx={{ mt: 1 }} id="demo-radio-buttons-group-label">Availabilities </FormLabel>
-            <FormControlLabel control={<Checkbox defaultChecked />} label="Label" />
+            <FormControlLabel control={
+              <Checkbox
+                checked={availchecked}
+                onChange={AvailablityHandler}
+                inputProps={{ 'aria-label': 'controlled' }}
+              />} label="Search all availabilities?" />
+            {availchecked && <AvailabilitiesCheckBox />}
           </FormGroup>
+
+          {/* ///////////////////////////////////////////////////   Dates   ///////////////////////////////////////////// */}
 
 
           <hr />
           <FormGroup>
             <FormLabel sx={{ mt: 1, mb: 0 }} id="demo-radio-buttons-group-label">Release Dates </FormLabel>
-            <FormControlLabel control={<Checkbox defaultChecked />} label="Label" />
+
+            <FormControlLabel control={<Checkbox 
+              checked={releseDatesChecked}
+              onChange={releaseDateHandler}
+              inputProps={{ 'aria-label': 'controlled' }} 
+              />} label="Search all releases?" />
+              {releseDatesChecked && <ReleaseDates />}
           </FormGroup>
+
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <Stack spacing={3} sx={{ mb: 4 }} >
               <DesktopDatePicker
@@ -186,13 +221,14 @@ export default function NestedDropDown() {
             </Stack>
           </LocalizationProvider>
 
+          {/* //////////////////////////////////////////////////////////////////////////////////////////////// */}
           <hr />
           <FormGroup>
             <FormLabel sx={{ mt: 1 }} id="demo-radio-buttons-group-label">Genres </FormLabel>
           </FormGroup>
 
           {<Chips />}
-
+          {/* //////////////////////////////////////////////////////////////////////////////////////////////// */}
           <hr />
           <FormGroup>
             <FormLabel sx={{ mt: 1 }} id="demo-radio-buttons-group-label">User Score </FormLabel>
@@ -206,7 +242,7 @@ export default function NestedDropDown() {
               getAriaValueText={valuetextSlider1}
             />
           </Box>
-
+          {/* //////////////////////////////////////////////////////////////////////////////////////////////// */}
           <hr />
           <FormGroup>
             <FormLabel sx={{ mt: 1 }} id="demo-radio-buttons-group-label">hlkjh   </FormLabel>
@@ -222,7 +258,7 @@ export default function NestedDropDown() {
             />
           </Box>
 
-          
+          {/* //////////////////////////////////////////////////////////////////////////////////////////////// */}
           <hr />
           <FormGroup>
             <FormLabel sx={{ mt: 1 }} id="demo-radio-buttons-group-labeyy">Runtime  </FormLabel>
@@ -240,6 +276,73 @@ export default function NestedDropDown() {
       </FormControl>
     </div>
   );
+}
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
+function AvailabilitiesCheckBox() {
+  const [availMultiCheckBox, setAvailMultiCheckBox] = React.useState([]);
+
+  function multiCheckBoxHandler(e) {
+    var index = availMultiCheckBox.indexOf(e.target.value);
+
+    if (index != -1) {
+      let newArray = availMultiCheckBox.filter((curr, i) => {
+        return curr != e.target.value
+      });
+      availMultiCheckBox.splice(index, 1)
+      setAvailMultiCheckBox([...newArray]);
+    } else {
+      setAvailMultiCheckBox([...availMultiCheckBox, e.target.value])
+    }
+
+  }
+  ////////////////////////////////////////////////////////////////////////////////////////////
+  console.log(availMultiCheckBox)
+  return (
+    <>
+      <FormControlLabel value="Stream" onChange={multiCheckBoxHandler} control={<Checkbox />} label="Stream" />
+      <FormControlLabel value="Free" onChange={multiCheckBoxHandler} control={<Checkbox />} label="Free" />
+      <FormControlLabel value="Adds" onChange={multiCheckBoxHandler} control={<Checkbox />} label="Adds" />
+      <FormControlLabel value="Rent" onChange={multiCheckBoxHandler} control={<Checkbox />} label="Rent" />
+      <FormControlLabel value="Buy" onChange={multiCheckBoxHandler} control={<Checkbox />} label="Buy" />
+    </>
+  )
+}
+
+
+function ReleaseDates() {
+  const [availMultiCheckBox, setAvailMultiCheckBox] = React.useState([]);
+
+  function multiCheckBoxHandler(e) {
+    var index = availMultiCheckBox.indexOf(e.target.value);
+
+    if (index != -1) {
+      let newArray = availMultiCheckBox.filter((curr, i) => {
+        return curr != e.target.value
+      });
+      availMultiCheckBox.splice(index, 1)
+      setAvailMultiCheckBox([...newArray]);
+    } else {
+      setAvailMultiCheckBox([...availMultiCheckBox, e.target.value])
+    }
+
+  }
+
+  console.log(availMultiCheckBox)
+  return (
+    <>
+      <FormControlLabel value="Stream" onChange={multiCheckBoxHandler} control={<Checkbox />} label="Stream" />
+      <FormControlLabel value="Free" onChange={multiCheckBoxHandler} control={<Checkbox />} label="Free" />
+      <FormControlLabel value="Adds" onChange={multiCheckBoxHandler} control={<Checkbox />} label="Adds" />
+      <FormControlLabel value="Rent" onChange={multiCheckBoxHandler} control={<Checkbox />} label="Rent" />
+      <FormControlLabel value="Buy" onChange={multiCheckBoxHandler} control={<Checkbox />} label="Buy" />
+    </>
+  )
 }
 
 

@@ -5,9 +5,9 @@ import manageStateReducer from './reducers/manageState';
 import movieReducer from "./reducers/movieReducer";
 
 import PopularMovieSaga from "./sagas/popularMoviesSaga";
-import deleteSaga from "./sagas/deleteUserSaga";
-import addSaga from "./sagas/addUserSaga";
-import updateSaga from "./sagas/updateUserSaga"
+import topRatedMovieSaga from "./sagas/topRatedMovieSaga";
+import upCommingMovieSaga from "./sagas/upCommingMovieSaga";
+import nowplayingMovieSaga from "./sagas/nowplayingMovieSaga"
 
 
 const sagaMiddleware = createSagaMiddleware();
@@ -29,9 +29,9 @@ const store = configureStore({
 );
 
 sagaMiddleware.run(PopularMovieSaga);
-sagaMiddleware.run(deleteSaga);
-sagaMiddleware.run(addSaga);
-sagaMiddleware.run(updateSaga);
+sagaMiddleware.run(nowplayingMovieSaga);
+sagaMiddleware.run(topRatedMovieSaga);
+sagaMiddleware.run(upCommingMovieSaga);
 
 
 export default store;

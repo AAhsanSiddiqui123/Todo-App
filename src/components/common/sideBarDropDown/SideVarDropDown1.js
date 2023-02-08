@@ -25,7 +25,7 @@ import Slider from '@mui/material/Slider';
 function valuetextSlider1(value) {
   return `${value}°C`;
 }
-function valuetextSlider2(value) {
+function valuetextSlider3(value) {
   return `${value}°C`;
 }
 
@@ -88,12 +88,6 @@ function valuetext(value) {
 
 export default function NestedDropDown() {
 
-  const [value, setValue] = React.useState(dayjs('2014-08-18T21:11:54'));
-
-  const handleChangeDate = (newValue) => {
-    setValue(newValue);
-  };
-
   const theme = useTheme();
   const [personName, setPersonName] = React.useState([]);
 
@@ -107,19 +101,26 @@ export default function NestedDropDown() {
     );
   };
 
-  const handleClick = () => {
-    console.info('You clicked the Chip.');
-  };
 
-
+  /////// Slide Bars
   const [valueSlider1, setValueSlider1] = React.useState([20, 37]);
   const handleChangeSlider1 = (event, newValue) => {
     setValueSlider1(newValue);
   };
-  const [valueSlider2, setValueSlider2] = React.useState([20, 37]);
+
+  const [valueSlider2, setValueSlider2] = React.useState(45);
   const handleChangeSlider2 = (event, newValue) => {
     setValueSlider2(newValue);
   };
+
+  const [valueSlider3, setValueSlider3] = React.useState([20, 37]);
+  const handleChangeSlider3 = (event, newValue) => {
+    setValueSlider3(newValue);
+  };
+
+  // console.log(valueSlider1)
+  // console.log(valueSlider2)
+  // console.log(valueSlider3)
 
   ////Show me
   const [showme, setShowMe] = React.useState('Everything');
@@ -128,16 +129,28 @@ export default function NestedDropDown() {
   };
 
   ////Availablity
-  const [availchecked, setToglleAvailablityChecked] = React.useState(true);
+  const [availchecked, setToglleAvailablityChecked] = React.useState(false);
   const AvailablityHandler = (event) => {
     console.log(event.target.checked);
     setToglleAvailablityChecked(event.target.checked);
   };
+
   ////Release Dates
-  const [releseDatesChecked, setToggleReleaseDates] = React.useState(true);
+  const [releseDatesChecked, setToggleReleaseDates] = React.useState(false);
   const releaseDateHandler = (event) => {
     console.log(event)
     setToggleReleaseDates(event.target.checked);
+  };
+
+  const [date1, setDate1Value] = React.useState(dayjs('2014-08-18T21:11:54'));
+  const date1handleChangeDate = (newValue) => {
+    console.log(newValue)
+    setDate1Value(newValue);
+  };
+  const [date2, setDate2Value] = React.useState(dayjs('2014-08-18T21:11:54'));
+  const date1hand2eChangeDate = (newValue) => {
+    console.log(newValue)
+    setDate2Value(newValue);
   };
 
 
@@ -193,12 +206,12 @@ export default function NestedDropDown() {
           <FormGroup>
             <FormLabel sx={{ mt: 1, mb: 0 }} id="demo-radio-buttons-group-label">Release Dates </FormLabel>
 
-            <FormControlLabel control={<Checkbox 
+            <FormControlLabel control={<Checkbox
               checked={releseDatesChecked}
               onChange={releaseDateHandler}
-              inputProps={{ 'aria-label': 'controlled' }} 
-              />} label="Search all releases?" />
-              {releseDatesChecked && <ReleaseDates />}
+              inputProps={{ 'aria-label': 'controlled' }}
+            />} label="Search all releases?" />
+            {releseDatesChecked && <ReleaseDates />}
           </FormGroup>
 
           <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -206,29 +219,29 @@ export default function NestedDropDown() {
               <DesktopDatePicker
                 label="Date desktop"
                 inputFormat="MM/DD/YYYY"
-                value={value}
-                onChange={handleChangeDate}
+                value={date1}
+                onChange={date1handleChangeDate}
                 renderInput={(params) => <TextField {...params} />}
               />
               <DesktopDatePicker
                 label="Date desktop"
                 inputFormat="MM/DD/YYYY"
-                value={value}
-                onChange={handleChangeDate}
+                value={date2}
+                onChange={date1handleChangeDate}
                 renderInput={(params) => <TextField {...params} />}
               />
 
             </Stack>
           </LocalizationProvider>
 
-          {/* //////////////////////////////////////////////////////////////////////////////////////////////// */}
+          {/* //////////////////////////////////////////////////// Chips //////////////////////////////////////////// */}
           <hr />
           <FormGroup>
             <FormLabel sx={{ mt: 1 }} id="demo-radio-buttons-group-label">Genres </FormLabel>
           </FormGroup>
-
           {<Chips />}
-          {/* //////////////////////////////////////////////////////////////////////////////////////////////// */}
+
+          {/* ///////////////////////////////////////////////// User Score Slider /////////////////////////////////////////////// */}
           <hr />
           <FormGroup>
             <FormLabel sx={{ mt: 1 }} id="demo-radio-buttons-group-label">User Score </FormLabel>
@@ -242,23 +255,18 @@ export default function NestedDropDown() {
               getAriaValueText={valuetextSlider1}
             />
           </Box>
-          {/* //////////////////////////////////////////////////////////////////////////////////////////////// */}
+          {/* /////////////////////////////////////////////////////// Minimum User Votes Slider///////////////////////////////////////// */}
           <hr />
           <FormGroup>
-            <FormLabel sx={{ mt: 1 }} id="demo-radio-buttons-group-label">hlkjh   </FormLabel>
+            <FormLabel sx={{ mt: 1 }} id="demo-radio-buttons-group-label">Minimum User Votes</FormLabel>
           </FormGroup>
-          <Box >
-            <Slider
-              aria-label="Custom marks"
-              defaultValue={20}
-              getAriaValueText={valuetext}
-              step={10}
-              valueLabelDisplay="auto"
-              marks={marks}
-            />
+          <Box>
+            <Slider value={valueSlider2}
+              onChange={handleChangeSlider2} 
+              defaultValue={50} aria-label="Default" valueLabelDisplay="auto" />
           </Box>
 
-          {/* //////////////////////////////////////////////////////////////////////////////////////////////// */}
+          {/* ////////////////////////////////////////////////////  Runtime Slider    //////////////////////////////////////////// */}
           <hr />
           <FormGroup>
             <FormLabel sx={{ mt: 1 }} id="demo-radio-buttons-group-labeyy">Runtime  </FormLabel>
@@ -266,10 +274,10 @@ export default function NestedDropDown() {
           <Box sx={{ mt: 0 }}>
             <Slider
               getAriaLabel={() => 'emperature range'}
-              value={valueSlider2}
-              onChange={handleChangeSlider2}
+              value={valueSlider3}
+              onChange={handleChangeSlider3}
               valueLabelDisplay="auto"
-              getAriaValueText={valuetextSlider2}
+              getAriaValueText={valuetextSlider3}
             />
           </Box>
         </FormControl>}
@@ -283,7 +291,7 @@ export default function NestedDropDown() {
 
 
 
-////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////  Availablity Chec Box Component//////////////////////////
 function AvailabilitiesCheckBox() {
   const [availMultiCheckBox, setAvailMultiCheckBox] = React.useState([]);
 
@@ -301,20 +309,20 @@ function AvailabilitiesCheckBox() {
     }
 
   }
-  ////////////////////////////////////////////////////////////////////////////////////////////
   console.log(availMultiCheckBox)
   return (
     <>
-      <FormControlLabel value="Stream" onChange={multiCheckBoxHandler} control={<Checkbox />} label="Stream" />
-      <FormControlLabel value="Free" onChange={multiCheckBoxHandler} control={<Checkbox />} label="Free" />
-      <FormControlLabel value="Adds" onChange={multiCheckBoxHandler} control={<Checkbox />} label="Adds" />
-      <FormControlLabel value="Rent" onChange={multiCheckBoxHandler} control={<Checkbox />} label="Rent" />
+      <FormControlLabel sx={{ mb: -2 }} value="Stream" onChange={multiCheckBoxHandler} control={<Checkbox />} label="Stream" />
+      <FormControlLabel sx={{ mb: -2 }} value="Free" onChange={multiCheckBoxHandler} control={<Checkbox />} label="Free" />
+      <FormControlLabel sx={{ mb: -2 }} value="Adds" onChange={multiCheckBoxHandler} control={<Checkbox />} label="Adds" />
+      <FormControlLabel sx={{ mb: -2 }} value="Rent" onChange={multiCheckBoxHandler} control={<Checkbox />} label="Rent" />
       <FormControlLabel value="Buy" onChange={multiCheckBoxHandler} control={<Checkbox />} label="Buy" />
     </>
   )
 }
 
 
+//////////////////////////////////////////////////////////////////// Release Dates Components   ////////////////////////
 function ReleaseDates() {
   const [availMultiCheckBox, setAvailMultiCheckBox] = React.useState([]);
 
@@ -336,11 +344,12 @@ function ReleaseDates() {
   console.log(availMultiCheckBox)
   return (
     <>
-      <FormControlLabel value="Stream" onChange={multiCheckBoxHandler} control={<Checkbox />} label="Stream" />
-      <FormControlLabel value="Free" onChange={multiCheckBoxHandler} control={<Checkbox />} label="Free" />
-      <FormControlLabel value="Adds" onChange={multiCheckBoxHandler} control={<Checkbox />} label="Adds" />
-      <FormControlLabel value="Rent" onChange={multiCheckBoxHandler} control={<Checkbox />} label="Rent" />
-      <FormControlLabel value="Buy" onChange={multiCheckBoxHandler} control={<Checkbox />} label="Buy" />
+      <FormControlLabel sx={{ mb: -2 }} value="Premiere" onChange={multiCheckBoxHandler} control={<Checkbox />} label="Premiere" />
+      <FormControlLabel sx={{ mb: -2 }} value="Theatrical (limited)" onChange={multiCheckBoxHandler} control={<Checkbox />} label="Theatrical (limited)" />
+      <FormControlLabel sx={{ mb: -2 }} value="Theatrical" onChange={multiCheckBoxHandler} control={<Checkbox />} label="Theatrical" />
+      <FormControlLabel sx={{ mb: -2 }} value="Digital" onChange={multiCheckBoxHandler} control={<Checkbox />} label="Digital" />
+      <FormControlLabel sx={{ mb: -2 }} value="Physical" onChange={multiCheckBoxHandler} control={<Checkbox />} label="Physical" />
+      <FormControlLabel sx={{ mb: 2 }} value="TV" onChange={multiCheckBoxHandler} control={<Checkbox />} label="TV" />
     </>
   )
 }

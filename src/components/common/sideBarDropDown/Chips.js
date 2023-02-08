@@ -1,14 +1,15 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 import Chip from '@mui/material/Chip';
 import Box from '@mui/material/Box';
-
 
 const ListItem = styled('li')(({ theme }) => ({
   margin: theme.spacing(0.5),
 }));
 
 export default function Chips() {
+  let theme = useTheme()
+
   const [chipData, setChipData] = React.useState([
     { key: 0, label: 'Action' },
     { key: 1, label: 'Adventure' },
@@ -30,27 +31,51 @@ export default function Chips() {
     { key: 17, label: 'Western' },
     { key: 18, label: 'TV Movie' },
   ]);
+
+  const boxSX = {
+    "&:hover": {
+      border: "1px solid #01B4E4",
+    },
+  };
+
+  const [availMultiCheckBox, setAvailMultiCheckBox] = React.useState([]);
+
+  function chipHandler(e) {
+    let value = e.target.closest(".test").getAttribute("value");
+
+    var index = availMultiCheckBox.indexOf(value);
+
+    if (index != -1) {
+      let newArray = availMultiCheckBox.filter((curr, i) => {
+        return curr != value
+      });
+      availMultiCheckBox.splice(index, 1)
+      setAvailMultiCheckBox([...newArray]);
+    } else {
+      setAvailMultiCheckBox([...availMultiCheckBox, value])
+    }
+  }
+
+  // console.log(availMultiCheckBox)
+
   return (
     <Box
+
       sx={{
         display: 'flex',
         justifyContent: 'center',
         flexWrap: 'wrap',
         listStyle: 'none',
         p: 0.5,
+        mb: 2,
       }}
       component="ul"
     >
+
       {chipData.map((data) => {
-        let icon;
         return (
           <ListItem key={data.key}>
-            <Chip
-              variant="outlined"
-              icon={icon}
-              label={data.label}
-              
-            />
+            <Chip className='test' sx={boxSX} id={data.key} variant="outlined" label={data.label} value={data.label} onClick={chipHandler} />
           </ListItem>
         );
       })}

@@ -19,15 +19,13 @@ export default function MainCardContainer(props){
     console.log(moviesArray)
 
 return (
-    <Grid item lg={8} md={8} sm={12} xs={12}>
-        <div style={{ backgroundColor: 'white' }} className={style.wraper}>
-            {moviesArray ? moviesArray.map((curr) => {
-                return <MovieCard
-                    key={curr.id}
-                    data={curr}
-                />
-            }):[]}
-        </div>
-    </Grid>
+    <>
+    {moviesArray ? moviesArray.map((curr) => {
+        return <MovieCard
+            key={curr.id}
+            data={curr}
+        />
+    }) : []}
+</>
 );
 }

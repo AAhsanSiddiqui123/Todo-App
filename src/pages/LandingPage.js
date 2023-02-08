@@ -17,16 +17,22 @@ export default function FixedContainer() {
         <React.Fragment>
             <AppBar />
             <CssBaseline />
-            <Container style={{ maxWidth: "90%" }} >
-                <Box sx={{ bgcolor: 'white', }} >
+            <Container style={{ 
+                maxWidth: "80%",
+                 }} >
+                {/* <Box sx={{ bgcolor: 'white', }} > */}
                     <hr style={{ opacity: "none" }} />
                     <h1 className={style.activePage}>Popular Movies</h1>
 
-                    <Grid container spacing={2}>
+                    <Grid container spacing={3}>
                         <SideBar />
-                        <Outlet />
+                        <Grid item lg={9.5} md={9} sm={12} xs={12}>
+                            <div style={{ backgroundColor: 'white' }} className={style.wraper}>
+                                <Outlet />
+                            </div>
+                        </Grid>
                     </Grid>
-                </Box>
+                {/* </Box> */}
             </Container>
         </React.Fragment>
     );

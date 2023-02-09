@@ -7,34 +7,30 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 
-import BasicMenu from "./Menu"
+import MovieMenu from "./menu/MovieMenu"
+import TvMenu from "./menu/TvMenu"
 
 const pages = [
-<BasicMenu
+<MovieMenu
     title={"Movie"}
     val1={ "Popular"}
     val2={ "NowPlaying"}
     val3={ "UpComming"}
     val4={ "TopRated"}
 />,
-<BasicMenu
+<TvMenu
     title={"TV Shows"}
     val1={ "Popular"}
-    val2={ "Airing Today"}
-    val3={ "On Tv"}
-    val4={ "Top Rated"}
-
-/>, <BasicMenu
+/>
+, <MovieMenu
     title={"People"}
- 
-/>];   
+/>
+];   
 
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -113,7 +109,7 @@ function NavBar() {
                             }}
                         >
                             <Box>
-                                {pages.map((page, i) => (
+                                {/* {pages.map((page, i) => (
                                     <li style={{ listStyle: "none" }}
                                         key={i}
                                         onClick={handleCloseNavMenu}
@@ -121,7 +117,7 @@ function NavBar() {
                                     >
                                         {page}
                                     </li>
-                                ))}
+                                ))} */}
                             </Box>
                         </Menu>
                     </Box>

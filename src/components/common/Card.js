@@ -8,12 +8,16 @@ import Typography from '@mui/material/Typography';
 
 import style from "../../pages/HeroSection.module.css"
 import CircularStatic from "./RatingLoader"
-import { Box } from '@mui/system';
+import { useNavigate } from "react-router-dom";
 
 
 export default function MovieCard(props) {
+    const navigate = useNavigate();
+    function clickHandler (){       
+        navigate(`/detail/${props.data.id}`)
+    }
     return (
-        <div className={style.card}>
+        <div className={style.card} style={{cursor:"pointer"}} onClick={clickHandler}>
             <Card sx={{ height: "370px"}}>
                 <CardMedia
                     component="img"
@@ -21,22 +25,19 @@ export default function MovieCard(props) {
                     height="270"
                     image={`https://image.tmdb.org/t/p/w500/${props.data.poster_path}`}
                 />
-                <CircularStatic />
+                <CircularStatic rating={props.data.vote_average} />
                 <CardContent>
 
                     <Typography gutterBottom component="div" sx={{ fontSize: 15, fontWeight: 600 }} >
-                        <strong>{props.data.original_title}</strong>
+                        <strong>{props.data.original_title || props.data.original_name}</strong>
                     </Typography>
 
                     <Typography gutterBottom variant="h8" component="div" sx={{ fontSize: 15 }} >
-                        {props.data.release_date}
+                        {props.data.release_date || props.data.first_air_date}
                     </Typography>
 
                 </CardContent>
-                {/* <CardActions>
-                    <Button size="small">Share</Button>
-                    <Button size="small">Learn More</Button>
-                </CardActions> */}
+
             </Card>
         </div>
     );

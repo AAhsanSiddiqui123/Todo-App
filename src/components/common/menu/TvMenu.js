@@ -2,11 +2,11 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 
 
-export default function BasicMenu(props) {
+export default function TvMenu(props) {
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const dispatch = useDispatch();
@@ -18,16 +18,9 @@ export default function BasicMenu(props) {
   const handleClose = (e) => {
     let selectedOption = e.nativeEvent.target.outerText;
     console.log(selectedOption)
-    if(selectedOption === "Popular"){
-      navigate("/movie")     
 
-    }else if(selectedOption === "NowPlaying"){
-    
-      navigate("/movie/nowplaying")
-    }else if(selectedOption === "UpComming"){  
-      navigate("/movie/upcomming")
-    }else if(selectedOption === "TopRated"){  
-      navigate("/movie/toprated")
+    if(selectedOption === "Popular"){
+      navigate("/tv/popular")     
     }
 
     setAnchorEl(null);
@@ -56,9 +49,6 @@ export default function BasicMenu(props) {
         }}
       >
         <MenuItem  onClick={handleClose}>{props.val1}</MenuItem>
-        <MenuItem  onClick={handleClose}>{props.val2}</MenuItem>
-        <MenuItem  onClick={handleClose}>{props.val3}</MenuItem>
-        <MenuItem  onClick={handleClose}>{props.val4}</MenuItem>
       </Menu>
     </div>
   );

@@ -11,25 +11,25 @@ export default function Chips() {
   let theme = useTheme()
 
   const [chipData, setChipData] = React.useState([
-    { key: 0, label: 'Action' },
-    { key: 1, label: 'Adventure' },
-    { key: 2, label: 'Comedy' },
-    { key: 3, label: 'Animation' },
-    { key: 4, label: 'Crime' },
-    { key: 5, label: 'Documentary' },
-    { key: 6, label: 'Family' },
-    { key: 7, label: 'Fantasy' },
-    { key: 8, label: 'History' },
-    { key: 9, label: 'Horror' },
-    { key: 10, label: 'Music' },
-    { key: 11, label: 'Mystery' },
-    { key: 12, label: 'Romance' },
-    { key: 13, label: 'Science Fiction' },
-    { key: 14, label: 'TV Movie' },
-    { key: 15, label: 'Thriller' },
-    { key: 16, label: 'War' },
-    { key: 17, label: 'Western' },
-    { key: 18, label: 'TV Movie' },
+    { key: 0, label: 'Action', value: 28 },
+    { key: 1, label: 'Adventure', value: 12 },
+    { key: 2, label: 'Comedy', value:16 },
+    { key: 3, label: 'Animation', value:35 },
+    { key: 4, label: 'Crime', value:80 },
+    { key: 5, label: 'Documentary', value:99 },
+    { key: 6, label: 'Darama', value:18 },
+    { key: 7, label: 'Family', value:10751 },
+    { key: 8, label: 'Fantasy', value:14 },
+    { key: 9, label: 'History', value:36 },
+    { key: 10, label: 'Horror', value:27 },
+    { key: 11, label: 'Music', value:10402 },
+    { key: 12, label: 'Mystery', value:9648 },
+    { key: 13, label: 'Romance', value:10749 },
+    { key: 14, label: 'Science Fiction', value:878 },
+    { key: 15, label: 'TV Movie', value:10770 },
+    { key: 16, label: 'Thriller', value: 53},
+    { key: 17, label: 'War', value: 10752},
+    { key: 18, label: 'Western', value:37 },
   ]);
 
   const boxSX = {
@@ -56,7 +56,7 @@ export default function Chips() {
     }
   }
 
-  // console.log(availMultiCheckBox)
+  console.log(availMultiCheckBox)
 
   return (
     <Box
@@ -75,7 +75,7 @@ export default function Chips() {
       {chipData.map((data) => {
         return (
           <ListItem key={data.key}>
-            <Chip className='test' sx={boxSX} id={data.key} variant="outlined" label={data.label} value={data.label} onClick={chipHandler} />
+            <Chip className='test' sx={boxSX} id={data.key} variant="outlined" label={data.label} value={data.value} onClick={chipHandler} />
           </ListItem>
         );
       })}

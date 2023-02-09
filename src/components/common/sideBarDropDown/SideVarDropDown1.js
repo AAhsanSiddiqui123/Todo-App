@@ -63,30 +63,13 @@ function getStyles(name, personName, theme) {
   };
 }
 
-const marks = [
-  {
-    value: 0,
-    label: '0°C',
-  },
-  {
-    value: 20,
-    label: '20°C',
-  },
-  {
-    value: 37,
-    label: '37°C',
-  },
-  {
-    value: 100,
-    label: '100°C',
-  },
-];
+
 
 function valuetext(value) {
   return `${value}°C`;
 }
 
-export default function NestedDropDown() {
+export default function SideVarDropDown1(props) {
 
   const theme = useTheme();
   const [personName, setPersonName] = React.useState([]);
@@ -100,6 +83,40 @@ export default function NestedDropDown() {
       typeof value === "string" ? value.split(",") : value
     );
   };
+
+  const queryQbj={
+    air_date : null,
+    air_date  : "2023-08-09",
+    certification: null,
+    certification_country: "PK",
+    debug: null,
+    first_air_date : null,
+    first_air_date  : null,
+    ott_region: "PK",
+    page: 1,
+    primary_release_date : null,
+    primary_release_date  : null,
+    region: null,
+    release_date : "2023-02-22",
+    release_date  : "2023-08-22",
+    show_me: 0,
+    sort_by: null,
+    vote_average : 0,
+    vote_average  : 10,
+    vote_count : 0,
+    with_genres: [12,35,37],
+    with_keywords: null,
+    with_networks: null,
+    with_origin_country: null,
+    with_original_language: null,
+    with_ott_monetization_types: null,
+    with_ott_providers: null,
+    with_release_type: null,
+    with_runtime : 0,
+    with_runtime  : 400,
+
+  }
+
 
 
   /////// Slide Bars
@@ -125,6 +142,7 @@ export default function NestedDropDown() {
   ////Show me
   const [showme, setShowMe] = React.useState('Everything');
   const showMeHandler = (event) => {
+    console.log(event.target.value)
     // setShowMe(event.target.value);
   };
 
@@ -144,7 +162,8 @@ export default function NestedDropDown() {
 
   const [date1, setDate1Value] = React.useState(dayjs('2014-08-18T21:11:54'));
   const date1handleChangeDate = (newValue) => {
-    console.log(newValue)
+    console.log(dayjs(newValue).format("YY-MM-DD"))
+    //7.5/*10
     setDate1Value(newValue);
   };
   const [date2, setDate2Value] = React.useState(dayjs('2014-08-18T21:11:54'));
@@ -154,6 +173,11 @@ export default function NestedDropDown() {
   };
 
 
+
+
+  props.querySelector()
+
+
   return (
     <div>
       <FormControl sx={{ p: 1, width: "100%" }} style={{ overflow: "unset" }}>
@@ -161,26 +185,26 @@ export default function NestedDropDown() {
           <p>Show me</p>
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue="female"
+            defaultValue="0"
             name="radio-buttons-group"
             sx={{ mb: 2.5 }}
             onChange={showMeHandler}
           >
             <FormControlLabel
               sx={{ mb: -2 }}
-              value="Everything"
+              value="0"
               control={<Radio />}
               label="Everything"
             />
             <FormControlLabel
               sx={{ mb: -2 }}
-              value="Movies Haven't Seen"
+              value="1"
               control={<Radio />}
               label="Movies Haven't Seen"
             />
             <FormControlLabel
               sx={{ mb: -2 }}
-              value="Movies I Have Seen"
+              value="2"
               control={<Radio />}
               label="Movies I Have Seen"
             />
@@ -215,7 +239,7 @@ export default function NestedDropDown() {
           </FormGroup>
 
           <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <Stack spacing={3} sx={{ mb: 4 }} >
+            <Stack spacing={3} sx={{ mb: 4, mt: 3 }} >
               <DesktopDatePicker
                 label="Date desktop"
                 inputFormat="MM/DD/YYYY"
@@ -227,7 +251,7 @@ export default function NestedDropDown() {
                 label="Date desktop"
                 inputFormat="MM/DD/YYYY"
                 value={date2}
-                onChange={date1handleChangeDate}
+                onChange={date1hand2eChangeDate}
                 renderInput={(params) => <TextField {...params} />}
               />
 

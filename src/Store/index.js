@@ -8,6 +8,8 @@ import PopularMovieSaga from "./sagas/popularMoviesSaga";
 import topRatedMovieSaga from "./sagas/topRatedMovieSaga";
 import upCommingMovieSaga from "./sagas/upCommingMovieSaga";
 import nowplayingMovieSaga from "./sagas/nowplayingMovieSaga"
+import tvSaga from "./sagas/tvSaga"
+
 
 
 const sagaMiddleware = createSagaMiddleware();
@@ -32,6 +34,8 @@ sagaMiddleware.run(PopularMovieSaga);
 sagaMiddleware.run(nowplayingMovieSaga);
 sagaMiddleware.run(topRatedMovieSaga);
 sagaMiddleware.run(upCommingMovieSaga);
+
+sagaMiddleware.run(tvSaga);
 
 
 export default store;

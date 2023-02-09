@@ -7,6 +7,9 @@ import UpCommingMovie from "./pages/moviePages/UpCommingMovie";
 import ToprateMovie from "./pages/moviePages/TopRatedMovie"
 import LandingPage from "./pages/LandingPage";
 
+import TvShows from "./pages/tvPage/TvShows"
+import DetailPage from "./pages/DetailPage"
+
 
 
 const RoutesMain = () => {
@@ -20,7 +23,9 @@ const RoutesMain = () => {
                 <Route path="/movie/nowplaying" element={<NowPlayingMovie />} />
                 <Route path="/movie/upcomming" element={<UpCommingMovie />} />
                 <Route path="/movie/toprated" element={<ToprateMovie />} />
+                <Route path="/tv/popular" element={<TvShows />} />
             </Route>
+                <Route path="/detail/:data" element={<DetailPage />} />
         </Routes>)
 
     // } else {

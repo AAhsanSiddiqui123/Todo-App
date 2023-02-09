@@ -1,29 +1,45 @@
-import * as React from "react";
-import PropTypes from "prop-types";
-import CircularProgress from "@mui/material/CircularProgress";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
+// sx={{ position: "relative", display: "inline-flex", marginTop: "-40px", marginLeft:"10px" }} bgcolor="lightblue" borderRadius="100px"
+
+
+
+
+
+import * as React from 'react';
+import PropTypes from 'prop-types';
+import CircularProgress from '@mui/material/CircularProgress';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 
 function CircularProgressWithLabel(props) {
-  let t = 20;
+ let mRating =  Math.round(props.value)
+ let circleColor;
+
+//  if(mRating > 70){
+//   circleColor = "success"
+//  }else if(mRating > 50){
+//   circleColor = "warning"
+//  }else if(mRating > 30){
+//   circleColor = "danger"
+//  }
+ 
+
   return (
-    <Box sx={{ position: "relative", display: "inline-flex", marginTop: "-40px", marginLeft:"10px" }} bgcolor="lightblue" borderRadius="100px">
-      <CircularProgress variant="determinate" {...props} />
+    <Box sx={{ position: "relative", display: "inline-flex", marginTop: "-40px", marginLeft:"10px" }} bgcolor="black" borderRadius="100px">
+      <CircularProgress color="success" variant="determinate" {...props} />
       <Box
         sx={{
           top: 0,
           left: 0,
           bottom: 0,
           right: 0,
-          position: "absolute",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          // backgroundColor: "lightBlue"
+          position: 'absolute',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
         }}
       >
-        <Typography variant="caption" component="div" color="text.secondary" >
-          {`${t}%`}
+        <Typography variant="caption" component="div" style={{color: "white"}} >
+          {`${Math.round(props.value)}%`}
         </Typography>
       </Box>
     </Box>
@@ -31,15 +47,21 @@ function CircularProgressWithLabel(props) {
 }
 
 CircularProgressWithLabel.propTypes = {
-  value: PropTypes.number.isRequired
+  value: PropTypes.number.isRequired,
 };
 
-export default function CircularStatic() {
+export default function CircularStatic(props) {
+
   const [progress, setProgress] = React.useState(0);
 
+
   React.useEffect(() => {
-    setProgress(70);
+
+      setProgress(props.rating * 10);
+  
+
   }, []);
 
   return <CircularProgressWithLabel value={progress} />;
 }
+

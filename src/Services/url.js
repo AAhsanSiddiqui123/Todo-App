@@ -12,4 +12,4 @@ exports.Get_TopRatedMovie_url = `${MainMovieUrl}`;
 
 exports.Get_AllTvPopular_url = `${MainTvUrl}`;
 
-exports.Get_MovieDetail_url = "https://api.themoviedb.org/3/movie/{movie_id}?api_key=<<api_key>>&language=en-US"
+exports.Get_MovieDetail_url = "https://api.themoviedb.org/3/movie"

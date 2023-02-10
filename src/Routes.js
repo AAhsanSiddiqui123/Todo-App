@@ -25,7 +25,7 @@ const RoutesMain = () => {
                 <Route path="/movie/toprated" element={<ToprateMovie />} />
                 <Route path="/tv/popular" element={<TvShows />} />
             </Route>
-                <Route path="/detail/:data" element={<DetailPage />} />
+                <Route path="/detail/:id" element={<DetailPage />} />
         </Routes>)
 
     // } else {

@@ -18,12 +18,12 @@ export default function MainCardContainer(props) {
 
     return (
         <>
-            {moviesArray ? moviesArray.map((curr) => {
+            {moviesArray.map((curr) => {
                 return <MovieCard
                     key={curr.id}
                     data={curr}
                 />
-            }) : []}
+            })}
         </>
     );
 }

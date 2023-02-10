@@ -17,51 +17,70 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkIcon from '@mui/icons-material/Link';
 import Chip from '@mui/material/Chip';
+import CardMedia from '@mui/material/CardMedia';
+import DetailPeopleCard from "../components/common/DetailPeopleCard";
+
 
 const DetailPage = () => {
-    let data = useParams();
+    const [state, setState] = React.useState({})
+    let id = useParams();
 
+    console.log(`${Get_MovieDetail_url}/${id.id}`)
 
     React.useEffect(() => {
         axiosService({
             method: "GET",
-            url: `${Get_MovieDetail_url}/${data.data}`,
+            url: `${Get_MovieDetail_url}/${id.id}`,
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
             },
             params: { api_key: "a501016df75ba02be8137f4996f56d90", language: "en-US" }
         }).then((res) => {
-            console.log(res);
+            console.log(res.data);
+            setState(res.data);
         })
 
     }, [])
 
 
-    const Item = styled(Paper)(({ theme }) => ({
-        backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-        ...theme.typography.body2,
-        padding: theme.spacing(1),
-        textAlign: 'center',
-        color: theme.palette.text.secondary,
-    }));
+    var year = (new Date(state.release_date)).getFullYear();
+    let country = state?.production_countries?.[0]?.iso_3166_1
+    let posterImage = `https://image.tmdb.org/t/p/original/${state.poster_path}`
 
-
+    const styles = {
+        paperContainer: {
+            backgroundImage: `url(${posterImage})`,
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+        }
+    };
     return (
         <>
 
             {/* ////////////////////////////////////////////////////////// Section 1 */}
 
-            <Grid container spacing={2} sx={{ backgroundColor: "lightblue", alignItems: "center", justifyContent: "center" }}>
-                <Grid item xs={6} md={3}>
-                    <Item>xs=6 md=8</Item>
+            <Grid container spacing={2} sx={{ backgroundColor: "lightblue", alignItems: "center", justifyContent: "center", p: 4, color: "white" }} style={styles.paperContainer }>
+
+                <Grid item xs={6} md={3} >
+                    <CardMedia
+                        component="img"
+                        sx={{ borderRadius: 5 }}
+                        alt="green iguana"
+                        image={`https://image.tmdb.org/t/p/w500/${state.poster_path}`}
+                    />
                 </Grid>
                 <Grid item xs={6} md={8}>
                     <Box>
-                        <Typography variant='h2' sx={{ fontWeight: "700", fontSize: "35.2px" }}> Black Panther: Wakanda Forever (2022) </Typography>
+                        <Typography variant='h2' sx={{ fontWeight: "700", fontSize: "35.2px" }}> {state.original_title} {`(${year})` || ""} </Typography>
                         <Box>
-                            <Typography variant='p' sx={{}}>11/11/2022 (US)
-                                Action, Adventure, Science Fiction
-                                2h 42m (2022) </Typography>
+                            <Typography variant='p'>{state.release_date} {`(${country})`}</Typography>
+                            {
+                                state.genres ? state.genres.map((curr, i) => {
+                                    return <Typography variant='p' key={i}> {curr.name} </Typography>
+                                }) : []
+                            }
+                            <Typography variant='p'>{` ${state.runtime}m`} </Typography>
+
                         </Box>
                     </Box>
                     <Stack sx={{ mt: 2 }} direction="row" spacing={2}>
@@ -78,15 +97,15 @@ const DetailPage = () => {
                             <AddIcon />
                         </Fab>
                     </Stack>
-                    <Box>
+                    <Box sx={{ mt: 3 }}>
                         <Typography variant='h3' sx={{ fontSize: "18.2px", mt: 1 }}>Forever </Typography>
                         <Typography variant='h3' sx={{ fontSize: "18.2px", fontWeight: "700", mt: 1 }}>Overview </Typography>
-                        <Typography variant='p' sx={{ mt: 1 }}>Queen Ramonda, Shuri, M’Baku, Okoye and the Dora Milaje fight to protect their nation from intervening world powers in the wake of King T’Challa’s death. As the Wakandans strive to embrace their next chapter, the heroes must band together with the help of War Dog Nakia and Everett Ross and forge a new path for the kingdom of Wakanda. </Typography>
-                        <Stack direction="row" spacing={2} sx={{ display: "flex" }}>
-                            <Typography variant='p'><strong>Status</strong><br />Released </Typography>
-                            <Typography variant='p'><strong>Original Language</strong><br />English </Typography>
-                            <Typography variant='p'><strong>Budget</strong><br />$250,000,0</Typography>
-                            <Typography variant='p'><strong>Revenue</strong><br />$250,000,0 </Typography>
+                        <Typography variant='p' sx={{ mt: 1 }}>{state.overview}</Typography>
+                        <Stack direction="row" spacing={20} sx={{ display: "flex", mt: 3 }}>
+                            <Typography variant='p'><strong>Status</strong><br />{state.status}</Typography>
+                            <Typography variant='p'><strong>Original Language</strong><br />{state?.spoken_languages?.[0]?.english_name} </Typography>
+                            <Typography variant='p'><strong>Budget</strong><br />{state.budget}</Typography>
+                            <Typography variant='p'><strong>Revenue</strong><br />{state.revenue}</Typography>
 
                         </Stack>
                     </Box>
@@ -98,9 +117,22 @@ const DetailPage = () => {
             {/* ////////////////////////////////////////////////////////// Section 2 */}
 
             <Container maxWidth="xl" sx={{ backgroundColor: "lightcoral", mt: 4 }}>
-                <Grid container spacing={2} sx={{ alignItems: "center", justifyContent: "center" }}>
-                    <Grid item xs={6} md={8}>
-                        <Item>xs=6 md=8</Item>
+
+                <Grid container spacing={2} sx={{  justifyContent: "center" }}>
+                    <Grid item xs={6} md={8} sx={{ overflowX:"auto"}}>
+                        <Stack spacing={2} direction="row">
+                                <DetailPeopleCard />
+                                <DetailPeopleCard />
+                                <DetailPeopleCard />
+                                <DetailPeopleCard />
+                                <DetailPeopleCard />
+                                <DetailPeopleCard />
+                                <DetailPeopleCard />
+                                <DetailPeopleCard />
+           
+                                
+                                
+                        </Stack>
                     </Grid>
                     <Grid item xs={6} md={3}>
                         <Stack direction="row" spacing={3}>
@@ -111,15 +143,15 @@ const DetailPage = () => {
                         </Stack>
 
                         <Stack direction="column" spacing={3}>
-                            <Typography variant='p'><strong>Status</strong><br />Released </Typography>
-                            <Typography variant='p'><strong>Original Language</strong><br />English </Typography>
-                            <Typography variant='p'><strong>Budget</strong><br />$250,000,0</Typography>
-                            <Typography variant='p'><strong>Revenue</strong><br />$250,000,0 </Typography>
+                            <Typography variant='p'><strong>Status</strong><br />{state.status}</Typography>
+                            <Typography variant='p'><strong>Original Language</strong><br />{state?.spoken_languages?.[0]?.english_name} </Typography>
+                            <Typography variant='p'><strong>Budget</strong><br />{state.budget}</Typography>
+                            <Typography variant='p'><strong>Revenue</strong><br />{state.revenue}</Typography>
                         </Stack>
 
-                       
+
                         <Chip label="Basic" />
-                        
+
 
                     </Grid>
 

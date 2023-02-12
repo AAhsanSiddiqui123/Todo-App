@@ -10,6 +10,9 @@ import Grid from '@mui/material/Grid';
 import style from "./HeroSection.module.css"
 import SideBar from '../components/common/SideBar';
 
+import Footer from "../components/common/Footer"
+
+
 export default function FixedContainer() {
 
 
@@ -20,20 +23,19 @@ export default function FixedContainer() {
             <Container style={{ 
                 maxWidth: "80%",
                  }} >
-                {/* <Box sx={{ bgcolor: 'white', }} > */}
                     <hr style={{ opacity: "none" }} />
                     <h1 className={style.activePage}>Popular Movies</h1>
 
                     <Grid container spacing={3}>
                         <SideBar />
-                        <Grid item lg={9.5} md={9} sm={12} xs={12}>
+                        <Grid item xs={12} sm={12} md={9} lg={9.5}>
                             <div style={{ backgroundColor: 'white' }} className={style.wraper}>
                                 <Outlet />
                             </div>
                         </Grid>
-                    </Grid>
-                {/* </Box> */}
+                    </Grid>\
             </Container>
+            <Footer/>
         </React.Fragment>
     );
 }

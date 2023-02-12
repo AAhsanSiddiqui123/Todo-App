@@ -187,26 +187,28 @@ export default function SideVarDropDown1(props) {
             aria-labelledby="demo-radio-buttons-group-label"
             defaultValue="0"
             name="radio-buttons-group"
-            sx={{ mb: 2.5 }}
+            sx={{ mb: 2.5, fontSize:10 }}
             onChange={showMeHandler}
+            
           >
             <FormControlLabel
               sx={{ mb: -2 }}
               value="0"
-              control={<Radio />}
-              label="Everything"
+              control={<Radio size="small" />}
+              label={<span style={{ fontSize: '15px', whiteSpace:"nowrap" }}>Everything</span>}
+              
             />
             <FormControlLabel
               sx={{ mb: -2 }}
               value="1"
-              control={<Radio />}
-              label="Movies Haven't Seen"
+              control={<Radio size="small" />}
+              label={<span style={{ fontSize: '15px', whiteSpace:"nowrap" }}>Movies Have't Seen</span>}
             />
             <FormControlLabel
               sx={{ mb: -2 }}
               value="2"
-              control={<Radio />}
-              label="Movies I Have Seen"
+              control={<Radio size="small" />}
+              label={<span style={{ fontSize: '15px', whiteSpace:"nowrap"}}>Movies Have Seen</span>}
             />
           </RadioGroup>
 
@@ -216,11 +218,12 @@ export default function SideVarDropDown1(props) {
             <FormLabel sx={{ mt: 1 }} id="demo-radio-buttons-group-label">Availabilities </FormLabel>
             <FormControlLabel control={
               <Checkbox
+              size="small"
                 checked={availchecked}
                 onChange={AvailablityHandler}
                 inputProps={{ 'aria-label': 'controlled' }}
-              />} label="Search all availabilities?" />
-            {availchecked && <AvailabilitiesCheckBox />}
+              />} label={<span style={{ fontSize: '15px'}}>Search All Availabilities?</span>} />
+            {availchecked && <AvailabilitiesCheckBox  />}
           </FormGroup>
 
           {/* ///////////////////////////////////////////////////   Dates   ///////////////////////////////////////////// */}
@@ -231,6 +234,7 @@ export default function SideVarDropDown1(props) {
             <FormLabel sx={{ mt: 1, mb: 0 }} id="demo-radio-buttons-group-label">Release Dates </FormLabel>
 
             <FormControlLabel control={<Checkbox
+            size="small"
               checked={releseDatesChecked}
               onChange={releaseDateHandler}
               inputProps={{ 'aria-label': 'controlled' }}

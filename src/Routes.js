@@ -12,6 +12,7 @@ import DetailPage from "./pages/DetailPage"
 
 
 
+
 const RoutesMain = () => {
 
     let routs;

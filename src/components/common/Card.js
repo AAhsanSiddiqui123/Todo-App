@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import style from "../../pages/HeroSection.module.css"
 import CircularStatic from "./RatingLoader"
 import { useNavigate } from "react-router-dom";
+import Box from '@mui/material/Box';
 
 
 export default function MovieCard(props) {
@@ -26,9 +27,9 @@ export default function MovieCard(props) {
                     image={`https://image.tmdb.org/t/p/w500/${props.data.poster_path}`}
                 />
                 <CircularStatic rating={props.data.vote_average} />
-                <CardContent>
+                <Box sx={{p: 1}}>
 
-                    <Typography gutterBottom component="div" sx={{ fontSize: 15, fontWeight: 600 }} >
+                    <Typography gutterBottom component="p" sx={{ fontSize: 15, fontWeight: 700, lineHeight:"1.1rem" }} >
                         <strong>{props.data.original_title || props.data.original_name}</strong>
                     </Typography>
 
@@ -36,7 +37,7 @@ export default function MovieCard(props) {
                         {props.data.release_date || props.data.first_air_date}
                     </Typography>
 
-                </CardContent>
+                </Box>
 
             </Card>
         </div>

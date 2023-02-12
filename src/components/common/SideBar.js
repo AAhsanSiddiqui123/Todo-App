@@ -18,7 +18,7 @@ const SideBar = () => {
 
 
   return (
-    <Grid item lg={2.5} md={3} sm={12} xs={12}>
+    <Grid item xs={12} sm={12} md={3} lg={2.5}>
 
       <Paper style={{ border: "solid 1px lightgrey", borderRadius: "6px", boxShadow: "1px 3px 18px #dad6d6" }}>
         <div style={{ height: "45px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between", paddingRight: "8px", paddingLeft: "8px" }} onClick={() => { return setDrop1(!drop1) }}>

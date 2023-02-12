@@ -7,7 +7,7 @@ const ListItem = styled('li')(({ theme }) => ({
   margin: theme.spacing(0.5),
 }));
 
-export default function Chips() {
+export default function Chips(props) {
   let theme = useTheme()
 
   const [chipData, setChipData] = React.useState([

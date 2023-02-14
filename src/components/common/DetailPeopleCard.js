@@ -1,32 +1,27 @@
 import * as React from 'react';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-export default function MediaCard() {
+
+export default function MediaCard(props) {
+
   return (
-    <Card sx={{ minWidth: "150px", height: "250px", border:"solid 1px black" }}>
+    <Card sx={{ minWidth: "140px", height: "280px", borderRadius: "7px", mb: 3}}>
       <CardMedia
-        sx={{ height: 140 }}
-        image="/static/images/cards/contemplative-reptile.jpg"
+        sx={{ height: 175 }}
+        image={`https://image.tmdb.org/t/p/w500/${props.cast.profile_path}`}
         title="green iguana"
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          Lizard
+        <Typography gutterBottom variant="h5" component="div" sx={{ fontSize: 15, fontWeight: 700}}>
+         {props.cast.original_name}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
+        <Typography variant="body2" color="text.secondary" sx={{ fontSize: 15}}>
+         {props.cast.character}
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
-      </CardActions>
     </Card>
   );
 }

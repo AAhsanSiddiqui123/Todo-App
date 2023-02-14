@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 export const axiosService = (options) => {
-    console.log(options)
     return axios({
         method: options.method ? options.method : 'GET',
         url: options.url,

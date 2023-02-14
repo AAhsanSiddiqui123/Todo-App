@@ -56,8 +56,6 @@ export default function Chips(props) {
     }
   }
 
-  console.log(availMultiCheckBox)
-
   return (
     <Box
 

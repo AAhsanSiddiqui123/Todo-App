@@ -10,6 +10,15 @@ exports.Get_UpCommingMovie_url = `${MainMovieUrl}`;
 exports.Get_TopRatedMovie_url = `${MainMovieUrl}`;
 
 
+// Movie Detail
+exports.Get_MovieDetail_url =  `${MainMovieUrl}`;
+
+// Cast 
+exports.Get_MovieCast_url =  `${MainMovieUrl}`;
+
+// Review 
+exports.Get_MovieReview_url =  `${MainMovieUrl}`;
+
+//Tv Shows
 exports.Get_AllTvPopular_url = `${MainTvUrl}`;
 
-exports.Get_MovieDetail_url = "https://api.themoviedb.org/3/movie"

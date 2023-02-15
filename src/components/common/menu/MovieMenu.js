@@ -20,7 +20,7 @@ export default function BasicMenu(props) {
     console.log(selectedOption)
 
     if(selectedOption === "Popular"){
-      navigate("/movie")     
+      navigate("/")     
     }else if(selectedOption === "NowPlaying"){  
       navigate("/movie/nowplaying")
     }else if(selectedOption === "UpComming"){  

@@ -7,7 +7,6 @@ import Grid from '@mui/material/Grid';
 import { useParams } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import Fab from '@mui/material/Fab';
-import AddIcon from '@mui/icons-material/Add';
 import { Get_MovieDetail_url } from "../Services/url";
 import { axiosService } from "../Services/axios.service";
 import Container from '@mui/material/Container';
@@ -35,7 +34,7 @@ const DetailPage = () => {
     const [state, setState] = React.useState({})
     let id = useParams();
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     let topCast = useSelector((state) => state.movieReducer.topCase);
     let reviews = useSelector((state) => state.movieReducer.reviews);
 
@@ -62,7 +61,7 @@ const DetailPage = () => {
     let posterImage = `https://image.tmdb.org/t/p/original/${state?.backdrop_path}`
 
     var month = (new Date(reviews?.[0]?.created_at)).getUTCMonth() + 1;
-    var day = (new Date(reviews?.[0]?.created_at)).getUTCDate();;
+    var day = (new Date(reviews?.[0]?.created_at)).getUTCDate();
     var year = (new Date(reviews?.[0]?.created_at)).getFullYear();
 
     const styles = {
@@ -77,7 +76,7 @@ const DetailPage = () => {
 
             {/* /////////////////////////////////////////////////////////////////////////////////// Section 1 */}
 
-            <Grid className='background' container spacing={2} sx={{ alignItems: "center", justifyContent: "center", p: 3, color: "white" }} style={styles.paperContainer}>
+            <Grid className='background' mt="30px" container spacing={2} sx={{ alignItems: "center", justifyContent: "center", p: 3, color: "white" }} style={styles.paperContainer}>
 
 
                 <Grid item xs={0} sm={4} md={3} lg={2.5} xl={2.5} sx={{}}  >

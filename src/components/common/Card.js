@@ -11,7 +11,8 @@ import Box from '@mui/material/Box';
 
 export default function MovieCard(props) {
     const navigate = useNavigate();
-    function clickHandler (){       
+
+    function clickHandler (){ 
         navigate(`/detail/${props.data.id}`)
     }
     return (
@@ -33,9 +34,7 @@ export default function MovieCard(props) {
                     <Typography gutterBottom variant="h8" component="div" sx={{ fontSize: 15 }} >
                         {props.data.release_date || props.data.first_air_date}
                     </Typography>
-
                 </Box>
-
             </Card>
         </div>
     );

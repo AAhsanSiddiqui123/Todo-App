@@ -12,13 +12,17 @@ exports.Get_TopRatedMovie_url = `${MainMovieUrl}`;
 
 // Movie Detail
 exports.Get_MovieDetail_url =  `${MainMovieUrl}`;
-
 // Cast 
 exports.Get_MovieCast_url =  `${MainMovieUrl}`;
-
 // Review 
 exports.Get_MovieReview_url =  `${MainMovieUrl}`;
 
+
 //Tv Shows
 exports.Get_AllTvPopular_url = `${MainTvUrl}`;
-
+// Tv Detail 
+exports.Get_TvDetail_url = `${MainTvUrl}`;
+// Cast 
+exports.Get_TvCast_url =  `${MainTvUrl}`;
+// Review 
+exports.Get_TvReview_url =  `${MainTvUrl}`;

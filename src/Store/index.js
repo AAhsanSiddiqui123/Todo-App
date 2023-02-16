@@ -12,6 +12,8 @@ import getCastSaga from "./sagas/movieSaga/topCast";
 import getReviewSaga from "./sagas/movieSaga/reviewSaga"
 
 import tvSaga from "./sagas/tvSaga/tvSaga";
+import getTvCastSaga from "./sagas/tvSaga/topTvCastSaga";
+import getTvReviewSaga from "./sagas/tvSaga/reviewTvSaga";
 
 
 
@@ -41,6 +43,8 @@ sagaMiddleware.run(getCastSaga);
 sagaMiddleware.run(getReviewSaga);
 
 sagaMiddleware.run(tvSaga);
+sagaMiddleware.run(getTvCastSaga);
+sagaMiddleware.run(getTvReviewSaga);
 
 
 export default store;

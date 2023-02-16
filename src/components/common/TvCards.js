@@ -9,11 +9,11 @@ import { useNavigate } from "react-router-dom";
 import Box from '@mui/material/Box';
 
 
-export default function MovieCard(props) {
+export default function TvCard(props) {
     const navigate = useNavigate();
 
     function clickHandler (){ 
-        navigate(`/detail/${props.data.id}`)
+        navigate(`/tv/${props.data.id}`)
     }
     return (
         <div className={style.card} style={{cursor:"pointer"}} onClick={clickHandler}>

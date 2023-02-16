@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import MovieCard from "../../components/common/Card";
+import TvCard from "../../components/common/TvCards";
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
@@ -33,7 +33,7 @@ export default function TvShows(props) {
                     <Grid item xs={12} sm={12} md={9} lg={9.5}>
                         <div style={{ backgroundColor: 'white' }} className={style.wraper}>
                             {moviesArray ? moviesArray.map((curr) => {
-                                return <MovieCard
+                                return <TvCard
                                     key={curr.id}
                                     data={curr}
                                 />

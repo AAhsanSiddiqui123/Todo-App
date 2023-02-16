@@ -7,7 +7,7 @@ import Grid from '@mui/material/Grid';
 import { useParams } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import Fab from '@mui/material/Fab';
-import { Get_MovieDetail_url } from "../Services/url";
+import { Get_TvDetail_url, Get_TvCast_url, Get_TvReview_url } from "../Services/url";
 import { axiosService } from "../Services/axios.service";
 import Container from '@mui/material/Container';
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -30,9 +30,11 @@ import CircularStatic from "../components/common/RatingLoader"
 
 
 
-const DetailPage = () => {
+const TvDetailPage = () => {
     const [state, setState] = React.useState({})
     let id = useParams();
+
+
 
     const dispatch = useDispatch();
     let topCast = useSelector((state) => state.movieReducer.topCase);
@@ -41,14 +43,14 @@ const DetailPage = () => {
     React.useEffect(() => {
         axiosService({
             method: "GET",
-            url: `${Get_MovieDetail_url}/${id.id}`,
+            url: `${Get_TvDetail_url}/${id.id}`,
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
             },
             params: { api_key: "a501016df75ba02be8137f4996f56d90", language: "en-US" }
         }).then((res) => {
-            dispatch({ type: "get_cast_saga", payload: res.data.id })
-            dispatch({ type: "get_Review_saga", payload: res.data.id })
+            dispatch({ type: "get_tvCast_saga", payload: res.data.id })
+            dispatch({ type: "get_TvReview_saga", payload: res.data.id })
 
             setState(res.data);
         })
@@ -219,4 +221,4 @@ const DetailPage = () => {
     )
 }
 
-export default DetailPage
+export default TvDetailPage

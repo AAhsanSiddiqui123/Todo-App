@@ -31,16 +31,16 @@ const Footer = () => {
 
           <Grid container sx={{  }}>
 
-            <Grid item xs={12} sm={5} md={3} lg={2} xl={2} sx={{bgcolor: "crimson" }}>
-              <Stack sx={{ ml: "5px" }} spacing={3}>
+            <Grid item xs={12} sm={12} md={12} lg={12} xl={2} sx={{}}>
+              <Stack sx={{ ml: "5px", width:"60%" }} spacing={3}>
                 <img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg" alt="The Movie Database (TMDB)"  height="100" />
-                <Button variant="contained">Contained</Button>
+                <Button variant="contained"  >Contained</Button>
               </Stack>
             </Grid>
 
 
             <Grid item xs={12} sm={4} md={3} lg={2} xl={2} >
-              <Stack sx={{ lineHeight: "1.4em" }} >
+              <Stack sx={{ lineHeight: "1.4em", mt:"10px" }} >
                 <Typography variant='h3' sx={{ fontWeight: "bold", fontSize: "1.4em" }}><strong>Budget</strong></Typography>
                 <Typography variant='p'>Revenue</Typography>
                 <Typography variant='p'>Revenue</Typography>
@@ -51,7 +51,7 @@ const Footer = () => {
             </Grid>
 
             <Grid item xs={12} sm={4} md={3} lg={2} xl={2}>
-              <Stack sx={{ lineHeight: "1.4em" }}>
+              <Stack sx={{ lineHeight: "1.4em", mt:"10px"}}>
                 <Typography variant='h3' sx={{ fontWeight: "bold", fontSize: "1.4em" }}><strong>Budget</strong></Typography>
                 <Typography variant='p'>Revenue</Typography>
                 <Typography variant='p'>Revenue</Typography>
@@ -62,7 +62,7 @@ const Footer = () => {
             </Grid>
 
             <Grid item xs={12} sm={4} md={3} lg={2} xl={2}>
-              <Stack sx={{ lineHeight: "1.4em" }}>
+              <Stack sx={{ lineHeight: "1.4em", mt:"10px"}}>
                 <Typography variant='h3' sx={{ fontWeight: "bold", fontSize: "1.4em" }}><strong>Budget</strong></Typography>
                 <Typography variant='p'>Revenue</Typography>
                 <Typography variant='p'>Revenue</Typography>
@@ -73,7 +73,7 @@ const Footer = () => {
             </Grid>
 
             <Grid item xs={12} sm={4} md={3} lg={2} xl={2}>
-              <Stack sx={{ lineHeight: "1.4em" }}>
+              <Stack sx={{ lineHeight: "1.4em" ,mt:"10px"}}>
                 <Typography variant='h3' sx={{ fontWeight: "bold", fontSize: "1.4em" }}><strong>Budget</strong></Typography>
                 <Typography variant='p'>Revenue</Typography>
                 <Typography variant='p'>Revenue</Typography>

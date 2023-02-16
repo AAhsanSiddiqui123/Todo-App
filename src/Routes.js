@@ -20,7 +20,7 @@ const RoutesMain = () => {
 
     routs = (<Routes>
         <Route path="/" element={<LandingPage />} >
-            <Route path="/frf" element={<PopularMovies />} />
+            <Route path="/" element={<PopularMovies />} />
             <Route path="movie/nowplaying" element={<NowPlayingMovie />} />
             <Route path="movie/upcomming" element={<UpCommingMovie />} />
             <Route path="movie/toprated" element={<ToprateMovie />} />

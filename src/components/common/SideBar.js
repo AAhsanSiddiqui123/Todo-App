@@ -11,9 +11,20 @@ const SideBar = () => {
   const [drop2, setDrop2] = React.useState(false);
   const [drop3, setDrop3] = React.useState(false);
 
-  function querySelector(active, queryQbj){
+  function querySelector(active, queryQbj) {
     console.log(queryQbj)
   }
+
+  const style = {
+    divStyle: { 
+      height: "45px", 
+      cursor: "pointer",
+       display: "flex", 
+       alignItems: "center", 
+       justifyContent: "space-between", 
+       paddingRight: "8px",
+        paddingLeft: "8px"
+       }}
 
 
 
@@ -21,7 +32,7 @@ const SideBar = () => {
     <Grid item xs={12} sm={12} md={3} lg={2.5}>
 
       <Paper sx={{ border: "solid 1px lightgrey", borderRadius: "6px", boxShadow: "1px 3px 18px #dad6d6" }}>
-        <div style={{ height: "45px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between", paddingRight: "8px", paddingLeft: "8px" }} onClick={() => { return setDrop1(!drop1) }}>
+        <div style={style.divStyle} onClick={() => { return setDrop1(!drop1) }}>
           <p>Sort</p>
           <ChevronRightIcon />
         </div>
@@ -29,22 +40,22 @@ const SideBar = () => {
       </Paper>
 
       <Paper sx={{ marginTop: "14px", border: "solid 1px lightgrey", borderRadius: "6px", boxShadow: "1px 3px 18px #dad6d6" }}>
-        <div style={{ height: "45px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between", paddingRight: "8px", paddingLeft: "8px" }} onClick={() => { return setDrop2(!drop2) }}>
+        <div style={style.divStyle} onClick={() => { return setDrop2(!drop2) }}>
           <p>Filter</p>
-          <ChevronRightIcon  />
+          <ChevronRightIcon />
         </div>
         {drop2 && <SideVarDropDown1 querySelector={querySelector} />}
       </Paper>
 
       <Paper sx={{ marginTop: "14px", border: "solid 1px lightgrey", borderRadius: "6px", boxShadow: "1px 3px 18px #dad6d6" }}>
-        <div style={{ height: "45px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between", paddingRight: "8px", paddingLeft: "8px" }} onClick={() => { return setDrop3(!drop3) }}>
+        <div style={style.divStyle} onClick={() => { return setDrop3(!drop3) }}>
           <p>Sort</p>
           <ChevronRightIcon />
         </div>
         {drop3 && <SideBarDropDown />}
       </Paper>
 
-      <Button variant="contained" disabled sx={{width: "100%", borderRadius: "16px", mt: 3}}>Search</Button>
+      <Button variant="contained" disabled sx={{ width: "100%", borderRadius: "16px", mt: 3 }}>Search</Button>
 
     </Grid>
   )

@@ -1,10 +1,13 @@
 import { takeEvery, put } from 'redux-saga/effects'
 import { movieActionCreater } from '../../reducers/movieReducer';
+import { magageStateAction } from '../../reducers/manageState';
+
 import { Get_MovieCast_url } from "../../../Services/url"
 import { axiosService } from "../../../Services/axios.service"
 
 
 function* getCast(action) {
+    yield put({ type: magageStateAction.castLoadingHandler, payload: true });
 
     let payload = yield axiosService({
         method: "GET",
@@ -16,8 +19,8 @@ function* getCast(action) {
     })
 
     // console.log(payload.data.cast);
-    
-    
+
+    yield put({ type: magageStateAction.castLoadingHandler, payload: false });
     yield put({ type: movieActionCreater.castHandler, payload: payload.data.cast });
 }
 

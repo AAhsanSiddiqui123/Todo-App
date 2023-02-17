@@ -18,6 +18,11 @@ import CardMedia from '@mui/material/CardMedia';
 import DetailPeopleCard from "../components/common/DetailPeopleCard";
 import Chips from "../components/common/sideBarDropDown/Chips"
 import Avatar from '@mui/material/Avatar';
+import CircularProgress from '@mui/material/CircularProgress';
+import {magageStateAction} from "../Store/reducers/manageState";
+
+
+
 import { useDispatch, useSelector } from 'react-redux';
 
 import MenuIcon from '@mui/icons-material/Menu';
@@ -26,7 +31,6 @@ import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import StarIcon from '@mui/icons-material/Star';
 
 import CircularStatic from "../components/common/RatingLoader"
-
 
 
 
@@ -39,8 +43,14 @@ const TvDetailPage = () => {
     const dispatch = useDispatch();
     let topCast = useSelector((state) => state.movieReducer.topCase);
     let reviews = useSelector((state) => state.movieReducer.reviews);
+    let isLoading = useSelector((state) => state.stateReducer.isLoading);
+    let topCastIsLoading = useSelector((state) => state.stateReducer.topCastIsLoading);
+
+    console.log(topCastIsLoading);
 
     React.useEffect(() => {
+        dispatch(magageStateAction.updateHandler(true))
+
         axiosService({
             method: "GET",
             url: `${Get_TvDetail_url}/${id.id}`,
@@ -49,6 +59,8 @@ const TvDetailPage = () => {
             },
             params: { api_key: "a501016df75ba02be8137f4996f56d90", language: "en-US" }
         }).then((res) => {
+            dispatch(magageStateAction.updateHandler(false))
+
             dispatch({ type: "get_tvCast_saga", payload: res.data.id })
             dispatch({ type: "get_TvReview_saga", payload: res.data.id })
 
@@ -58,7 +70,7 @@ const TvDetailPage = () => {
     }, [])
 
 
-    var movieRealeseyear = (new Date(state.release_date)).getFullYear();
+    var movieRealeseyear = (new Date(state.first_air_date)).getFullYear();
     let country = state?.production_countries?.[0]?.iso_3166_1
     let posterImage = `https://image.tmdb.org/t/p/original/${state?.backdrop_path}`
 
@@ -81,6 +93,9 @@ const TvDetailPage = () => {
             <Grid className='background' mt="30px" container spacing={2} sx={{ alignItems: "center", justifyContent: "center", p: 3, color: "white" }} style={styles.paperContainer}>
 
 
+            {!isLoading?
+                <>
+
                 <Grid item xs={0} sm={4} md={3} lg={2.5} xl={2.5} sx={{}}  >
                     <CardMedia
                         component="img"
@@ -93,7 +108,7 @@ const TvDetailPage = () => {
                 </Grid>
                 <Grid item xs={12} sm={8} md={8} lg={8} xl={8}>
                     <Box>
-                        <Typography variant='h2' sx={{ fontWeight: "700", fontSize: "35.2px" }}> {state.original_title} {`(${movieRealeseyear})` || ""} </Typography>
+                        <Typography variant='h2' sx={{ fontWeight: "700", fontSize: "35.2px" }}> {state.original_name} {`(${movieRealeseyear})` || ""} </Typography>
                         <Box>
                             <Typography variant='p'>{state.release_date} {`(${country})`}</Typography>
                             {
@@ -125,6 +140,8 @@ const TvDetailPage = () => {
                         </Stack>
                     </Box>
                 </Grid>
+               
+                </>:<CircularProgress />}
 
             </Grid>
 
@@ -144,12 +161,12 @@ const TvDetailPage = () => {
 
                         {/* ///////// Slider */}
                         <Stack spacing={2} direction="row" sx={{ overflowX: "auto", mb: 3 }}>
-                            {
+                            {!topCastIsLoading?
                                 topCast.map((curr) => {
                                     return <DetailPeopleCard
                                         key={curr.id}
                                         cast={curr} />
-                                })
+                                }):<CircularProgress />
 
                             }
 
@@ -173,8 +190,8 @@ const TvDetailPage = () => {
                                 <Stack direction="row" spacing={2}>
                                     <Avatar alt="Travis Howard" />
                                     <Stack spacing={2}>
-                                        <Typography variant='p'><strong>A review by {reviews?.[0]?.author}</strong><br />Written by  {reviews?.[0]?.author} on {`${year}-${month}-${day}`}</Typography>
-                                        <Typography variant='p'>{`${reviews?.[0]?.content.substring(0, 600)}...`}</Typography>
+                                        <Typography variant='p'><strong>A review by {reviews?.[0]?.author}</strong><br />Written by  {reviews?.[0]?.author} on {`${year||0}-${month||0}-${day||0}`}</Typography>
+                                        <Typography variant='p'>{`${reviews?.[0]?.content.substring(0, 600)}...`?? "No Review"}</Typography>
                                     </Stack>
 
                                 </Stack>

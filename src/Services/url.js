@@ -1,9 +1,10 @@
 const MainMovieUrl = 'https://api.themoviedb.org/3/movie';
 const MainTvUrl = 'https://api.themoviedb.org/3/tv';
+const MainPeopleUrl = "https://api.themoviedb.org/3/person";
 
 
 
-//Movies
+// Movies
 exports.Get_AllPopular_url = `${MainMovieUrl}`;
 exports.Get_NowPlayingMovie_url = `${MainMovieUrl}`;
 exports.Get_UpCommingMovie_url = `${MainMovieUrl}`;
@@ -26,3 +27,7 @@ exports.Get_TvDetail_url = `${MainTvUrl}`;
 exports.Get_TvCast_url =  `${MainTvUrl}`;
 // Review 
 exports.Get_TvReview_url =  `${MainTvUrl}`;
+
+
+//People 
+exports.Get_People_url =  `${MainPeopleUrl}`;

@@ -10,7 +10,8 @@ const movieReducer = createSlice({
 
     listHandler(state, action) {
       console.log(action.payload.data.results);
-      state.moviesArray = action.payload.data.results;
+      state.moviesArray = [...state.moviesArray, ...action.payload.data.results];
+      // state.moviesArray = state.moviesArray.concat(action.payload.data.results)
     },
 
     castHandler(state, action) {

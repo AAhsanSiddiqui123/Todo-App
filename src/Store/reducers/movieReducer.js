@@ -1,38 +1,33 @@
 import { createSlice, current } from '@reduxjs/toolkit';
 
 
-const initialCounterState = { moviesArray: [] };
+const initialCounterState = { moviesArray: [], topCase: [], reviews: [] };
 
 const movieReducer = createSlice({
   name: 'movieReducer',
   initialState: initialCounterState,
   reducers: {
 
-    listHandler(state, action) { 
-      console.log(action.payload.data.results); 
+    listHandler(state, action) {
+      console.log(action.payload.data.results);
       state.moviesArray = action.payload.data.results;
     },
 
-    // updateHandler(state, action) {
-    //   let initialArray = current(state.dataArray)
-    //   let indexdValue = initialArray.findIndex((curr) => {
-    //     return curr.id === action.payload.updatedId
-    //   })
+    castHandler(state, action) {
+      // let initialArray = current(state.dataArray)
+      let arr = action.payload
+      state.topCase = arr.slice(0, 10)
+    },
 
-    //   let obj = {
-    //     ...initialArray[indexdValue],
-    //     name: action.payload.inputChange
-    //   }
+    reviewsHandler(state, action){
+      state.reviews = action.payload
+    }
 
-    //   state.dataArray[indexdValue] = obj
-    // },
-
-
-  },
+  }
 });
 
 
 
-export const movieActionCreater  = movieReducer.actions;
+export const movieActionCreater = movieReducer.actions;
 
 export default movieReducer.reducer;

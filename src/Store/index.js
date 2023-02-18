@@ -4,11 +4,14 @@ import createSagaMiddleware from 'redux-saga';
 import manageStateReducer from './reducers/manageState';
 import movieReducer from "./reducers/movieReducer";
 
-import PopularMovieSaga from "./sagas/popularMoviesSaga";
-import topRatedMovieSaga from "./sagas/topRatedMovieSaga";
-import upCommingMovieSaga from "./sagas/upCommingMovieSaga";
-import nowplayingMovieSaga from "./sagas/nowplayingMovieSaga"
-import tvSaga from "./sagas/tvSaga"
+import PopularMovieSaga from "./sagas/movieSaga/popularMoviesSaga";
+import topRatedMovieSaga from "./sagas/movieSaga/topRatedMovieSaga";
+import upCommingMovieSaga from "./sagas/movieSaga/upCommingMovieSaga";
+import nowplayingMovieSaga from "./sagas/movieSaga/nowplayingMovieSaga";
+import getCastSaga from "./sagas/movieSaga/topCast";
+import getReviewSaga from "./sagas/movieSaga/reviewSaga"
+
+import tvSaga from "./sagas/tvSaga/tvSaga";
 
 
 
@@ -34,6 +37,8 @@ sagaMiddleware.run(PopularMovieSaga);
 sagaMiddleware.run(nowplayingMovieSaga);
 sagaMiddleware.run(topRatedMovieSaga);
 sagaMiddleware.run(upCommingMovieSaga);
+sagaMiddleware.run(getCastSaga);
+sagaMiddleware.run(getReviewSaga);
 
 sagaMiddleware.run(tvSaga);
 

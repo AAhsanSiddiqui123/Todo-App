@@ -153,16 +153,7 @@ function NavBar() {
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
-                        {/* <Tooltip >
-                            <IconButton sx={{ p: 2, color: "white", fontSize: "15px" }}>
-                                <p sx={{ fontSize: "0px" }}>Loin</p>
-                            </IconButton>
-                        </Tooltip>
-                        <Tooltip >
-                            <IconButton sx={{ p: 2, color: "white", fontSize: "15px" }}>
-                                <p sx={{ fontSize: "0px" }}>Join TMDB</p>
-                            </IconButton>
-                        </Tooltip> */}
+        
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 2, color: "white" }}>
                                 <SearchRoundedIcon sx={{ fontSize: "30px" }} />

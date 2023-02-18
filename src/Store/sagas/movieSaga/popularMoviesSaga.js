@@ -1,7 +1,7 @@
 import { takeEvery, put } from 'redux-saga/effects'
-import { movieActionCreater } from '../reducers/movieReducer';
-import { Get_AllPopular_url } from "../../Services/url"
-import { axiosService } from "../../Services/axios.service"
+import { movieActionCreater } from '../../reducers/movieReducer';
+import { Get_AllPopular_url } from "../../../Services/url"
+import { axiosService } from "../../../Services/axios.service"
 
 
 function* getPopularMovie(a) {

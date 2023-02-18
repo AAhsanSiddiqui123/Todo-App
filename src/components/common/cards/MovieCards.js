@@ -3,16 +3,17 @@ import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 
-import style from "../../pages/HeroSection.module.css"
-import CircularStatic from "./RatingLoader"
+import style from "../../../pages/HeroSection.module.css"
+import CircularStatic from "../RatingLoader"
 import { useNavigate } from "react-router-dom";
 import Box from '@mui/material/Box';
 
 
 export default function MovieCard(props) {
     const navigate = useNavigate();
-    function clickHandler (){       
-        navigate(`/detail/${props.data.id}`)
+
+    function clickHandler (){ 
+        navigate(`/movie/${props.data.id}`)
     }
     return (
         <div className={style.card} style={{cursor:"pointer"}} onClick={clickHandler}>
@@ -33,9 +34,7 @@ export default function MovieCard(props) {
                     <Typography gutterBottom variant="h8" component="div" sx={{ fontSize: 15 }} >
                         {props.data.release_date || props.data.first_air_date}
                     </Typography>
-
                 </Box>
-
             </Card>
         </div>
     );

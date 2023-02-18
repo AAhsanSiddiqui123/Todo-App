@@ -5,7 +5,7 @@ import { axiosService } from "../../../Services/axios.service"
 
 
 function* getTvShows(action) {
-    console.log(action.action);
+    // console.log(action.action.page);
 
     let payload = yield axiosService({
         method: "GET",
@@ -13,10 +13,8 @@ function* getTvShows(action) {
         headers: {
             'Content-type': 'application/json; charset=UTF-8',
         },
-        params: { api_key: "a501016df75ba02be8137f4996f56d90", language: "en-US", page: 1 }
+        params: { api_key: "a501016df75ba02be8137f4996f56d90", language: "en-US", page: action.action.page }
     })
-
-    console.log(payload)
     
     
     yield put({ type: movieActionCreater.listHandler, payload });

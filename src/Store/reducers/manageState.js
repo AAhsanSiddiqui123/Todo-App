@@ -1,18 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialUpdateState = { isEdit: false, updatedId: "" };
+const initialUpdateState = { isLoading: false, topCastIsLoading:false };
 
 const magageState = createSlice({
   name: 'manageState',
   initialState: initialUpdateState,
   reducers: {
-    formUpdateHandler(state, action) {
-      state.isEdit = action.payload
+    updateHandler(state, action) {
+      state.isLoading = action.payload
     },
 
-    foundUpdateIdHandler(state, action) {
-      state.updatedId = action.payload
+    castLoadingHandler(state, action){
+      console.log(action);
+      state.topCastIsLoading = action.payload
     }
+
 
   },
 });

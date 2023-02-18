@@ -12,8 +12,9 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 
-import MovieMenu from "./menu/MovieMenu"
-import TvMenu from "./menu/TvMenu"
+import MovieMenu from "./menu/MovieMenu";
+import TvMenu from "./menu/TvMenu";
+import PeopleMenu from "./menu/PeopleMenu";
 
 const pages = [
 <MovieMenu
@@ -27,8 +28,9 @@ const pages = [
     title={"TV Shows"}
     val1={ "Popular"}
 />
-, <MovieMenu
+, <PeopleMenu
     title={"People"}
+    val1={ "people"}
 />
 ];   
 

@@ -7,9 +7,6 @@ import Grid from '@mui/material/Grid';
 import { useParams } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import Fab from '@mui/material/Fab';
-import AddIcon from '@mui/icons-material/Add';
-import { Get_MovieDetail_url } from "../Services/url";
-import { axiosService } from "../Services/axios.service";
 import Container from '@mui/material/Container';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
@@ -19,7 +16,13 @@ import CardMedia from '@mui/material/CardMedia';
 import DetailPeopleCard from "../components/common/DetailPeopleCard";
 import Chips from "../components/common/sideBarDropDown/Chips"
 import Avatar from '@mui/material/Avatar';
+import CircularProgress from '@mui/material/CircularProgress';
+
+
+import { axiosService } from "../Services/axios.service";
+import { Get_MovieDetail_url } from "../Services/url";
 import { useDispatch, useSelector } from 'react-redux';
+import {magageStateAction} from "../Store/reducers/manageState";
 
 import MenuIcon from '@mui/icons-material/Menu';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -35,11 +38,17 @@ const DetailPage = () => {
     const [state, setState] = React.useState({})
     let id = useParams();
 
-    const dispatch = useDispatch()
+
+
+    const dispatch = useDispatch();
     let topCast = useSelector((state) => state.movieReducer.topCase);
     let reviews = useSelector((state) => state.movieReducer.reviews);
+    let isLoading = useSelector((state) => state.stateReducer.isLoading);
+    let topCastIsLoading = useSelector((state) => state.stateReducer.topCastIsLoading);
+
 
     React.useEffect(() => {
+        dispatch(magageStateAction.updateHandler(true))
         axiosService({
             method: "GET",
             url: `${Get_MovieDetail_url}/${id.id}`,
@@ -48,6 +57,8 @@ const DetailPage = () => {
             },
             params: { api_key: "a501016df75ba02be8137f4996f56d90", language: "en-US" }
         }).then((res) => {
+            dispatch(magageStateAction.updateHandler(false))
+
             dispatch({ type: "get_cast_saga", payload: res.data.id })
             dispatch({ type: "get_Review_saga", payload: res.data.id })
 
@@ -62,7 +73,7 @@ const DetailPage = () => {
     let posterImage = `https://image.tmdb.org/t/p/original/${state?.backdrop_path}`
 
     var month = (new Date(reviews?.[0]?.created_at)).getUTCMonth() + 1;
-    var day = (new Date(reviews?.[0]?.created_at)).getUTCDate();;
+    var day = (new Date(reviews?.[0]?.created_at)).getUTCDate();
     var year = (new Date(reviews?.[0]?.created_at)).getFullYear();
 
     const styles = {
@@ -77,9 +88,11 @@ const DetailPage = () => {
 
             {/* /////////////////////////////////////////////////////////////////////////////////// Section 1 */}
 
-            <Grid className='background' container spacing={2} sx={{ alignItems: "center", justifyContent: "center", p: 3, color: "white" }} style={styles.paperContainer}>
 
+            <Grid className='background' mt="30px" container spacing={2} sx={{ alignItems: "center", justifyContent: "center", p: 3, color: "white" }} style={styles.paperContainer}>
 
+                {!isLoading?
+                <>
                 <Grid item xs={0} sm={4} md={3} lg={2.5} xl={2.5} sx={{}}  >
                     <CardMedia
                         component="img"
@@ -123,9 +136,10 @@ const DetailPage = () => {
 
                         </Stack>
                     </Box>
-                </Grid>
+                </Grid> </>:<CircularProgress />}
 
             </Grid>
+
 
 
             {/* /////////////////////////////////////////////////////////////////////////////////// Section 2 */}
@@ -143,12 +157,12 @@ const DetailPage = () => {
 
                         {/* ///////// Slider */}
                         <Stack spacing={2} direction="row" sx={{ overflowX: "auto", mb: 3 }}>
-                            {
+                            {!topCastIsLoading?
                                 topCast.map((curr) => {
                                     return <DetailPeopleCard
                                         key={curr.id}
                                         cast={curr} />
-                                })
+                                }):<CircularProgress />
 
                             }
 

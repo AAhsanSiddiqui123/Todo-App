@@ -12,6 +12,10 @@ import getCastSaga from "./sagas/movieSaga/topCast";
 import getReviewSaga from "./sagas/movieSaga/reviewSaga"
 
 import tvSaga from "./sagas/tvSaga/tvSaga";
+import getTvCastSaga from "./sagas/tvSaga/topTvCastSaga";
+import getTvReviewSaga from "./sagas/tvSaga/reviewTvSaga";
+
+import peopleSaga from "./sagas/peopleSaga/peopleSaga";
 
 
 
@@ -21,7 +25,7 @@ const middleware = [sagaMiddleware]
 
 const store = configureStore({
   reducer: {
-    update: manageStateReducer,
+    stateReducer: manageStateReducer,
     movieReducer: movieReducer,
   },
   middleware: (getDefaultMiddleware) =>
@@ -41,6 +45,9 @@ sagaMiddleware.run(getCastSaga);
 sagaMiddleware.run(getReviewSaga);
 
 sagaMiddleware.run(tvSaga);
+sagaMiddleware.run(getTvCastSaga);
+sagaMiddleware.run(getTvReviewSaga);
 
+sagaMiddleware.run(peopleSaga);
 
 export default store;

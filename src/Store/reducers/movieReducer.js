@@ -1,7 +1,7 @@
 import { createSlice, current } from '@reduxjs/toolkit';
 
 
-const initialCounterState = { moviesArray: [], peopleArray:[], topCase: [], reviews: [] };
+const initialCounterState = { moviesArray: [], peopleArray:[], topCase: [], reviews: [], isLoading: false };
 
 const movieReducer = createSlice({
   name: 'movieReducer',
@@ -9,9 +9,8 @@ const movieReducer = createSlice({
   reducers: {
 
     listHandler(state, action) {
-      console.log(action.payload.data.results);
+      console.log();
       state.moviesArray = [...state.moviesArray, ...action.payload.data.results];
-      // state.moviesArray = state.moviesArray.concat(action.payload.data.results)
     },
 
     castHandler(state, action) {
@@ -25,6 +24,11 @@ const movieReducer = createSlice({
 
     peopleHandler(state, action){
       state.peopleArray = action.payload.data.results
+    },
+
+    loadingHandler(state, action){
+      console.log(action)
+      state.isLoading = action.payload.loading
     }
 
   }

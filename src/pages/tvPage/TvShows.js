@@ -18,14 +18,13 @@ export default function TvShows(props) {
     let moviesArray
     moviesArray = useSelector((state) => state.movieReducer.moviesArray);
     React.useEffect(() => {
-        dispatch({ type: "Tv_saga", action: {page: apiCallOnScroll} })
+        dispatch({ type: "Tv_saga", action: {page: 1} })
 
-    }, [apiCallOnScroll])
+    }, [])
 
-    function fetchData() {
-        setApiCallOnScroll(apiCallOnScroll + 1)
-
-    }
+    // function fetchData() {
+    //     setApiCallOnScroll(apiCallOnScroll + 1)
+    // }
     
     console.log(moviesArray)
 
@@ -54,7 +53,7 @@ export default function TvShows(props) {
             </Container>
 
 
-            <InfiniteScroll
+            {/* <InfiniteScroll
                 dataLength={20} //This is important field to render the next data
                 next={fetchData}
                 hasMore={true}
@@ -64,7 +63,9 @@ export default function TvShows(props) {
                         <b>Yay! You have seen it all</b>
                     </p>
                 }
-           />
+           >
+            
+           </InfiniteScroll> */}
   
         </>
     );

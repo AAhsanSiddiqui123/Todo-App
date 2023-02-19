@@ -20,6 +20,7 @@ export default function TvMenu(props) {
     console.log(selectedOption)
 
     if(selectedOption === "people"){
+      localStorage.setItem("activePage", "people");
       navigate("/people")     
     }
 

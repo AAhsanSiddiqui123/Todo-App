@@ -20,12 +20,19 @@ export default function BasicMenu(props) {
     console.log(selectedOption)
 
     if(selectedOption === "Popular"){
+      localStorage.setItem("activePage", "popularMovie");
       navigate("/")     
+
     }else if(selectedOption === "NowPlaying"){  
+      localStorage.setItem("activePage", "nowPlayingMovie");
       navigate("/movie/nowplaying")
+
     }else if(selectedOption === "UpComming"){  
+      localStorage.setItem("activePage", "upCommingMovie");
       navigate("/movie/upcomming")
+      
     }else if(selectedOption === "TopRated"){  
+      localStorage.setItem("activePage", "topRatedMovie");
       navigate("/movie/toprated")
     }
 

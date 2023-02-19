@@ -6,14 +6,16 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import SideBar from '../../components/common/SideBar';
 import style from "../HeroSection.module.css"
+import Skeleton from "@mui/material/Skeleton";
 
 
 
 export default function MainCardContainer(props) {
     const dispatch = useDispatch();
-
-    let moviesArray
-    moviesArray = useSelector((state) => state.movieReducer.moviesArray);
+    let skeletonarr = [1,2,3,4,5,6,7,8,9,10];
+   
+    let moviesArray = useSelector((state) => state.movieReducer.moviesArray);
+    let isloading = useSelector((state) => state.movieReducer.isLoading);
     React.useEffect(() => {
         dispatch({ type: "popularMovie_saga", action: "payload" })
 
@@ -30,16 +32,40 @@ export default function MainCardContainer(props) {
                     <SideBar />
                     <Grid item xs={12} sm={12} md={9} lg={9.5}>
                         <div style={{ backgroundColor: 'white' }} className={style.wraper}>
-                            {moviesArray ? moviesArray.map((curr) => {
+                            {!isloading ? moviesArray.map((curr) => {
                                 return <MovieCard
                                     key={curr.id}
                                     data={curr}
                                 />
-                            }) : []}
+                            }) : skeletonarr.map((curr)=><SkeletonChildren key={curr}/>)}
+
+
                         </div>
                     </Grid>
                 </Grid>
             </Container>
         </>
+    );
+}
+
+
+
+function SkeletonChildrenDemo() {
+    return (
+        <div>
+            <Skeleton variant="rectangular" width="100%" height="300px"></Skeleton>
+        </div>
+    );
+}
+
+function SkeletonChildren() {
+    return (
+        <div>
+           <Grid container spacing={8}>
+                <Grid item xs>
+                    <SkeletonChildrenDemo loading />
+                </Grid>
+            </Grid>
+        </div>
     );
 }

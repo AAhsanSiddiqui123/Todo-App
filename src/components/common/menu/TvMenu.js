@@ -20,6 +20,7 @@ export default function TvMenu(props) {
     console.log(selectedOption)
 
     if(selectedOption === "Popular"){
+      localStorage.setItem("activePage", "populartv");
       navigate("/tv/popular")     
     }
 

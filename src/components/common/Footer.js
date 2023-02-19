@@ -1,10 +1,11 @@
-import React from 'react'
-import Box from '@mui/material/Box';
+import React, { useRef, useEffect } from 'react'
+// import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import { createTheme, responsiveFontSizes, ThemeProvider, } from '@mui/material/styles';
+import { useSelector, useDispatch } from 'react-redux';
 
 
 const theme = createTheme();
@@ -22,25 +23,57 @@ theme.typography.h3 = {
   // },
 };
 
+let count = 1;
 const Footer = () => {
+  let ref = useRef();
+  let activePage = localStorage.getItem("activePage");
+  const dispatch = useDispatch();
+
+  console.log(activePage);
+
+  const apiCall = function (entries) {
+    const [entry] = entries;
+    count = count + 1;
+
+    if (entry.isIntersecting) {
+      if(activePage === "popularMovie"){
+        console.log("hello g")
+        dispatch({ type: "popularMovie_saga", action: { page: count } })     
+      }
+
+    }
+  }
+
+  useEffect(() => {
+    const Observer = new IntersectionObserver(apiCall, {
+      root: null,
+      threshold: 0
+    })
+
+    Observer.observe(ref.current)
+
+    console.log(ref.current)
+  }, [])
+
+
   return (
     <ThemeProvider theme={theme}>
 
-      <Stack mt="20px" sx={{ backgroundColor: "#032541", color: "white", display: "flex", alignItems: "center" }}>
+      <Stack ref={ref} mt="20px" sx={{ backgroundColor: "#032541", color: "white", display: "flex", alignItems: "center" }}>
         <Stack sx={{ width: "70%", p: 5 }} direction="row" spacing={5}>
 
-          <Grid container sx={{  }}>
+          <Grid container sx={{}}>
 
             <Grid item xs={12} sm={12} md={12} lg={12} xl={2} sx={{}}>
               <Stack sx={{ ml: "5px" }} spacing={3}>
-                <img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg" alt="The Movie Database (TMDB)"  height="100" />
+                <img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg" alt="The Movie Database (TMDB)" height="100" />
                 <Button variant="contained"  >Contained</Button>
               </Stack>
             </Grid>
 
 
             <Grid item xs={12} sm={6} md={4} lg={3} xl={2} mt="10px" >
-              <Stack sx={{ lineHeight: "1.4em", mt:"10px" }} >
+              <Stack sx={{ lineHeight: "1.4em", mt: "10px" }} >
                 <Typography variant='h3' sx={{ fontWeight: "bold", fontSize: "1.4em" }}><strong>THE BASICS</strong></Typography>
                 <Typography variant='p'>About TMDB</Typography>
                 <Typography variant='p'>Contact Us</Typography>
@@ -51,7 +84,7 @@ const Footer = () => {
             </Grid>
 
             <Grid item xs={12} sm={6} md={4} lg={3} xl={2} mt="10px">
-              <Stack sx={{ lineHeight: "1.4em", mt:"10px"}}>
+              <Stack sx={{ lineHeight: "1.4em", mt: "10px" }}>
                 <Typography variant='h3' sx={{ fontWeight: "bold", fontSize: "1.4em" }}><strong>GET INVOLVED</strong></Typography>
                 <Typography variant='p'>Contribution Bible</Typography>
                 <Typography variant='p'>Add New Movie</Typography>
@@ -60,7 +93,7 @@ const Footer = () => {
             </Grid>
 
             <Grid item xs={12} sm={6} md={4} lg={3} xl={2} mt="10px">
-              <Stack sx={{ lineHeight: "1.4em", mt:"10px"}}>
+              <Stack sx={{ lineHeight: "1.4em", mt: "10px" }}>
                 <Typography variant='h3' sx={{ fontWeight: "bold", fontSize: "1.4em" }}><strong>COMMUNITY</strong></Typography>
                 <Typography variant='p'>Guidelines</Typography>
                 <Typography variant='p'>Discussions</Typography>
@@ -70,7 +103,7 @@ const Footer = () => {
             </Grid>
 
             <Grid item xs={12} sm={4} md={4} lg={3} xl={2} mt="10px">
-              <Stack sx={{ lineHeight: "1.4em" ,mt:"10px"}}>
+              <Stack sx={{ lineHeight: "1.4em", mt: "10px" }}>
                 <Typography variant='h3' sx={{ fontWeight: "bold", fontSize: "1.4em" }}><strong>LEGAL</strong></Typography>
                 <Typography variant='p'>Terms of Use</Typography>
                 <Typography variant='p'>Api Termsof Use</Typography>

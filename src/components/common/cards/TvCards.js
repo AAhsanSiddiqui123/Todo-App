@@ -13,6 +13,7 @@ export default function TvCard(props) {
     const navigate = useNavigate();
 
     function clickHandler (){ 
+        console.log("tv")
         navigate(`/tv/${props.data.id}`)
     }
     return (

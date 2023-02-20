@@ -21,7 +21,7 @@ export default function BasicMenu(props) {
 
     if(selectedOption === "Popular"){
       localStorage.setItem("activePage", "popularMovie");
-      navigate("/")     
+      navigate("/movie")     
 
     }else if(selectedOption === "NowPlaying"){  
       localStorage.setItem("activePage", "nowPlayingMovie");

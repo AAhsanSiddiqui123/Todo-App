@@ -7,20 +7,38 @@ import Grid from '@mui/material/Grid';
 import SideBar from '../../components/common/SideBar';
 import style from "../HeroSection.module.css"
 import Skeleton from "@mui/material/Skeleton";
+import {movieActionCreater} from "../../Store/reducers/movieReducer";
+import { useParams } from 'react-router-dom';
 
 
 
 export default function MainCardContainer(props) {
+    // let tag = useParams();
+    // console.log(tag);
     const dispatch = useDispatch();
     let skeletonarr = [1,2,3,4,5,6,7,8,9,10];
    
-    let moviesArray = useSelector((state) => state.movieReducer.moviesArray);
+    let popularMovie = useSelector((state) => state.movieReducer.popularMovie);
     let isloading = useSelector((state) => state.movieReducer.isLoading);
+    let activePageNum = useSelector((state) => state.movieReducer.activePageNum);
+
+
     React.useEffect(() => {
-        dispatch({ type: "popularMovie_saga", action: "payload" })
+        dispatch(movieActionCreater.loadMoreClickedHandler(false))
+        dispatch(movieActionCreater.activePageNumHandler(1));
+        dispatch({ type: "popularMovie_saga", action: {count: 1, page: 1} });
 
     }, [])
-    console.log(moviesArray)
+
+    function loadMoreHandler() {
+        activePageNum =activePageNum+1
+        dispatch({ type: "popularMovie_saga", action: { page: activePageNum } })
+        dispatch(movieActionCreater.activePageNumHandler(activePageNum))
+        dispatch(movieActionCreater.loadMoreClickedHandler(true))
+    }
+
+
+    // console.log(moviesArray)
 
     return (
         <>
@@ -32,15 +50,16 @@ export default function MainCardContainer(props) {
                     <SideBar />
                     <Grid item xs={12} sm={12} md={9} lg={9.5}>
                         <div style={{ backgroundColor: 'white' }} className={style.wraper}>
-                            {!isloading ? moviesArray.map((curr) => {
+                            {!isloading ? popularMovie.map((curr, index) => {
                                 return <MovieCard
-                                    key={curr.id}
-                                    data={curr}
+                                key={`${curr.id}-${index}`}
+                                data={curr}
                                 />
                             }) : skeletonarr.map((curr)=><SkeletonChildren key={curr}/>)}
 
 
                         </div>
+                        <button style={{width:"100%", height:"30px"}} onClick={loadMoreHandler}>Load More</button>
                     </Grid>
                 </Grid>
             </Container>

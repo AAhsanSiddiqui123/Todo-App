@@ -13,6 +13,8 @@ import TvDetailPage from "./pages/TvDetailPage";
 
 import PeoplePage from "./pages/peoplePage/People"
 
+import HomePage from "./pages/HomePage"
+
 
 
 const RoutesMain = () => {
@@ -22,7 +24,8 @@ const RoutesMain = () => {
 
     routs = (<Routes>
         <Route path="/" element={<LandingPage />} >
-            <Route path="/" element={<PopularMovies />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="movie" element={<PopularMovies />} />
             <Route path="movie/nowplaying" element={<NowPlayingMovie />} />
             <Route path="movie/upcomming" element={<UpCommingMovie />} />
             <Route path="movie/toprated" element={<ToprateMovie />} />

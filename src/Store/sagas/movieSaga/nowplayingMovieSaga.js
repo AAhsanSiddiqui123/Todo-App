@@ -6,19 +6,22 @@ import { axiosService } from "../../../Services/axios.service"
 
 function* getNowPlayingMovie(action) {
    
-    console.log("nowplaying saga")
+    // console.log("nowplaying saga")
+    let count = action?.action?.count;
+
+    yield put({ type: movieActionCreater.loadingHandler, payload: { loading: true } });
     let payload = yield axiosService({
         method: "GET",
         url: `${Get_NowPlayingMovie_url}/now_playing`,
         headers: {
             'Content-type': 'application/json; charset=UTF-8',
         },
-        params: { api_key: "a501016df75ba02be8137f4996f56d90", language: "en-US", page: 1 }
+        params: { api_key: "a501016df75ba02be8137f4996f56d90", language: "en-US", page: action.action.page }
     })
-    console.log(payload)
+    // console.log(payload)
+    yield put({ type: movieActionCreater.loadingHandler, payload: { loading: false } });
+    yield put({ type: movieActionCreater.nowPlayingMovieHandler, payload,  count});
     
-    
-    yield put({ type: movieActionCreater.listHandler, payload });
 }
 
 function* nowplayingMovieSaga() {

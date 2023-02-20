@@ -5,31 +5,40 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import SideBar from '../../components/common/SideBar';
-import style from "../HeroSection.module.css";
-import InfiniteScroll from 'react-infinite-scroll-component';
-import { prettyDOM } from '@testing-library/react';
+import style from "../HeroSection.module.css"
+import Skeleton from "@mui/material/Skeleton";
+import {movieActionCreater} from "../../Store/reducers/movieReducer";
+import { useParams } from 'react-router-dom';
 
 
 
-export default function TvShows(props) {
+export default function MainCardContainer(props) {
+    // let tag = useParams();
+    // console.log(tag);
     const dispatch = useDispatch();
-    const [apiCallOnScroll, setApiCallOnScroll] = React.useState(1)
+    let skeletonarr = [1,2,3,4,5,6,7,8,9,10];
+   
+    let tvShow = useSelector((state) => state.movieReducer.tvShow);
+    let isloading = useSelector((state) => state.movieReducer.isLoading);
+    let activePageNum = useSelector((state) => state.movieReducer.activePageNum);
 
-    let moviesArray
-    moviesArray = useSelector((state) => state.movieReducer.moviesArray);
+
     React.useEffect(() => {
-        dispatch({ type: "Tv_saga", action: {page: 1} })
+        dispatch(movieActionCreater.loadMoreClickedHandler(false))
+        dispatch(movieActionCreater.activePageNumHandler(1));
+        dispatch({ type: "Tv_saga", action: {count: 1, page: 1} });
 
     }, [])
 
-    // function fetchData() {
-    //     setApiCallOnScroll(apiCallOnScroll + 1)
-    // }
-    
-    console.log(moviesArray)
+    function loadMoreHandler() {
+        activePageNum =activePageNum+1
+        dispatch({ type: "Tv_saga", action: { page: activePageNum } })
+        dispatch(movieActionCreater.activePageNumHandler(activePageNum))
+        dispatch(movieActionCreater.loadMoreClickedHandler(true))
+    }
 
 
-
+    // console.log(moviesArray)
 
     return (
         <>
@@ -41,32 +50,44 @@ export default function TvShows(props) {
                     <SideBar />
                     <Grid item xs={12} sm={12} md={9} lg={9.5}>
                         <div style={{ backgroundColor: 'white' }} className={style.wraper}>
-                            {moviesArray ? moviesArray.map((curr,index) => {
+                            {!isloading ? tvShow.map((curr, index) => {
                                 return <TvCard
-                                    key={`${curr.id}-${index}`}
-                                    data={curr}
+                                key={`${curr.id}-${index}`}
+                                data={curr}
                                 />
-                            }) : []}
+                            }) : skeletonarr.map((curr)=><SkeletonChildren key={curr}/>)}
+
+
                         </div>
+                        <button style={{width:"100%", height:"30px"}} onClick={loadMoreHandler}>Load More</button>
                     </Grid>
                 </Grid>
             </Container>
-
-
-            {/* <InfiniteScroll
-                dataLength={20} //This is important field to render the next data
-                next={fetchData}
-                hasMore={true}
-                loader={<h4>Loading...</h4>}
-                endMessage={
-                    <p style={{ textAlign: 'center' }}>
-                        <b>Yay! You have seen it all</b>
-                    </p>
-                }
-           >
-            
-           </InfiniteScroll> */}
-  
         </>
     );
 }
+
+
+
+function SkeletonChildrenDemo() {
+    return (
+        <div>
+            <Skeleton variant="rectangular" width="100%" height="300px"></Skeleton>
+        </div>
+    );
+}
+
+function SkeletonChildren() {
+    return (
+        <div>
+           <Grid container spacing={8}>
+                <Grid item xs>
+                    <SkeletonChildrenDemo loading />
+                </Grid>
+            </Grid>
+        </div>
+    );
+}
+
+
+

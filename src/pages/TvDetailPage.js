@@ -51,6 +51,7 @@ const TvDetailPage = () => {
     React.useEffect(() => {
         dispatch(magageStateAction.updateHandler(true))
 
+        console.log(`${Get_TvDetail_url}/${id.id}`);
         axiosService({
             method: "GET",
             url: `${Get_TvDetail_url}/${id.id}`,
@@ -90,7 +91,7 @@ const TvDetailPage = () => {
 
             {/* /////////////////////////////////////////////////////////////////////////////////// Section 1 */}
 
-            <Grid className='background' mt="30px" container spacing={2} sx={{ alignItems: "center", justifyContent: "center", p: 3, color: "white" }} style={styles.paperContainer}>
+            <Grid className='background' mt="30px" container spacing={2}  style={styles.paperContainer}>
 
 
             {!isLoading?

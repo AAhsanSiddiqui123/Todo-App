@@ -6,7 +6,10 @@ import { axiosService } from "../../../Services/axios.service"
 
 function* getTvShows(action) {
     // console.log(action.action.page);
+    let count = action?.action?.count;
 
+    yield put({ type: movieActionCreater.loadingHandler, payload: { loading: true } });
+    
     let payload = yield axiosService({
         method: "GET",
         url: `${Get_AllTvPopular_url}/popular`,
@@ -16,8 +19,8 @@ function* getTvShows(action) {
         params: { api_key: "a501016df75ba02be8137f4996f56d90", language: "en-US", page: action.action.page }
     })
     
-    
-    yield put({ type: movieActionCreater.listHandler, payload });
+    yield put({ type: movieActionCreater.loadingHandler, payload: { loading: false } });
+    yield put({ type: movieActionCreater.tvShowsHandler, payload,  count});
 }
 
 function* tvSaga() {

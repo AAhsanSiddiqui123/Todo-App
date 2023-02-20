@@ -6,6 +6,8 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import { createTheme, responsiveFontSizes, ThemeProvider, } from '@mui/material/styles';
 import { useSelector, useDispatch } from 'react-redux';
+import { movieActionCreater } from "../../Store/reducers/movieReducer"
+
 
 
 const theme = createTheme();
@@ -23,22 +25,43 @@ theme.typography.h3 = {
   // },
 };
 
-let count = 1;
 const Footer = () => {
   let ref = useRef();
   let activePage = localStorage.getItem("activePage");
-  const dispatch = useDispatch();
+  let activePageNum = useSelector((state) => state.movieReducer.activePageNum);
+  let loadMoreClicked = useSelector((state) => state.movieReducer.loadMoreClicked);
+  let isloading = useSelector((state) => state.movieReducer.isLoading);
 
-  console.log(activePage);
+  const dispatch = useDispatch();
 
   const apiCall = function (entries) {
     const [entry] = entries;
-    count = count + 1;
+    if (entry.isIntersecting && !isloading) {
 
-    if (entry.isIntersecting) {
-      if(activePage === "popularMovie"){
-        console.log("hello g")
-        dispatch({ type: "popularMovie_saga", action: { page: count } })     
+      if (activePage === "popularMovie" && loadMoreClicked === true) {
+        activePageNum = activePageNum + 1;
+        dispatch(movieActionCreater.activePageNumHandler(activePageNum))
+        dispatch({ type: "popularMovie_saga", action: { page: activePageNum } })
+
+      } else if (activePage === "nowPlayingMovie" && loadMoreClicked === true) {
+        activePageNum = activePageNum + 1;
+        dispatch(movieActionCreater.activePageNumHandler(activePageNum))
+        dispatch({ type: "nowPlayingMovie_saga", action: { page: activePageNum } })
+
+      } else if (activePage === "topRatedMovie" && loadMoreClicked === true) {
+        activePageNum = activePageNum + 1;
+        dispatch(movieActionCreater.activePageNumHandler(activePageNum))
+        dispatch({ type: "TopRatedMovie_saga", action: { page: activePageNum } })
+
+      } else if (activePage === "upCommingMovie" && loadMoreClicked === true) {
+        activePageNum = activePageNum + 1;
+        dispatch(movieActionCreater.activePageNumHandler(activePageNum))
+        dispatch({ type: "UpCommingMovie_saga", action: { page: activePageNum } })
+     
+      }else if (activePage === "populartv" && loadMoreClicked === true) {
+        activePageNum = activePageNum + 1;
+        dispatch(movieActionCreater.activePageNumHandler(activePageNum))
+        dispatch({ type: "Tv_saga", action: { page: activePageNum } })
       }
 
     }
@@ -50,16 +73,19 @@ const Footer = () => {
       threshold: 0
     })
 
-    Observer.observe(ref.current)
+    if (ref.current) Observer.observe(ref.current)
 
-    console.log(ref.current)
-  }, [])
+    return () => {
+      if (ref.current) Observer.unobserve(ref.current)
+    }
+
+  }, [loadMoreClicked, isloading])
 
 
   return (
     <ThemeProvider theme={theme}>
 
-      <Stack ref={ref} mt="20px" sx={{ backgroundColor: "#032541", color: "white", display: "flex", alignItems: "center" }}>
+      <Stack ref={ref} mt="20px" sx={{ backgroundColor: "#032541", color: "white", display: "flex", alignItems: "center", position:"fixed", bottom:0, width: "100%"}}>
         <Stack sx={{ width: "70%", p: 5 }} direction="row" spacing={5}>
 
           <Grid container sx={{}}>

@@ -7,17 +7,22 @@ import { axiosService } from "../../../Services/axios.service"
 function* getUpcomminMovie(action) {
     console.log(action.action);
 
+    let count = action?.action?.count;
+
+    yield put({ type: movieActionCreater.loadingHandler, payload: { loading: true } });
     let payload = yield axiosService({
         method: "GET",
         url: `${Get_UpCommingMovie_url}/upcoming`,
         headers: {
             'Content-type': 'application/json; charset=UTF-8',
         },
-        params: { api_key: "a501016df75ba02be8137f4996f56d90", language: "en-US", page: 1 }
+        params: { api_key: "a501016df75ba02be8137f4996f56d90", language: "en-US", page: action.action.page }
     })
     
     
-    yield put({ type: movieActionCreater.listHandler, payload });
+    yield put({ type: movieActionCreater.loadingHandler, payload: { loading: false } });
+    yield put({ type: movieActionCreater.upCommingMovie, payload,  count});
+
 }
 
 function* upCommingMovieSaga() {

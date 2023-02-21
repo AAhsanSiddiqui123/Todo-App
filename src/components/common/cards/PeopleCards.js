@@ -18,9 +18,7 @@ export default function PeopleCards(props) {
         <Typography gutterBottom variant="h5" component="div" sx={{ fontSize: 15, fontWeight: 700}}>
          {props.data.name}
         </Typography>
-        {/* <Typography variant="body2" color="text.secondary" sx={{ fontSize: 15}}>
-         {props.cast.character}
-        </Typography> */}
+  
       </CardContent>
     </Card>
   );

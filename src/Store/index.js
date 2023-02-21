@@ -3,6 +3,7 @@ import createSagaMiddleware from 'redux-saga';
 
 import manageStateReducer from './reducers/manageState';
 import movieReducer from "./reducers/movieReducer";
+import searchReducer from "./reducers/searchReducer"
 
 import PopularMovieSaga from "./sagas/movieSaga/popularMoviesSaga";
 import topRatedMovieSaga from "./sagas/movieSaga/topRatedMovieSaga";
@@ -16,6 +17,7 @@ import getTvCastSaga from "./sagas/tvSaga/topTvCastSaga";
 import getTvReviewSaga from "./sagas/tvSaga/reviewTvSaga";
 
 import peopleSaga from "./sagas/peopleSaga/peopleSaga";
+import searchSaga from "./sagas/searchSaga/searchSaga"
 
 
 
@@ -27,6 +29,7 @@ const store = configureStore({
   reducer: {
     stateReducer: manageStateReducer,
     movieReducer: movieReducer,
+    searchReducer: searchReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -49,5 +52,6 @@ sagaMiddleware.run(getTvCastSaga);
 sagaMiddleware.run(getTvReviewSaga);
 
 sagaMiddleware.run(peopleSaga);
+sagaMiddleware.run(searchSaga);
 
 export default store;

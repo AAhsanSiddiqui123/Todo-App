@@ -1,6 +1,7 @@
 const MainMovieUrl = 'https://api.themoviedb.org/3/movie';
 const MainTvUrl = 'https://api.themoviedb.org/3/tv';
 const MainPeopleUrl = "https://api.themoviedb.org/3/person";
+const SearchUrl = "https://api.themoviedb.org/3/search/multi";
 
 
 
@@ -31,3 +32,7 @@ exports.Get_TvReview_url =  `${MainTvUrl}`;
 
 //People 
 exports.Get_People_url =  `${MainPeopleUrl}`;
+
+
+//search
+exports.Search_url =  `${SearchUrl}`;

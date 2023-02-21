@@ -13,8 +13,8 @@ import TvDetailPage from "./pages/TvDetailPage";
 
 import PeoplePage from "./pages/peoplePage/People"
 
-import HomePage from "./pages/HomePage"
-
+import HomePage from "./pages/HomePage";
+import SearchPage from "./pages/searchPage/SearchPage"
 
 
 const RoutesMain = () => {
@@ -30,24 +30,19 @@ const RoutesMain = () => {
             <Route path="movie/upcomming" element={<UpCommingMovie />} />
             <Route path="movie/toprated" element={<ToprateMovie />} />
             <Route path="/movie/:id" element={<MovieDetailPage />} />
-            
+
             <Route path="tv/popular" element={<TvShows />} />
             <Route path="/tv/:id" element={<TvDetailPage />} />
 
             <Route path="/people" element={<PeoplePage />} />
+
+            <Route path="/search" element={<SearchPage />} />
+
         </Route>
 
-        {/* <Route path="" element={<DetailLandingPage />} >
-            <Route path="detail/:id" element={<DetailPage />} />
-        </Route> */}
 
     </Routes>)
 
-    // } else {
-    //     routs = (<Routes>
-    //         {/* <Route path="/" element={<SigninPage />} /> */}
-    //     </Routes>)
-    // }
 
 
     return (

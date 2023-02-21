@@ -85,7 +85,7 @@ const Footer = () => {
   return (
     <ThemeProvider theme={theme}>
 
-      <Stack ref={ref} mt="20px" sx={{ backgroundColor: "#032541", color: "white", display: "flex", alignItems: "center", position:"fixed", bottom:0, width: "100%"}}>
+      <Stack ref={ref} mt="20px" sx={{ backgroundColor: "#032541", color: "white", display: "flex", alignItems: "center", width: "100%"}}>
         <Stack sx={{ width: "70%", p: 5 }} direction="row" spacing={5}>
 
           <Grid container sx={{}}>

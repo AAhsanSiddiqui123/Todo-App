@@ -18,6 +18,9 @@ import { useSelector, useDispatch } from 'react-redux';
 
 let input;
 export default function HomePage(props) {
+    const [input, setInput] = React.useState("");
+    const [submitClicked, setSubmitClicked] = React.useState(false)
+
     const navigate = useNavigate();
 
     let popularMovie = useSelector((state) => state.movieReducer.popularMovie);
@@ -28,20 +31,37 @@ export default function HomePage(props) {
         dispatch({ type: "popularMovie_saga", action: { count: 1, page: 1 } });
     }, [])
 
-    
+    const rndInt = Math.floor(Math.random() * 15) + 1
+    console.log(rndInt)
+
+
+
     function changeHandler(e) {
-       input=e.target.value     
+        setInput(e.target.value)
     }
-    
+
+    React.useEffect(() => {
+        if (input && !submitClicked) {
+            var getData = setTimeout(() => {
+                navigate(`/search`)
+                dispatch({ type: "search_saga", action: { query: input, page: 1 } });
+            }, 2000)
+
+        }
+        return () => clearTimeout(getData)
+    }, [input])
+
+
     function submitHandler(e) {
-       e.preventDefault()   
-       navigate(`/search`)
-        
+        e.preventDefault()
+        setSubmitClicked(true)
+        navigate(`/search`)
         dispatch({ type: "search_saga", action: { query: input, page: 1 } });
     }
 
 
-    let posterImage = `https://image.tmdb.org/t/p/original/wwemzKWzjKYJFfCeiB57q3r4Bcm.png`
+    let posterImage = `https://image.tmdb.org/t/p/original/${popularMovie?.[rndInt]?.backdrop_path}`
+    
 
     const styles = {
         paperContainer: {
@@ -63,11 +83,11 @@ export default function HomePage(props) {
                         <Paper component="form" sx={{ p: '2px 4px', width: "100%", borderRadius: "50px" }}>
                             {/* <form onSubmit={submitHandler}> */}
 
-                                <input ref={ref} onChange={changeHandler}style={{ ml: 1, flex: 1, width: "90%", height:"30px", border:0,  }} placeholder="Search for a movie, tv show, person....." />
+                            <input ref={ref} onChange={changeHandler} style={{ ml: 1, flex: 1, width: "90%", height: "30px", border: 0, outline: "none" }} placeholder="Search for a movie, tv show, person....." />
 
-                                <IconButton onClick={submitHandler} type='submit' color="primary" sx={{ p: '10px', left: 0 }} aria-label="directions">
-                                    <DirectionsIcon />
-                                </IconButton>
+                            <IconButton onClick={submitHandler} type='submit' color="primary" sx={{ p: '10px', left: 0 }} aria-label="directions">
+                                <DirectionsIcon />
+                            </IconButton>
                             {/* </form> */}
 
                         </Paper>

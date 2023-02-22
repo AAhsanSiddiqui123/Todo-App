@@ -11,28 +11,30 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
+import SideDrawer from "../common/Drawer";
+import DrawerMenu from "../../components/common/menu/DrawerMenu/DrawerMenu"
 
 import MovieMenu from "./menu/MovieMenu";
 import TvMenu from "./menu/TvMenu";
 import PeopleMenu from "./menu/PeopleMenu";
 
 const pages = [
-<MovieMenu
-    title={"Movie"}
-    val1={ "Popular"}
-    val2={ "NowPlaying"}
-    val3={ "UpComming"}
-    val4={ "TopRated"}
-/>,
-<TvMenu
-    title={"TV Shows"}
-    val1={ "Popular"}
-/>
-, <PeopleMenu
-    title={"People"}
-    val1={ "people"}
-/>
-];   
+    <MovieMenu
+        title={"Movie"}
+        val1={"Popular"}
+        val2={"NowPlaying"}
+        val3={"UpComming"}
+        val4={"TopRated"}
+    />,
+    <TvMenu
+        title={"TV Shows"}
+        val1={"Popular"}
+    />
+    , <PeopleMenu
+        title={"People"}
+        val1={"people"}
+    />
+];
 
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -55,6 +57,14 @@ function NavBar() {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
+
+    let movieMenu = <MovieMenu
+        title={"Movie"}
+        val1={"Popular"}
+        val2={"NowPlaying"}
+        val3={"UpComming"}
+        val4={"TopRated"}
+    />
 
     return (
         <AppBar position="static" sx={{ backgroundColor: "#032541" }}>
@@ -90,40 +100,13 @@ function NavBar() {
                             onClick={handleOpenNavMenu}
                             color="inherit"
                         >
-                            <MenuIcon />
+
+                            {/* <MenuIcon /> */}
+                            {<SideDrawer />}
                         </IconButton>
-                        <Menu
-                            id="menu-appbar"
-                            anchorEl={anchorElNav}
-                            anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'left',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'left',
-                            }}
-                            open={Boolean(anchorElNav)}
-                            onClose={handleCloseNavMenu}
-                            sx={{
-                                display: { xs: 'block', md: 'none' },
-                            }}
-                        >
-                            <Box>
-                                {/* {pages.map((page, i) => (
-                                    <li style={{ listStyle: "none" }}
-                                        key={i}
-                                        onClick={handleCloseNavMenu}
-                                        sx={{ my: 2, color: 'white', display: 'block' }}
-                                    >
-                                        {page}
-                                    </li>
-                                ))} */}
-                            </Box>
-                        </Menu>
+
                     </Box>
-                    <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+                    {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
                     <Typography
                         variant="h5"
                         noWrap
@@ -140,7 +123,7 @@ function NavBar() {
                             textDecoration: 'none',
                         }}
                     >
-                        LOGO
+                        TMDB
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page, i) => (
@@ -155,10 +138,10 @@ function NavBar() {
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
-        
+
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 2, color: "white" }}>
-                                <SearchRoundedIcon sx={{ fontSize: "30px" }} />
+                                {/* <SearchRoundedIcon sx={{ fontSize: "30px" }} /> */}
                             </IconButton>
                         </Tooltip>
                         <Menu

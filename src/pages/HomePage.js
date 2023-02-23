@@ -5,6 +5,7 @@ import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 import DirectionsIcon from '@mui/icons-material/Directions';
+import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 import { Height } from '@mui/icons-material';
 import { Stack } from '@mui/system';
 import Typography from '@mui/material/Typography';
@@ -16,7 +17,7 @@ import HomePageCards from "../components/common/cards/HomePageCards";
 import { useSelector, useDispatch } from 'react-redux';
 
 
-let input;
+let rndInt;
 export default function HomePage(props) {
     const [input, setInput] = React.useState("");
     const [submitClicked, setSubmitClicked] = React.useState(false)
@@ -31,14 +32,17 @@ export default function HomePage(props) {
         dispatch({ type: "popularMovie_saga", action: { count: 1, page: 1 } });
     }, [])
 
-    const rndInt = Math.floor(Math.random() * 15) + 1
-    console.log(rndInt)
 
 
 
     function changeHandler(e) {
         setInput(e.target.value)
     }
+
+    React.useEffect(()=>{
+        rndInt = Math.floor(Math.random() * 15) + 1
+
+    },[])
 
     React.useEffect(() => {
         if (input && !submitClicked) {
@@ -75,7 +79,7 @@ export default function HomePage(props) {
     return (
         <Container style={{ maxWidth: "70%" }} >
             <Grid className='background' container style={styles.paperContainer} p={3}>
-                <Grid item sx={{ display: 'flex', alignItems: 'center', }} lg={12} xl={12} >
+                <Grid item sx={{ display: 'flex', alignItems: 'center', }}xm={12} sm={12} md={12} lg={12} xl={12} >
                     <Stack spacing={2} sx={{ width: "100%" }}>
                         <Typography variant='h2' sx={{ fontWeight: "700", fontSize: "35.2px" }}> Welcome. </Typography>
                         <Typography variant='p' sx={{ fontWeight: "500", fontSize: "35.2px" }}>Millions of movies, TV shows and people to discover. Explore now.</Typography>
@@ -83,10 +87,10 @@ export default function HomePage(props) {
                         <Paper component="form" sx={{ p: '2px 4px', width: "100%", borderRadius: "50px" }}>
                             {/* <form onSubmit={submitHandler}> */}
 
-                            <input ref={ref} onChange={changeHandler} style={{ ml: 1, flex: 1, width: "90%", height: "30px", border: 0, outline: "none" }} placeholder="Search for a movie, tv show, person....." />
+                            <input ref={ref} onChange={changeHandler} style={{ ml: 1, flex: 1, width: "90%", height: "30px", border: 0, outline: "none", padding:"8px", borderRadius:"50px" }} placeholder="Search for a movie, tv show, person....." />
 
-                            <IconButton onClick={submitHandler} type='submit' color="primary" sx={{ p: '10px', left: 0 }} aria-label="directions">
-                                <DirectionsIcon />
+                            <IconButton onClick={submitHandler} type='submit' color="primary" sx={{ left: 0 }} aria-label="directions">
+                                <ManageSearchIcon />
                             </IconButton>
                             {/* </form> */}
 

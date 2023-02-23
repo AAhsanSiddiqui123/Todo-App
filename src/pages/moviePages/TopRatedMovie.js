@@ -8,8 +8,9 @@ import Grid from '@mui/material/Grid';
 import SideBar from '../../components/common/SideBar';
 import style from "../HeroSection.module.css"
 import Skeleton from "@mui/material/Skeleton";
-import {movieActionCreater} from "../../Store/reducers/movieReducer";
-import { useParams } from 'react-router-dom';
+import { movieActionCreater } from "../../Store/reducers/movieReducer";
+import Typography from '@mui/material/Typography';
+
 
 
 
@@ -18,8 +19,8 @@ export default function MainCardContainer(props) {
     // let tag = useParams();
     // console.log(tag);
     const dispatch = useDispatch();
-    let skeletonarr = [1,2,3,4,5,6,7,8,9,10];
-   
+    let skeletonarr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
     let topMovie = useSelector((state) => state.movieReducer.topMovie);
     let isloading = useSelector((state) => state.movieReducer.isLoading);
     let activePageNum = useSelector((state) => state.movieReducer.activePageNum);
@@ -28,12 +29,12 @@ export default function MainCardContainer(props) {
     React.useEffect(() => {
         dispatch(movieActionCreater.loadMoreClickedHandler(false))
         dispatch(movieActionCreater.activePageNumHandler(1));
-        dispatch({ type: "TopRatedMovie_saga", action: {count: 1, page: 1} });
+        dispatch({ type: "TopRatedMovie_saga", action: { count: 1, page: 1 } });
 
     }, [])
 
     function loadMoreHandler() {
-        activePageNum =activePageNum+1
+        activePageNum = activePageNum + 1
         dispatch({ type: "TopRatedMovie_saga", action: { page: activePageNum } })
         dispatch(movieActionCreater.activePageNumHandler(activePageNum))
         dispatch(movieActionCreater.loadMoreClickedHandler(true))
@@ -54,14 +55,19 @@ export default function MainCardContainer(props) {
                         <div style={{ backgroundColor: 'white' }} className={style.wraper}>
                             {!isloading ? topMovie.map((curr, index) => {
                                 return <MovieCard
-                                key={`${curr.id}-${index}`}
-                                data={curr}
+                                    key={`${curr.id}-${index}`}
+                                    tag="movie"
+                                    data={curr}
                                 />
-                            }) : skeletonarr.map((curr)=><SkeletonChildren key={curr}/>)}
+                            }) : skeletonarr.map((curr) => <SkeletonChildren key={curr} />)}
 
 
                         </div>
-                        <button style={{width:"100%", height:"30px"}} onClick={loadMoreHandler}>Load More</button>
+                        <button style={{ width: "100%", height: "50px", backgroundColor: "#00B4E4", border: 0, marginTop: "12px", cursor: "pointer", borderRadius: 5 }} onClick={loadMoreHandler}>
+                            <Typography variant="h5" sx={{ color: "white", mt: 1 }} gutterBottom>
+                                Load More
+                            </Typography>
+                        </button>
                     </Grid>
                 </Grid>
             </Container>
@@ -82,7 +88,7 @@ function SkeletonChildrenDemo() {
 function SkeletonChildren() {
     return (
         <div>
-           <Grid container spacing={8}>
+            <Grid container spacing={8}>
                 <Grid item xs>
                     <SkeletonChildrenDemo loading />
                 </Grid>

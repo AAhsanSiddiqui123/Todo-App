@@ -16,6 +16,10 @@ export default function SideDrawer(props) {
   const toggleDrawer = (anchor, open) => (event) => {
     setState({ ...state, [anchor]: open });
   };
+  
+  function closeDrawer(a) {
+    setState({ ...state, [a]: false });
+  }
 
   const list = (anchor) => (
     <Box
@@ -34,13 +38,16 @@ export default function SideDrawer(props) {
           {list("left")}
           <DrawerMenu
             values={["Movies", "popular","NowPlaying","UpComming", "TopRated"  ]}
+            closeDrawer={closeDrawer}
 
           />
           <DrawerMenu
           values={["Tv Shows", "Popular"]}
+          closeDrawer={closeDrawer}
           />
           <DrawerMenu
           values={["People", "people"  ]}
+          closeDrawer={closeDrawer}
           />
         </Drawer >
       </React.Fragment>

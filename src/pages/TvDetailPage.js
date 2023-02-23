@@ -13,7 +13,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkIcon from '@mui/icons-material/Link';
 import CardMedia from '@mui/material/CardMedia';
-import DetailPeopleCard from "../components/common/DetailPeopleCard";
+import DetailPeopleCard from "../components/common/cards/DetailPeopleCard";
 import Chips from "../components/common/sideBarDropDown/Chips"
 import Avatar from '@mui/material/Avatar';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -28,6 +28,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import StarIcon from '@mui/icons-material/Star';
+import { movieActionCreater } from "../Store/reducers/movieReducer";
+
 
 import CircularStatic from "../components/common/RatingLoader"
 
@@ -37,7 +39,7 @@ const TvDetailPage = () => {
     const [state, setState] = React.useState({})
     let id = useParams();
 
-
+console.log(id);
 
     const dispatch = useDispatch();
     let topCast = useSelector((state) => state.movieReducer.topCase);
@@ -48,6 +50,7 @@ const TvDetailPage = () => {
     console.log(topCastIsLoading);
 
     React.useEffect(() => {
+        dispatch(movieActionCreater.loadMoreClickedHandler(false))
         dispatch(magageStateAction.updateHandler(true))
 
         console.log(`${Get_TvDetail_url}/${id.id}`);
@@ -90,7 +93,7 @@ const TvDetailPage = () => {
 
             {/* /////////////////////////////////////////////////////////////////////////////////// Section 1 */}
 
-            <Grid className='background' mt="30px" container spacing={2}  style={styles.paperContainer}>
+            <Grid className='background' mt="30px" container spacing={2} sx={{ alignItems: "center", justifyContent: "center", p: 3, color: "white" }} style={styles.paperContainer}>
 
 
             {!isLoading?

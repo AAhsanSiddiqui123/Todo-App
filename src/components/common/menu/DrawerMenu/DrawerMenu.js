@@ -7,21 +7,26 @@ import { useNavigate } from "react-router-dom";
 
 
 export default function DrawerMenu(props) {
+    let close;
     const navigate = useNavigate();
     const [open, setOpen] = React.useState(false);
     const [heading, setHeading] = React.useState("");
 
+
+    function closefunction() {
+        props.closeDrawer("left")
+    }
 
     const handleClick = (e) => {
         setHeading(e.target.innerText);
         setOpen(!open);
     };
 
+
     function onclickhandler(e) {
         let selectedOption = e.target.innerText;
-
-        console.log(heading, selectedOption)
         if (heading === "Movies") {
+            closefunction()
             if (selectedOption === "popular") {
 
                 localStorage.setItem("activePage", "popularMovie");
@@ -41,21 +46,20 @@ export default function DrawerMenu(props) {
             }
         }
         if (heading === "Tv Shows") {
-            console.log(heading, selectedOption)
+            closefunction()
             if (selectedOption === "Popular") {
                 localStorage.setItem("activePage", "populartv");
                 navigate("/tv/popular")
             }
         }
         if (heading === "People") {
-            if(selectedOption === "people"){
+            closefunction()
+            if (selectedOption === "people") {
                 localStorage.setItem("activePage", "people");
-                navigate("/people")     
-              }
+                navigate("/people")
+            }
         }
-
         // setAnchorEl(null);
-
     }
 
     return (
@@ -66,7 +70,6 @@ export default function DrawerMenu(props) {
 
             <Collapse in={open} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
-
                     {props.values.map((curr, i) => {
                         if (props.values[i + 1] === undefined) {
                             return
@@ -75,7 +78,6 @@ export default function DrawerMenu(props) {
                             <ListItemText primary={props.values[i + 1]} />
                         </ListItemButton>
                     })}
-
                 </List>
             </Collapse>
         </List>

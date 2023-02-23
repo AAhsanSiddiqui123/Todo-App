@@ -13,7 +13,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkIcon from '@mui/icons-material/Link';
 import CardMedia from '@mui/material/CardMedia';
-import DetailPeopleCard from "../components/common/DetailPeopleCard";
+import DetailPeopleCard from "../components/common/cards/DetailPeopleCard";
 import Chips from "../components/common/sideBarDropDown/Chips"
 import Avatar from '@mui/material/Avatar';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -23,6 +23,8 @@ import { axiosService } from "../Services/axios.service";
 import { Get_MovieDetail_url } from "../Services/url";
 import { useDispatch, useSelector } from 'react-redux';
 import {magageStateAction} from "../Store/reducers/manageState";
+import { movieActionCreater } from "../Store/reducers/movieReducer";
+
 
 import MenuIcon from '@mui/icons-material/Menu';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -48,6 +50,7 @@ const DetailPage = () => {
 
 
     React.useEffect(() => {
+        dispatch(movieActionCreater.loadMoreClickedHandler(false))
         dispatch(magageStateAction.updateHandler(true))
         axiosService({
             method: "GET",
@@ -89,7 +92,9 @@ const DetailPage = () => {
             {/* /////////////////////////////////////////////////////////////////////////////////// Section 1 */}
 
 
+
             <Grid className='background' mt="30px" container spacing={2} sx={{ alignItems: "center", justifyContent: "center", p: 3, color: "white" }} style={styles.paperContainer}>
+
 
                 {!isLoading?
                 <>

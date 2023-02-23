@@ -13,7 +13,7 @@ export default function MovieCard(props) {
     const navigate = useNavigate();
 
     function clickHandler (){ 
-        navigate(`/movie/${props.data.id}`)
+        navigate(`/${props.tag}/${props.data.id}`)
     }
     return (
         <div className={style.card} style={{cursor:"pointer"}} onClick={clickHandler}>

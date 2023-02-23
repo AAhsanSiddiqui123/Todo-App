@@ -21,7 +21,6 @@ const movieReducer = createSlice({
   reducers: {
 
     popularMovieHandler(state, action, count) {
-      console.log(action.count);
       if(action.count === 1){
         state.popularMovie = action.payload.data.results;
       }else{
@@ -80,7 +79,6 @@ const movieReducer = createSlice({
     },
 
     activePageNumHandler(state, action){
-      console.log(action.payload);
       state.activePageNum = action.payload
     },
 

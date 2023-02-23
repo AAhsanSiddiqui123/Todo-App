@@ -29,10 +29,10 @@ const RoutesMain = () => {
             <Route path="movie/nowplaying" element={<NowPlayingMovie />} />
             <Route path="movie/upcomming" element={<UpCommingMovie />} />
             <Route path="movie/toprated" element={<ToprateMovie />} />
-            <Route path="/movie/:id" element={<MovieDetailPage />} />
+            <Route path="/movie/:id/" element={<MovieDetailPage />} />
 
             <Route path="tv/popular" element={<TvShows />} />
-            <Route path="/tv/:id" element={<TvDetailPage />} />
+            <Route path="/tv/:id/" element={<TvDetailPage />} />
 
             <Route path="/people" element={<PeoplePage />} />
 

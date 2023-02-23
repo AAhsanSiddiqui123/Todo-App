@@ -90,7 +90,7 @@ const Footer = () => {
 
           <Grid container sx={{}}>
 
-            <Grid item xs={12} sm={12} md={12} lg={12} xl={2} sx={{}}>
+            <Grid item xs={12} sm={12} md={12} lg={12} xl={2} sx={{mr:5}}>
               <Stack sx={{ ml: "5px" }} spacing={3}>
                 <img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg" alt="The Movie Database (TMDB)" height="100" />
                 <Button variant="contained"  >Contained</Button>

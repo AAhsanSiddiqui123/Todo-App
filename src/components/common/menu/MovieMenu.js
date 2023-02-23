@@ -15,6 +15,7 @@ export default function BasicMenu(props) {
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+  
   const handleClose = (e) => {
     let selectedOption = e.nativeEvent.target.outerText;
     console.log(selectedOption)

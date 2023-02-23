@@ -7,8 +7,6 @@ import Grid from '@mui/material/Grid';
 import { useParams } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import Fab from '@mui/material/Fab';
-import { Get_TvDetail_url, Get_TvCast_url, Get_TvReview_url } from "../Services/url";
-import { axiosService } from "../Services/axios.service";
 import Container from '@mui/material/Container';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
@@ -19,11 +17,12 @@ import DetailPeopleCard from "../components/common/DetailPeopleCard";
 import Chips from "../components/common/sideBarDropDown/Chips"
 import Avatar from '@mui/material/Avatar';
 import CircularProgress from '@mui/material/CircularProgress';
-import {magageStateAction} from "../Store/reducers/manageState";
 
 
-
+import { axiosService } from "../Services/axios.service";
+import { Get_TvDetail_url} from "../Services/url";
 import { useDispatch, useSelector } from 'react-redux';
+import {magageStateAction} from "../Store/reducers/manageState";
 
 import MenuIcon from '@mui/icons-material/Menu';
 import FavoriteIcon from '@mui/icons-material/Favorite';

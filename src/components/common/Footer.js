@@ -81,11 +81,19 @@ const Footer = () => {
 
   }, [loadMoreClicked, isloading])
 
-
+const styles={
+  footerStack:{
+    backgroundColor: "#032541", 
+    color: "white", 
+    display: "flex", 
+    alignItems: "center", 
+    width: "100%"
+  }
+}
   return (
     <ThemeProvider theme={theme}>
 
-      <Stack ref={ref} mt="20px" sx={{ backgroundColor: "#032541", color: "white", display: "flex", alignItems: "center", width: "100%"}}>
+      <Stack ref={ref} mt="20px" sx={styles.footerStack}>
         <Stack sx={{ width: "70%", p: 5 }} direction="row" spacing={5}>
 
           <Grid container sx={{}}>

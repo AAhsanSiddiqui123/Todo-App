@@ -16,22 +16,29 @@ const SideBar = () => {
   }
 
   const style = {
-    divStyle: { 
-      height: "45px", 
+    divStyle: {
+      height: "45px",
       cursor: "pointer",
-       display: "flex", 
-       alignItems: "center", 
-       justifyContent: "space-between", 
-       paddingRight: "8px",
-        paddingLeft: "8px"
-       }}
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      paddingRight: "8px",
+      paddingLeft: "8px"
+    },
+    paper: {
+      marginTop: "14px",
+      border: "solid 1px lightgrey",
+      borderRadius: "6px",
+      boxShadow: "1px 3px 18px #dad6d6"
+    }
+  }
 
 
 
   return (
     <Grid item xs={12} sm={12} md={3} lg={2.5}>
 
-      <Paper sx={{ border: "solid 1px lightgrey", borderRadius: "6px", boxShadow: "1px 3px 18px #dad6d6" }}>
+      <Paper sx={style.paper}>
         <div style={style.divStyle} onClick={() => { return setDrop1(!drop1) }}>
           <p>Sort</p>
           <ChevronRightIcon />
@@ -39,7 +46,7 @@ const SideBar = () => {
         {drop1 && <SideBarDropDown />}
       </Paper>
 
-      <Paper sx={{ marginTop: "14px", border: "solid 1px lightgrey", borderRadius: "6px", boxShadow: "1px 3px 18px #dad6d6" }}>
+      <Paper sx={style.paper}>
         <div style={style.divStyle} onClick={() => { return setDrop2(!drop2) }}>
           <p>Filter</p>
           <ChevronRightIcon />
@@ -47,7 +54,7 @@ const SideBar = () => {
         {drop2 && <SideVarDropDown1 querySelector={querySelector} />}
       </Paper>
 
-      <Paper sx={{ marginTop: "14px", border: "solid 1px lightgrey", borderRadius: "6px", boxShadow: "1px 3px 18px #dad6d6" }}>
+      <Paper sx={style.paper}>
         <div style={style.divStyle} onClick={() => { return setDrop3(!drop3) }}>
           <p>Sort</p>
           <ChevronRightIcon />

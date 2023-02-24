@@ -16,7 +16,6 @@ import Container from '@mui/material/Container';
 export default function SearchCard(props) {
     const navigate = useNavigate();
 
-    console.log(props.data.media_type);
     function clickHandler() {
         // navigate(`/movie/${props.data.id}`)
     }

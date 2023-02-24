@@ -22,7 +22,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { axiosService } from "../Services/axios.service";
 import { Get_MovieDetail_url } from "../Services/url";
 import { useDispatch, useSelector } from 'react-redux';
-import {magageStateAction} from "../Store/reducers/manageState";
+import { magageStateAction } from "../Store/reducers/manageState";
 import { movieActionCreater } from "../Store/reducers/movieReducer";
 
 
@@ -84,6 +84,12 @@ const DetailPage = () => {
             backgroundImage: `url(${posterImage})`,
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
+        },
+        grid: {
+            alignItems: "center",
+            justifyContent: "center",
+            p: 3,
+            color: "white"
         }
     };
     return (
@@ -93,55 +99,56 @@ const DetailPage = () => {
 
 
 
-            <Grid className='background' mt="30px" container spacing={2} sx={{ alignItems: "center", justifyContent: "center", p: 3, color: "white" }} style={styles.paperContainer}>
+            <Grid className='background' mt="30px" container spacing={2} sx={styles.grid} style={styles.paperContainer}>
 
 
-                {!isLoading?
-                <>
-                <Grid item xs={0} sm={4} md={3} lg={2.5} xl={2.5} sx={{}}  >
-                    <CardMedia
-                        component="img"
-                        sx={{ borderRadius: 2, minHeight: "100px", height: "440px",
-                        //  width: "300px"
-                         }}
-                        alt="green iguana"
-                        image={`https://image.tmdb.org/t/p/w500/${state?.poster_path}`}
-                    />
-                </Grid>
-                <Grid item xs={12} sm={8} md={8} lg={8} xl={8}>
-                    <Box>
-                        <Typography variant='h2' sx={{ fontWeight: "700", fontSize: "35.2px" }}> {state.original_title} {`(${movieRealeseyear})` || ""} </Typography>
-                        <Box>
-                            <Typography variant='p'>{state.release_date} {`(${country})`}</Typography>
-                            {
-                                state.genres ? state.genres.map((curr, i) => {
-                                    return <Typography variant='p' key={i}> {curr.name} </Typography>
-                                }) : []
-                            }
-                            <Typography variant='p'>{` ${state.runtime}m`} </Typography>
+                {!isLoading ?
+                    <>
+                        <Grid item xs={0} sm={4} md={3} lg={2.5} xl={2.5} sx={{}}  >
+                            <CardMedia
+                                component="img"
+                                sx={{
+                                    borderRadius: 2, minHeight: "100px", height: "440px",
+                                    //  width: "300px"
+                                }}
+                                alt="green iguana"
+                                image={`https://image.tmdb.org/t/p/w500/${state?.poster_path}`}
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={8} md={8} lg={8} xl={8}>
+                            <Box>
+                                <Typography variant='h2' sx={{ fontWeight: "700", fontSize: "35.2px" }}> {state.original_title} {`(${movieRealeseyear})` || ""} </Typography>
+                                <Box>
+                                    <Typography variant='p'>{state.release_date} {`(${country})`}</Typography>
+                                    {
+                                        state.genres ? state.genres.map((curr, i) => {
+                                            return <Typography variant='p' key={i}> {curr.name} </Typography>
+                                        }) : []
+                                    }
+                                    <Typography variant='p'>{` ${state.runtime}m`} </Typography>
 
-                        </Box>
-                    </Box>
-                    <Stack sx={{ mt: 2 }} direction="row" spacing={2}>
-                        {/* <Fab><CircularStatic rating={7.55}/></Fab> */}
-                    <Fab sx={{bgcolor :"#032541", color: "white"}} aria-label="add" size="small"><MenuIcon sx={{fontSize:"small"}} /></Fab>
-                    <Fab sx={{bgcolor :"#032541", color: "white"}} aria-label="add" size="small"><FavoriteIcon sx={{fontSize:"small"}} /></Fab>
-                    <Fab sx={{bgcolor :"#032541", color: "white"}} aria-label="add" size="small"><BookmarkBorderIcon sx={{fontSize:"small"}} /></Fab>
-                    <Fab sx={{bgcolor :"#032541", color: "white"}} aria-label="add" size="small"><StarIcon sx={{fontSize:"small"}} /></Fab>
-                    </Stack>
-                    <Box sx={{ mt: 3 }}>
-                        <Typography variant='h3' sx={{ fontSize: "18.2px", mt: 1 }}>Forever </Typography>
-                        <Typography variant='h3' sx={{ fontSize: "18.2px", fontWeight: "700", mt: 1 }}>Overview </Typography>
-                        <Typography variant='p' sx={{ mt: 1 }}>{state.overview}</Typography>
-                        <Stack direction="row" spacing={20} sx={{ display: "flex", mt: 3 }}>
-                            {/* <Typography variant='p'><strong>Status</strong><br />{state.status}</Typography>
+                                </Box>
+                            </Box>
+                            <Stack sx={{ mt: 2 }} direction="row" spacing={2}>
+                                {/* <Fab><CircularStatic rating={7.55}/></Fab> */}
+                                <Fab sx={{ bgcolor: "#032541", color: "white" }} aria-label="add" size="small"><MenuIcon sx={{ fontSize: "small" }} /></Fab>
+                                <Fab sx={{ bgcolor: "#032541", color: "white" }} aria-label="add" size="small"><FavoriteIcon sx={{ fontSize: "small" }} /></Fab>
+                                <Fab sx={{ bgcolor: "#032541", color: "white" }} aria-label="add" size="small"><BookmarkBorderIcon sx={{ fontSize: "small" }} /></Fab>
+                                <Fab sx={{ bgcolor: "#032541", color: "white" }} aria-label="add" size="small"><StarIcon sx={{ fontSize: "small" }} /></Fab>
+                            </Stack>
+                            <Box sx={{ mt: 3 }}>
+                                <Typography variant='h3' sx={{ fontSize: "18.2px", mt: 1 }}>Forever </Typography>
+                                <Typography variant='h3' sx={{ fontSize: "18.2px", fontWeight: "700", mt: 1 }}>Overview </Typography>
+                                <Typography variant='p' sx={{ mt: 1 }}>{state.overview}</Typography>
+                                <Stack direction="row" spacing={20} sx={{ display: "flex", mt: 3 }}>
+                                    {/* <Typography variant='p'><strong>Status</strong><br />{state.status}</Typography>
                             <Typography variant='p'><strong>Original Language</strong><br />{state?.spoken_languages?.[0]?.english_name} </Typography>
                             <Typography variant='p'><strong>Budget</strong><br />{state.budget}</Typography>
                             <Typography variant='p'><strong>Revenue</strong><br />{state.revenue}</Typography> */}
 
-                        </Stack>
-                    </Box>
-                </Grid> </>:<CircularProgress />}
+                                </Stack>
+                            </Box>
+                        </Grid> </> : <CircularProgress />}
 
             </Grid>
 
@@ -162,12 +169,12 @@ const DetailPage = () => {
 
                         {/* ///////// Slider */}
                         <Stack spacing={2} direction="row" sx={{ overflowX: "auto", mb: 3 }}>
-                            {!topCastIsLoading?
+                            {!topCastIsLoading ?
                                 topCast.map((curr) => {
                                     return <DetailPeopleCard
                                         key={curr.id}
                                         cast={curr} />
-                                }):<CircularProgress />
+                                }) : <CircularProgress />
 
                             }
 

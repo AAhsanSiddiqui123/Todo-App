@@ -1,8 +1,3 @@
-// sx={{ position: "relative", display: "inline-flex", marginTop: "-40px", marginLeft:"10px" }} bgcolor="lightblue" borderRadius="100px"
-
-
-
-
 
 import * as React from 'react';
 import PropTypes from 'prop-types';
@@ -21,10 +16,18 @@ function CircularProgressWithLabel(props) {
 //  }else if(mRating > 30){
 //   circleColor = "danger"
 //  }
+
+const styles={
+  Loader:{ 
+    position: "relative", 
+    display: "inline-flex", 
+    marginTop: "-40px", 
+    marginLeft:"10px"
+   }}
  
 
   return (
-    <Box sx={{ position: "relative", display: "inline-flex", marginTop: "-40px", marginLeft:"10px" }} bgcolor="black" borderRadius="100px">
+    <Box sx={styles.Loader} bgcolor="black" borderRadius="100px">
       <CircularProgress color="success" variant="determinate" {...props} />
       <Box
         sx={{

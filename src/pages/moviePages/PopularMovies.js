@@ -10,6 +10,7 @@ import Skeleton from "@mui/material/Skeleton";
 import { movieActionCreater } from "../../Store/reducers/movieReducer";
 import { useParams } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
+import Button from '../../components/common/Button';
 
 
 
@@ -62,11 +63,8 @@ export default function MainCardContainer(props) {
 
 
                         </div>
-                        <button style={{ width: "100%", height: "50px", backgroundColor: "#00B4E4", border: 0, marginTop: "12px", cursor: "pointer", borderRadius:5}} onClick={loadMoreHandler}>
-                            <Typography variant="h5" sx={{color:"white", mt:1}} gutterBottom>
-                                Load More
-                            </Typography>
-                        </button>
+                
+                        <Button loadMoreHandler={loadMoreHandler} />
                     </Grid>
                 </Grid>
             </Container>

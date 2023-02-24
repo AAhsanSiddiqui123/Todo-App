@@ -86,6 +86,12 @@ console.log(id);
             backgroundImage: `url(${posterImage})`,
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
+        },
+        grid: {
+            alignItems: "center",
+            justifyContent: "center",
+            p: 3,
+            color: "white"
         }
     };
     return (
@@ -93,7 +99,7 @@ console.log(id);
 
             {/* /////////////////////////////////////////////////////////////////////////////////// Section 1 */}
 
-            <Grid className='background' mt="30px" container spacing={2} sx={{ alignItems: "center", justifyContent: "center", p: 3, color: "white" }} style={styles.paperContainer}>
+            <Grid className='background' mt="30px" container spacing={2} sx={styles.grid} style={styles.paperContainer}>
 
 
             {!isLoading?

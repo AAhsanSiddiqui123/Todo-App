@@ -9,6 +9,7 @@ import Container from '@mui/material/Container';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import SideDrawer from "../common/Drawer";
+import { Link } from 'react-router-dom';
 
 import MovieMenu from "./menu/AppBarMenu/AppBarMenu";
 
@@ -55,10 +56,10 @@ function NavBar() {
 
                 <Toolbar disableGutters>
                     <Typography
-                        variant="h6"
+                        // variant={Typography}
                         noWrap
-                        component="a"
-                        href="/"
+                        component={Link}
+                        to="/"
                         sx={{
                             mr: 2,
                             display: { xs: 'none', md: 'flex' },
@@ -92,8 +93,8 @@ function NavBar() {
                     <Typography
                         variant="h5"
                         noWrap
-                        component="a"
-                        href=""
+                        component={Link}
+                        to="/"
                         sx={{
                             mr: 2,
                             display: { xs: 'flex', md: 'none' },

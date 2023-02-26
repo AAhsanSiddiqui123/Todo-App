@@ -11,6 +11,11 @@ import { Stack } from '@mui/system';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import { useNavigate } from "react-router-dom";
+import InputAdornment from '@mui/material/InputAdornment';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+
+
 
 
 import HomePageCards from "../components/common/cards/HomePageCards";
@@ -33,9 +38,9 @@ export default function HomePage(props) {
     }, [])
 
 
-    function changeHandler(e) {
-        setInput(e.target.value)
-    }
+    // function changeHandler(e) {
+    //     setInput(e.target.value)
+    // }
 
     React.useEffect(() => {
         rndInt = Math.floor(Math.random() * 15) + 1
@@ -79,9 +84,19 @@ export default function HomePage(props) {
             border: 0,
             outline: "none",
             borderRadius: "50px",
-        }
+        },
+        inputField: {
+            width: "100%",
+            "& .MuiInputBase-root": {
+              borderRadius: "50px",
+              paddingRight: "0px",
+              height:"46px",
+              backgroundColor:"white"
+            }
+          }
 
     };
+
     return (
         <Container style={{ maxWidth: "70%" }} >
             <Grid className='background' container style={styles.paperContainer} p={3}>
@@ -90,17 +105,31 @@ export default function HomePage(props) {
                         <Typography variant='h2' sx={{ fontWeight: "700", fontSize: "35.2px" }}> Welcome. </Typography>
                         <Typography variant='p' sx={{ fontWeight: "500", fontSize: "35.2px" }}>Millions of movies, TV shows and people to discover. Explore now.</Typography>
 
-                        <Paper component="form" sx={{ p: 1.5, width: "100%", borderRadius: "50px", height: "48px", overflow: "hidden" }}>
-                            {/* <form onSubmit={submitHandler}> */}
+                        <Box
+                            component="form"
+                            onSubmit={submitHandler}
+                            noValidate
+                            autoComplete="off"
+                        >
+                            <TextField
+                                placeholder='Search for a movie, tv show, person......'
+                                InputLabelProps={{ shrink: false }}
+                                id="input-with-icon-textfield"
+                                sx={styles.inputField}
+                                onChange={(e) => setInput(e.target.value)}
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment className='searchbtn' position="start" sx={{ height: "46px", marginRight: "0px" }}>
+                                            <Button type="submit" variant="contained" sx={{ height: "46px", borderRadius: "50px" }}>Search</Button>
+                                        </InputAdornment>
+                                    ),
+                                }}
+                            />
 
-                            <input ref={ref} onChange={changeHandler} style={styles.inputField} placeholder="Search for a movie, tv show, person....." />
+                        </Box>
 
-                            <IconButton onClick={submitHandler} type='submit' color="primary" sx={{ left: 0, p: 0, }} aria-label="directions">
-                                <ManageSearchIcon />
-                            </IconButton>
-                            {/* </form> */}
 
-                        </Paper>
+
                     </Stack>
                 </Grid>
             </Grid>

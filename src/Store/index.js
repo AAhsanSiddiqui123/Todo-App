@@ -5,10 +5,7 @@ import manageStateReducer from './reducers/manageState';
 import movieReducer from "./reducers/movieReducer";
 import searchReducer from "./reducers/searchReducer"
 
-import PopularMovieSaga from "./sagas/movieSaga/popularMoviesSaga";
-import topRatedMovieSaga from "./sagas/movieSaga/topRatedMovieSaga";
-import upCommingMovieSaga from "./sagas/movieSaga/upCommingMovieSaga";
-import nowplayingMovieSaga from "./sagas/movieSaga/nowplayingMovieSaga";
+import MovieSaga from "./sagas/movieSaga/moviesSaga";
 import getCastSaga from "./sagas/movieSaga/topCast";
 import getReviewSaga from "./sagas/movieSaga/reviewSaga"
 
@@ -40,10 +37,7 @@ const store = configureStore({
 
 );
 
-sagaMiddleware.run(PopularMovieSaga);
-sagaMiddleware.run(nowplayingMovieSaga);
-sagaMiddleware.run(topRatedMovieSaga);
-sagaMiddleware.run(upCommingMovieSaga);
+sagaMiddleware.run(MovieSaga);
 sagaMiddleware.run(getCastSaga);
 sagaMiddleware.run(getReviewSaga);
 

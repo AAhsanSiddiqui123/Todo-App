@@ -14,8 +14,6 @@ const magageState = createSlice({
       console.log(action);
       state.topCastIsLoading = action.payload
     }
-
-
   },
 });
 

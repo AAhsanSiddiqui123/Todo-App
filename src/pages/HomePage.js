@@ -16,11 +16,8 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 
 
-
-
 import HomePageCards from "../components/common/cards/HomePageCards";
 import { useSelector, useDispatch } from 'react-redux';
-
 
 let rndInt;
 export default function HomePage(props) {

@@ -62,7 +62,7 @@ export default function BasicMenu(props) {
 
 
   return (
-    <div>
+    <div >
       <Button
         id="basic-button"
         aria-controls={open ? 'basic-menu' : undefined}
@@ -81,7 +81,12 @@ export default function BasicMenu(props) {
         MenuListProps={{
           'aria-labelledby': 'basic-button',
         }}
-      >
+        sx={{
+          "& .MuiPaper-root": {
+            padding: "0px"
+          }
+        }
+        }>
         {props.values.map((curr, i) => {
           if (props.values[i + 1] === undefined) {
             return

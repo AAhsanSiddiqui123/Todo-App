@@ -1,28 +1,24 @@
 
 import './App.css';
-import React, {Component } from 'react';
+import React, { useState } from 'react';
+
+import RoutesMain from "./Routes"
 
 
-export default class App extends Component{
-
-  constructor(){
-    super()
-    this.state = {
-      clear: false
-    }
-  }
 
 
- 
+function App() {
 
-  render(){
 
     return (
-      
-      <div className='mainContainer'>
-     <h1>Ahsan </h1>
-    </div>
-  );
+        <>
+       { <RoutesMain ></RoutesMain>}
+            {/* <NavBar />
+            <FixedContainer /> */}
+        </>
+    );
+
 }
-}
+
+export default App
 

@@ -1,0 +1,20 @@
+.activePage{
+    margin-top: 25px;
+    margin-bottom: 15px;
+    /* display: block; */
+}
+
+.wraper{
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    grid-auto-rows: 370px;
+    grid-gap: 31px;
+   
+    /* grid-template-columns: repeat(5, 1fr); */
+  }
+  .card{
+    border-radius: 10px;
+    box-shadow: 1px 10px 18px #dad6d6
+  }
+

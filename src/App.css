@@ -10,15 +10,9 @@
   max-height: 550px;
   overflow: auto;
   padding-bottom: 36px;
+
 }
 
-
-.mainContainer {
-  margin: auto;
-  position: relative;
-  width: 30%;
-  margin-top: 70px;
-}
 
 .footer {
   position: absolute;
@@ -36,10 +30,39 @@
 }
 
 
-.footer button{
+.footer button {
   width: 20%;
   height: 30px;
   background-color: #8C49E6;
   color: white;
   border: none;
+}
+
+.mainContainer {
+  max-width: 70%;
+  background-color: rgb(138, 102, 102);
+  margin: auto;
+}
+
+.css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
+  overflow: unset !important;
+  padding: 20px;
+}
+
+
+.chippp {
+  background-color: red;
+  color: red;
+  margin-top: 10px;
+}
+
+.background {
+  background-Color: rgba(0, 0, 0, 0.675);
+  background-blend-mode: soft-light;
+  align-items: "center";
+  justify-content: "center";
+  padding: 3;
+  color: "white";
+
+
 }

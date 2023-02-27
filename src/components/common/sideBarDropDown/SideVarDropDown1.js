@@ -69,8 +69,41 @@ function valuetext(value) {
   return `${value}°C`;
 }
 
-export default function SideVarDropDown1(props) {
 
+const queryQbj={
+  air_date : null,
+  air_date  : "2023-08-09",
+  certification: null,
+  certification_country: "PK",
+  debug: null,
+  first_air_date : null,
+  first_air_date  : null,
+  ott_region: "PK",
+  page: 1,
+  primary_release_date : null,
+  primary_release_date  : null,
+  region: null,
+  release_date : "2023-02-22",
+  release_date  : "2023-08-22",
+  show_me: 0,
+  sort_by: null,
+  vote_average : 0,
+  vote_average  : 10,
+  vote_count : 0,
+  with_genres: [12,35,37],
+  with_keywords: null,
+  with_networks: null,
+  with_origin_country: null,
+  with_original_language: null,
+  with_ott_monetization_types: null,
+  with_ott_providers: null,
+  with_release_type: null,
+  with_runtime : 0,
+  with_runtime  : 400,
+
+}
+
+export default function SideVarDropDown1(props) {
   const theme = useTheme();
   const [personName, setPersonName] = React.useState([]);
 
@@ -84,38 +117,8 @@ export default function SideVarDropDown1(props) {
     );
   };
 
-  const queryQbj={
-    air_date : null,
-    air_date  : "2023-08-09",
-    certification: null,
-    certification_country: "PK",
-    debug: null,
-    first_air_date : null,
-    first_air_date  : null,
-    ott_region: "PK",
-    page: 1,
-    primary_release_date : null,
-    primary_release_date  : null,
-    region: null,
-    release_date : "2023-02-22",
-    release_date  : "2023-08-22",
-    show_me: 0,
-    sort_by: null,
-    vote_average : 0,
-    vote_average  : 10,
-    vote_count : 0,
-    with_genres: [12,35,37],
-    with_keywords: null,
-    with_networks: null,
-    with_origin_country: null,
-    with_original_language: null,
-    with_ott_monetization_types: null,
-    with_ott_providers: null,
-    with_release_type: null,
-    with_runtime : 0,
-    with_runtime  : 400,
 
-  }
+
 
 
 
@@ -146,12 +149,23 @@ export default function SideVarDropDown1(props) {
     // setShowMe(event.target.value);
   };
 
+
+
+
+
   ////Availablity
   const [availchecked, setToglleAvailablityChecked] = React.useState(false);
+  const [checkValues, checkBoxValues] = React.useState(false);
   const AvailablityHandler = (event) => {
-    console.log(event.target.checked);
-    setToglleAvailablityChecked(event.target.checked);
+    setToglleAvailablityChecked(!availchecked);
   };
+  function AvailableCheckBox(checkbox) {
+    queryQbj.with_ott_monetization_types = checkbox.join("|")
+     console.log(queryQbj);
+  }
+
+
+
 
   ////Release Dates
   const [releseDatesChecked, setToggleReleaseDates] = React.useState(false);
@@ -219,11 +233,12 @@ export default function SideVarDropDown1(props) {
             <FormControlLabel control={
               <Checkbox
               size="small"
-                checked={availchecked}
+              defaultChecked 
+                // checked={availchecked}
                 onChange={AvailablityHandler}
                 inputProps={{ 'aria-label': 'controlled' }}
               />} label={<span style={{ fontSize: '15px'}}>Search All Availabilities?</span>} />
-            {availchecked && <AvailabilitiesCheckBox  />}
+            {availchecked && <AvailabilitiesCheckBox  AvailableCheckBox={AvailableCheckBox} />}
           </FormGroup>
 
           {/* /////////////////////////////////////////////////// Dates   ///////////////////////////////////////////// */}
@@ -320,7 +335,7 @@ export default function SideVarDropDown1(props) {
 
 
 //////////////////////////////////////////////////////////////////  Availablity Chec Box Component//////////////////////////
-function AvailabilitiesCheckBox() {
+function AvailabilitiesCheckBox(props) {
   const [availMultiCheckBox, setAvailMultiCheckBox] = React.useState([]);
 
   function multiCheckBoxHandler(e) {
@@ -337,14 +352,14 @@ function AvailabilitiesCheckBox() {
     }
 
   }
-  console.log(availMultiCheckBox)
+  props.AvailableCheckBox(availMultiCheckBox)
   return (
     <>
-      <FormControlLabel sx={{ mb: -2 }} value="Stream" onChange={multiCheckBoxHandler} control={<Checkbox />} label="Stream" />
-      <FormControlLabel sx={{ mb: -2 }} value="Free" onChange={multiCheckBoxHandler} control={<Checkbox />} label="Free" />
-      <FormControlLabel sx={{ mb: -2 }} value="Adds" onChange={multiCheckBoxHandler} control={<Checkbox />} label="Adds" />
-      <FormControlLabel sx={{ mb: -2 }} value="Rent" onChange={multiCheckBoxHandler} control={<Checkbox />} label="Rent" />
-      <FormControlLabel value="Buy" onChange={multiCheckBoxHandler} control={<Checkbox />} label="Buy" />
+      <FormControlLabel sx={{ mb: -2 }} value="stream" onChange={multiCheckBoxHandler} control={<Checkbox size="small" />} label="Stream" />
+      <FormControlLabel sx={{ mb: -2 }} value="free" onChange={multiCheckBoxHandler} control={<Checkbox size="small" />} label="Free" />
+      <FormControlLabel sx={{ mb: -2 }} value="adds" onChange={multiCheckBoxHandler} control={<Checkbox size="small" />} label="Adds" />
+      <FormControlLabel sx={{ mb: -2 }} value="rent" onChange={multiCheckBoxHandler} control={<Checkbox size="small" />} label="Rent" />
+      <FormControlLabel value="buy" onChange={multiCheckBoxHandler} control={<Checkbox size="small" />} label="Buy" />
     </>
   )
 }

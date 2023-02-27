@@ -99,7 +99,7 @@ const DetailPage = () => {
 
 
 
-            <Grid className='background' mt="30px" container spacing={2} sx={styles.grid} style={styles.paperContainer}>
+            <Grid className='background' mt="30px" container spacing={2} sx={styles.grid} style={                       styles.paperContainer}>
 
 
                 {!isLoading ?

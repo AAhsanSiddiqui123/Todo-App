@@ -1,18 +1,28 @@
 import React from 'react'
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import SideBarDropDown from "../common/sideBarDropDown/SideBarDropDown0";
-import SideVarDropDown1 from "../common/sideBarDropDown/SideVarDropDown1";
+import SideBarDropDown from "./sideBarDropDown/sideDropDown0/SideBarDropDown0";
+import SideVarDropDown1 from "./sideBarDropDown/sideDropDown1/SideVarDropDown1";
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import Button from '@mui/material/Button';
 
+import { useSelector, useDispatch } from 'react-redux';
+import { height } from '@mui/system';
+
+let queryString;
 const SideBar = () => {
+  const dispatch = useDispatch();
   const [drop1, setDrop1] = React.useState(false);
   const [drop2, setDrop2] = React.useState(false);
   const [drop3, setDrop3] = React.useState(false);
+  const [activeBtn, setActiveBtn] = React.useState(false);
 
-  function querySelector(active, queryQbj) {
-    console.log(queryQbj)
+  function querySelector(queryQbj) {
+    queryString =  queryQbj
+  }
+  
+  function clickHandler() {  
+    dispatch({ type: "discoverMovie_Saga", queryString})
   }
 
   const style = {
@@ -30,6 +40,13 @@ const SideBar = () => {
       border: "solid 1px lightgrey",
       borderRadius: "6px",
       boxShadow: "1px 3px 18px #dad6d6"
+    },
+    sortDropDonw:{
+      marginTop: "14px",
+      border: "solid 1px lightgrey",
+      borderRadius: "6px",
+      boxShadow: "1px 3px 18px #dad6d6",
+      // height:"100px"
     }
   }
 
@@ -38,7 +55,7 @@ const SideBar = () => {
   return (
     <Grid item xs={12} sm={12} md={3} lg={2.5}>
 
-      <Paper sx={style.paper}>
+      <Paper sx={style.sortDropDonw}>
         <div style={style.divStyle} onClick={() => { return setDrop1(!drop1) }}>
           <p>Sort</p>
           <ChevronRightIcon />
@@ -62,7 +79,7 @@ const SideBar = () => {
         {drop3 && <SideBarDropDown />}
       </Paper>
 
-      <Button variant="contained" disabled sx={{ width: "100%", borderRadius: "16px", mt: 3 }}>Search</Button>
+      <Button variant="contained" onClick={clickHandler} disabled={activeBtn} sx={{ width: "100%", borderRadius: "16px", mt: 3 }}>Search</Button>
 
     </Grid>
   )

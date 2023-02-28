@@ -14,7 +14,7 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkIcon from '@mui/icons-material/Link';
 import CardMedia from '@mui/material/CardMedia';
 import DetailPeopleCard from "../components/common/cards/DetailPeopleCard";
-import Chips from "../components/common/sideBarDropDown/Chips"
+import Chips from "../components/common/sideBarDropDown/sideDropDown1/components/Chips";
 import Avatar from '@mui/material/Avatar';
 import CircularProgress from '@mui/material/CircularProgress';
 

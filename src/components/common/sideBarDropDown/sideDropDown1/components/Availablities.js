@@ -18,8 +18,12 @@ const Availablities = (props) => {
       setAvailMultiCheckBox([...availMultiCheckBox, e.target.value])
     }
 
-    props.AvailableCheckBox(availMultiCheckBox)
   }
+
+  React.useEffect(()=>{
+      props.AvailableCheckBox(availMultiCheckBox)
+  },[availMultiCheckBox])
+
   return (
     <>
       <FormControlLabel sx={{ mb: -2 }} value="stream" onChange={multiCheckBoxHandler} control={<Checkbox size="small" />} label="Stream" />

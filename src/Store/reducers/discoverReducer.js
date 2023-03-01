@@ -1,7 +1,8 @@
 import { createSlice, current } from '@reduxjs/toolkit';
+import dayjs from 'dayjs';
 
 
-const initialCounterState = { 
+const initialCounterState = {
   queryObj: {
     air_date: null,
     air_date: "2023-08-09",
@@ -32,25 +33,46 @@ const initialCounterState = {
     with_release_type: null,
     with_runtime: 0,
     with_runtime: 400,
-  
-  }, 
+
+  },
 };
 
 const discoverReducer = createSlice({
   name: 'movieReducer',
   initialState: initialCounterState,
   reducers: {
+    sortHandler(state, action){
+      state.queryObj = { ...state.queryObj, sort_by: action.payload}
+    },
 
     queryObjHandler(state, action) {
-      // console.log(action.payload);
-
-      state.queryObj = {...state.queryObj, with_ott_monetization_types : action.payload.join("|")}
-
-
-      // console.log({...state.queryObj, ...action.payload});
-      // state.queryObj = {...state.queryObj, ...action.payload}
+      state.queryObj = { ...state.queryObj, with_ott_monetization_types: action.payload.join("|") }
     },
-}
+
+    releaseDateCheckBoxHandler(state, action){
+      state.queryObj = { ...state.queryObj, with_release_type: action.payload.join("|") }
+    },
+
+    fromDateHandler(state, action){
+      let from = dayjs(action.payload).format("YYYY-MM-DD");
+      state.queryObj = { ...state.queryObj, ["release_date.gte"]:from }
+    },
+
+    toDateHandler(state, action){
+      console.log(action);
+      let to = dayjs(action.payload.dateChange).format("YYYY-MM-DD");
+      state.queryObj = { ...state.queryObj, ["release_date.lte"]:to }; 
+    },
+
+    chipHandler(state, action){
+      state.queryObj = { ...state.queryObj, with_genres: action.payload }; 
+    }
+
+
+
+
+
+  }
 });
 
 

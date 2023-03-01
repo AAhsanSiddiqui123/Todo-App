@@ -5,25 +5,31 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
+import { discoverActionCreater } from '../../../../Store/reducers/discoverReducer';
+import { useSelector, useDispatch } from 'react-redux';
+
+
 export default function MultipleSelectChip() {
-  const [age, setAge] = React.useState('');
+  const dispatch = useDispatch();
+
+  const [state, setState] = React.useState('');
 
   const handleChange = (event) => {
-    console.log(event.target.value);
-    setAge(event.target.value);
+    dispatch(discoverActionCreater.sortHandler(event.target.value));
+    setState(event.target.value);
   };
 
   return (
     <Box sx={{ minWidth: 120, p:"20px"}}>
       <p>Sort Result By</p>
       <FormControl sx={{mt:1.5}} fullWidth>
-        <InputLabel size="small" sx={{mt:-0.5,}} id="demo-simple-select-label">Age</InputLabel>
+        <InputLabel size="small" sx={{mt:-0.5,}} id="demo-simple-select-label">Sort</InputLabel>
 
         <Select style={{backgroundColor:"lightGrey",  height:"35px"}}
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={age}
-          label="Age"
+          value={state}
+          label="sort"
           onChange={handleChange}
         >
           <MenuItem value="Popularity.asc"> Popularity Descending </MenuItem>

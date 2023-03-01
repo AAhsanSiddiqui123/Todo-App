@@ -19,9 +19,12 @@ const ReleaseDates = (props) => {
             setAvailMultiCheckBox([...availMultiCheckBox, e.target.value])
         }
 
-        props.AvailableReleaseCheckBox(availMultiCheckBox)
+        
     }
 
+    React.useEffect(()=>{
+        props.AvailableReleaseCheckBox(availMultiCheckBox) 
+       },[availMultiCheckBox])
     return (
         <>
             <FormControlLabel sx={{ mb: -2 }} value="1" onChange={multiCheckBoxHandler} control={<Checkbox size="small" />} label="Premiere" />

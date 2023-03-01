@@ -236,7 +236,7 @@ const DetailPage = () => {
                         }}
                             component="ul"
                         >
-                            <Chips />
+                            <Chips chipHandler={()=>{}}/>
                         </Box>
                     </Grid>
                 </Grid>

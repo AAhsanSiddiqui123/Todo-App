@@ -237,7 +237,7 @@ console.log(id);
                         }}
                             component="ul"
                         >
-                            <Chips />
+                            <Chips chipHandler={()=>{}}/>
                         </Box>
                     </Grid>
                 </Grid>

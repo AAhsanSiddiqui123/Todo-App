@@ -23,8 +23,6 @@ import { discoverActionCreater } from '../../../../Store/reducers/discoverReduce
 
 
 
-
-
 import Slider from '@mui/material/Slider';
 function valuetextSlider1(value) {
   return `${value}°C`;
@@ -51,46 +49,14 @@ function valuetext(value) {
 }
 
 
-const queryQbj = {
-  air_date: null,
-  air_date: "2023-08-09",
-  certification: null,
-  certification_country: "PK",
-  debug: null,
-  first_air_date: null,
-  first_air_date: null,
-  ott_region: "PK",
-  page: 1,
-  primary_release_date: null,
-  primary_release_date: null,
-  region: null,
-  "release_date.gte": null,
-  "release_date.lte": null,
-  show_me: 0,
-  sort_by: null,
-  vote_average: 0,
-  vote_average: 10,
-  vote_count: 0,
-  with_genres: [12, 35, 37],
-  with_keywords: null,
-  with_networks: null,
-  with_origin_country: null,
-  with_original_language: null,
-  with_ott_monetization_types: null,
-  with_ott_providers: null,
-  with_release_type: null,
-  with_runtime: 0,
-  with_runtime: 400,
-
-}
 
 export default function SideVarDropDown1(props) {
   // const theme = useTheme();
   const dispatch = useDispatch();
   const [personName, setPersonName] = React.useState([]);
-  let test = useSelector((state)=>state.discoverReducer.queryObj);
-  let queryObjHandler = useSelector((state)=>state.discoverReducer.queryObjHandler);
-  console.log(test);
+  let queryObj = useSelector((state)=>state.discoverReducer.queryObj);
+
+  // console.log(queryObj);
 
   const handleChange = (event) => {
     const {
@@ -140,11 +106,8 @@ export default function SideVarDropDown1(props) {
     setToglleAvailablityChecked(!availchecked);
   };
   function AvailableCheckBox(checkbox) {
-    // if(checkbox){
-    //   queryQbj.with_ott_monetization_types = checkbox.join("|");
-    // }
-    dispatch(discoverActionCreater.queryObjHandler(checkbox))
-    // props.querySelector(queryQbj)
+    console.log(checkbox);
+    dispatch(discoverActionCreater.queryObjHandler(checkbox));
   }
 
 
@@ -156,16 +119,12 @@ export default function SideVarDropDown1(props) {
   };
 
   function AvailableReleaseCheckBox(checkbox) {
-    queryQbj.with_release_type = checkbox.join("|")
-    props.querySelector(queryQbj)
+    dispatch(discoverActionCreater.releaseDateCheckBoxHandler(checkbox));
   }
 
   const [date1, setDate1Value] = React.useState(dayjs('2014-08-18'));
   const dateFromChangeHandler = (newValue) => {
-    let from = dayjs(newValue).format("YYYY-MM-DD");
-    queryQbj["release_date.gte"] = from;
-    props.querySelector(queryQbj)
-
+    dispatch(discoverActionCreater.fromDateHandler(newValue));
     setDate1Value(newValue);
   };
 
@@ -174,23 +133,29 @@ export default function SideVarDropDown1(props) {
   var month = ("0" + (dateObj.getMonth() + 1)).slice(-2); //months from 1-12
   var day = dateObj.getUTCDate();
   var year = dateObj.getUTCFullYear();
-  let newdate = year + "-" + month + "-" + day;
+  let currDate = year + "-" + month + "-" + day;
 
-  queryQbj["release_date.lte"] = newdate;
+  const [date2, setDate2Value] = React.useState(dayjs(currDate));
+  const dateToHandler = (dateChange) => {
+    let to = dayjs(dateChange).format("YYYY-MM-DD");
+    // queryObj["release_date.lte"] = to;
+    // props.querySelector(queryObj)
 
-  const [date2, setDate2Value] = React.useState(dayjs(newdate));
-  const dateToHandler = (newValue) => {
-    let to = dayjs(newValue).format("YYYY-MM-DD");
-    queryQbj["release_date.lte"] = to;
-    props.querySelector(queryQbj)
+    let dateObj = {
+      currDate: currDate,
+      dateChange: dateChange
+    }
 
-    setDate2Value(newValue);
+    dispatch(discoverActionCreater.toDateHandler(dateObj));
+    setDate2Value(dateChange);
   };
 
 
+
+  ////// chips
   function chipHandler(chipValues) {
-    queryQbj.with_genres = chipValues;
-    props.querySelector(queryQbj)
+    dispatch(discoverActionCreater.chipHandler(chipValues));
+    // props.querySelector(queryObj)
   }
 
 

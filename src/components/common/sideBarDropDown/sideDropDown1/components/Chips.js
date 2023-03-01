@@ -56,22 +56,15 @@ export default function Chips(props) {
     }
   }
 
-  props.chipHandler(chipsVal.join(","))
+  React.useEffect(()=>{
+    props.chipHandler(chipsVal.join(","))
+  },[chipsVal])
 
   return (
     <Box
-
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        flexWrap: 'wrap',
-        listStyle: 'none',
-        p: 0.5,
-        mb: 2,
-      }}
+      sx={{display: 'flex',justifyContent: 'center',flexWrap: 'wrap',listStyle: 'none', p: 0.5, mb: 2,}}
       component="ul"
     >
-
       {chipData.map((data) => {
         return (
           <ListItem key={data.key}>

@@ -41,3 +41,6 @@ exports.Search_url =  `${SearchUrl}`;
 
 //discover
 exports.Discover_url =  `${discoverUrl}`;
+
+//countries list
+exports.Countries_url =  `https://api.themoviedb.org/3/configuration/countries?api_key=a501016df75ba02be8137f4996f56d90`;

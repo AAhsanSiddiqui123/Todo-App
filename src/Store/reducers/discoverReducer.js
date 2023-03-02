@@ -1,11 +1,17 @@
 import { createSlice, current } from '@reduxjs/toolkit';
 import dayjs from 'dayjs';
 
+var dateObj = new Date();
+var month = ("0" + (dateObj.getMonth() + 1)).slice(-2); //months from 1-12
+var day = dateObj.getUTCDate();
+var year = dateObj.getUTCFullYear();
+let currDate = year + "-" + month + "-" + day;
+
 
 const initialCounterState = {
   queryObj: {
     air_date: null,
-    air_date: "2023-08-09",
+    air_date: currDate,
     certification: null,
     certification_country: "PK",
     debug: null,
@@ -17,13 +23,13 @@ const initialCounterState = {
     primary_release_date: null,
     region: null,
     "release_date.gte": null,
-    "release_date.lte": null,
+    "release_date.lte": currDate,
     show_me: 0,
     sort_by: null,
-    vote_average: 0,
-    vote_average: 10,
-    vote_count: 0,
-    with_genres: [12, 35, 37],
+    "vote_average.gte": 0,
+    "vote_average.lte": 10,
+    "vote_count.gte": 100,
+    with_genres: null,
     with_keywords: null,
     with_networks: null,
     with_origin_country: null,
@@ -31,8 +37,8 @@ const initialCounterState = {
     with_ott_monetization_types: null,
     with_ott_providers: null,
     with_release_type: null,
-    with_runtime: 0,
-    with_runtime: 400,
+    "with_runtime.gte": 0,
+    "with_runtime.lte": 400,
 
   },
 };
@@ -41,31 +47,54 @@ const discoverReducer = createSlice({
   name: 'movieReducer',
   initialState: initialCounterState,
   reducers: {
-    sortHandler(state, action){
-      state.queryObj = { ...state.queryObj, sort_by: action.payload}
+    sortHandler(state, action) {
+      state.queryObj = { ...state.queryObj, sort_by: action.payload }
     },
 
     queryObjHandler(state, action) {
-      state.queryObj = { ...state.queryObj, with_ott_monetization_types: action.payload.join("|") }
+      state.queryObj = { ...state.queryObj, with_ott_monetization_types: action.payload.join(" ") }
     },
 
-    releaseDateCheckBoxHandler(state, action){
-      state.queryObj = { ...state.queryObj, with_release_type: action.payload.join("|") }
+    releaseDateCheckBoxHandler(state, action) {
+      state.queryObj = { ...state.queryObj, with_release_type: action.payload.join() }
     },
 
-    fromDateHandler(state, action){
-      let from = dayjs(action.payload).format("YYYY-MM-DD");
-      state.queryObj = { ...state.queryObj, ["release_date.gte"]:from }
+    fromDateHandler(state, action) {
+      console.log(action);
+      let from = dayjs(action.payload.currDate).format("YYYY-MM-DD");
+      state.queryObj = { ...state.queryObj, ["release_date.gte"]: from }
     },
 
-    toDateHandler(state, action){
+    toDateHandler(state, action) {
       console.log(action);
       let to = dayjs(action.payload.dateChange).format("YYYY-MM-DD");
-      state.queryObj = { ...state.queryObj, ["release_date.lte"]:to }; 
+      state.queryObj = { ...state.queryObj, ["release_date.lte"]: to };
     },
 
-    chipHandler(state, action){
-      state.queryObj = { ...state.queryObj, with_genres: action.payload }; 
+    chipHandler(state, action) {
+      state.queryObj = { ...state.queryObj, with_genres: action.payload };
+    },
+
+    userScoreHandler(state, action) {
+      console.log(action);
+      state.queryObj =
+      {
+        ...state.queryObj,
+        "vote_average.gte": +action.payload[0],
+        "vote_average.lte": +action.payload[1]
+      };
+    },
+
+    minimumUserVotesHandler(state, action) {
+      state.queryObj = { ...state.queryObj,  "vote_count.gte": action.payload };
+    },
+
+    runtimeHandler(state, action) {
+      state.queryObj = {
+        ...state.queryObj,
+        "with_runtime.gte": +action.payload[0],
+        "with_runtime.lte": +action.payload[1]
+      };
     }
 
 

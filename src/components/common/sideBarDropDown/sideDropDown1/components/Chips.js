@@ -57,7 +57,10 @@ export default function Chips(props) {
   }
 
   React.useEffect(()=>{
-    props.chipHandler(chipsVal.join(","))
+    if(chipsVal.length > 0 ){
+      props.chipHandler(chipsVal.join(","))
+    }
+
   },[chipsVal])
 
   return (

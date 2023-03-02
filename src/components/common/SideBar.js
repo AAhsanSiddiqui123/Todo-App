@@ -18,14 +18,18 @@ const SideBar = () => {
   const [drop0, setDrop0] = React.useState(false);
   const [drop1, setDrop1] = React.useState(false);
   const [drop2, setDrop2] = React.useState(false);
-  const [activeBtn, setActiveBtn] = React.useState(false);
+  const [activeBtn, setActiveBtn] = React.useState(true);
+  let queryObj = useSelector((state)=>state.discoverReducer.queryObj);
 
-  function querySelector(queryQbj) {
-    queryString =  queryQbj
+
+  // console.log(queryObj);
+  function querySelector() {
+    console.log("side bar");
+    setActiveBtn(false)
   }
   
   function clickHandler() {  
-    dispatch({ type: "discoverMovie_Saga", queryString})
+    dispatch({ type: "discoverMovie_Saga", queryObj})
   }
 
   const style = {
@@ -82,7 +86,7 @@ const SideBar = () => {
         {drop2 && <SideBarDropDown2 />}
       </Paper>
 
-      <Button variant="contained" onClick={clickHandler} disabled={activeBtn} sx={{ width: "100%", borderRadius: "16px", mt: 3 }}>Search</Button>
+      <Button variant="contained" onClick={clickHandler} disabled = {activeBtn} sx={{ width: "100%", borderRadius: "16px", mt: 3 }}>Search</Button>
 
     </Grid>
   )

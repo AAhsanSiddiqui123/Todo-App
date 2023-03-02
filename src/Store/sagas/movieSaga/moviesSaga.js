@@ -1,7 +1,8 @@
 import { takeEvery, put } from 'redux-saga/effects'
 import { movieActionCreater } from '../../reducers/movieReducer';
 import { Get_AllPopular_url, Get_NowPlayingMovie_url, Get_TopRatedMovie_url, Get_UpCommingMovie_url, Discover_url } from "../../../Services/url"
-import { axiosService } from "../../../Services/axios.service"
+import { axiosService } from "../../../Services/axios.service";
+
 
 //////// popular Movie
 
@@ -85,10 +86,10 @@ function* getUpcomminMovie(action) {
 
 ////// Discover Movies
 function* discover(action) {
-    let params = action?.queryString || null;
+    let params = action?.queryObj || null;
 
 
-    console.log(params);
+    console.log(action.queryObj);
     // yield put({ type: movieActionCreater.loadingHandler, payload: { loading: true } });
     let payload = yield axiosService({
         method: "GET",
@@ -99,34 +100,34 @@ function* discover(action) {
         params: { 
               api_key: "a501016df75ba02be8137f4996f56d90",
               language: "en-US",
-              air_date  : "2023-08-09",
-              certification: null,
-              certification_country: "PK",
-              debug: null,
-              first_air_date : null,
-              first_air_date  : null,
-              ott_region: "PK",
+              air_date  : params?.air_date,
+            //   certification: null,
+            //   certification_country: "PK",
+            //   debug: null,
+            //   first_air_date : null,
+            //   first_air_date  : null,
+            //   ott_region: "PK",
               page: 1,
-              primary_release_date : null,
-              primary_release_date  : null,
-              region: null,
-              "release_date.gte" : params?.['release_date.gte'],
-              "release_date.lte" : params?.['release_date.lte'],
-              show_me: 0,
-              sort_by: null,
-              vote_average : 0,
-              vote_average  : 10,
-              vote_count : 0,
+            //   primary_release_date : null,
+            //   primary_release_date  : null,
+            //   region: null,
+            //   "release_date.gte" : params?.['release_date.gte'],
+            //   "release_date.lte" : params?.['release_date.lte'],
+            //   show_me: 0,
+            //   sort_by: null,
+              "vote_average.gte" : params?.["vote_average.gte"],
+              "vote_average.lte" : params?.["vote_average.lte"],
+              "vote_count.gte" : params?.["vote_count.gte"],
               with_genres: params?.with_genres,
-              with_keywords: null,
-              with_networks: null,
-              with_origin_country: null,
-              with_original_language: null,
+            //   with_keywords: null,
+            //   with_networks: null,
+            //   with_origin_country: null,
+            //   with_original_language: null,
               with_ott_monetization_types: params?.with_ott_monetization_types,
               with_ott_providers: null,
               with_release_type: params?.with_release_type,
-              with_runtime : 0,
-              with_runtime  : 400,
+              "with_runtime.gte":  params?.["with_runtime.gte"],
+              "with_runtime.lte": params?.["with_runtime.lte"],
             
             }
     }) 

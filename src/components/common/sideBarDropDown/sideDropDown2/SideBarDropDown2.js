@@ -10,10 +10,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Countries_url } from "../../../../Services/url";
 import { axiosService } from "../../../../Services/axios.service";
 
-
 export default function MultipleSelectChip() {
     const dispatch = useDispatch();
-    const [state, setState] = React.useState('');
+    const [regin, setRegin] = React.useState("PK");
+    const [ott, setOtt] = React.useState([]);
     const [countries, setCountries] = React.useState([]);
 
     React.useEffect(() => {
@@ -25,24 +25,24 @@ export default function MultipleSelectChip() {
         })
     }, [])
 
-    console.log(countries);
+    React.useEffect(() => {
+        axiosService({
+            method: "GET",
+            url: `https://api.themoviedb.org/3/watch/providers/movie`,
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+            params: { api_key: "a501016df75ba02be8137f4996f56d90", language: "en-US", watch_region:regin   }
+        }).then((res)=>{
+            setOtt(res.data.results)
+        })
+    }, [regin])
+
 
     const handleChange = (event) => {
-        // dispatch(discoverActionCreater.sortHandler(event.target.value));
-        setState(event.target.value);
+        setRegin(event.target.value);
     };
 
-
-    const platformArray = ["https://www.themoviedb.org/t/p/original/t2yyOv40HZeVlLjYsCsPHnWLk4W.jpg",
-        "https://www.themoviedb.org/t/p/original/emthp39XA2YScoYL1p0sdbAH2WA.jpg",
-        "https://www.themoviedb.org/t/p/original/ajbCmwvZ8HiePHZaOVEgm9MzyuA.jpg",
-        "https://www.themoviedb.org/t/p/original/uW4dPCcbXaaFTyfL5HwhuDt5akK.jpg",
-        "https://www.themoviedb.org/t/p/original/iJGVfWTDddgipZ7mJCCEYzmRYrP.jpg",
-        "https://www.themoviedb.org/t/p/original/bVR4Z1LCHY7gidXAJF5pMa4QrDS.jpg",
-        "https://www.themoviedb.org/t/p/original/liEIj6CkvojVDiMWeexGvflSPZT.jpg",
-        "https://www.themoviedb.org/t/p/original/59azlQKUgFdYq6QI5QEAxIeecyL.jpg",
-        "https://www.themoviedb.org/t/p/original/4FqTBYsUSZgS9z9UGKgxSDBbtc8.jpg"
-    ]
     const styles = {
         platformContainer: {
             marginTop: "15px",
@@ -60,15 +60,15 @@ export default function MultipleSelectChip() {
 
     return (
         <Box sx={{ minWidth: 120, p: "20px" }}>
-            <p>sort</p>
+            <p>Countries</p>
             <FormControl sx={{ mt: 1.5 }} fullWidth>
-                <InputLabel size="small" sx={{ mt: -0.5, }} id="demo-simple-select-label">sort</InputLabel>
+                <InputLabel size="small" sx={{ mt: -0.5, }} id="demo-simple-select-label">Country</InputLabel>
 
                 <Select style={{ backgroundColor: "lightGrey", height: "35px" }}
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={state}
-                    label="sort"
+                    value={regin}
+                    label="country"
                     onChange={handleChange}
                     MenuProps={{
                         PaperProps: {
@@ -97,15 +97,15 @@ export default function MultipleSelectChip() {
 
 
             <div style={styles.platformContainer}>
-                {platformArray.map((curr, i) => {
+                {ott?.map((curr, i) => {
                     return <Card
-                    key={`${i}`}
+                    key={`${curr.provider_id}`}
                         sx={styles.platform}>
                         <CardMedia
 
                             sx={{ height: 50, width: 50, }}
-                            image={curr}
-                            title="green iguana"
+                            image={`https://www.themoviedb.org/t/p/original/${curr.logo_path}`}
+                            title={curr.provider_name}
                         />
                     </Card>
                 })}

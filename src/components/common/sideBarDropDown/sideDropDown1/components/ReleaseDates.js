@@ -7,20 +7,21 @@ const ReleaseDates = (props) => {
     const [availMultiCheckBox, setAvailMultiCheckBox] = React.useState([]);
 
     function multiCheckBoxHandler(e) {
-        var index = availMultiCheckBox.indexOf(e.target.value);
+        var index = availMultiCheckBox.indexOf(+e.target.value);
 
         if (index != -1) {
             let newArray = availMultiCheckBox.filter((curr, i) => {
-                return curr != e.target.value
+                return curr != +e.target.value
             });
             availMultiCheckBox.splice(index, 1)
             setAvailMultiCheckBox([...newArray]);
         } else {
-            setAvailMultiCheckBox([...availMultiCheckBox, e.target.value])
+            setAvailMultiCheckBox([...availMultiCheckBox, +e.target.value])
         }
-
+        
         
     }
+    
 
     React.useEffect(()=>{
         props.AvailableReleaseCheckBox(availMultiCheckBox) 

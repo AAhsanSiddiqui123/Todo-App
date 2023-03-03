@@ -71,7 +71,7 @@ export default function SideVarDropDown1(props) {
 
 
   /////// Slide Bars
-  const [valueSlider1, setValueSlider1] = React.useState([0, 4]);
+  const [valueSlider1, setValueSlider1] = React.useState([0, 7]);
   const handleChangeSlider1 = (event, newValue) => {
     console.log("change");
     dispatch(discoverActionCreater.userScoreHandler(event.target.value));
@@ -220,14 +220,14 @@ export default function SideVarDropDown1(props) {
           <FormGroup>
             <FormLabel sx={{ mt: 1, mb: 0 }} id="demo-radio-buttons-group-label">Release Dates </FormLabel>
 
-            <FormControlLabel control={<Checkbox
+            {/* <FormControlLabel control={<Checkbox
               size="small"
               defaultChecked
               // checked={releseDatesChecked}
               onChange={releaseDateHandler}
               inputProps={{ 'aria-label': 'controlled' }}
             />} label="Search all releases?" />
-            {releseDatesChecked && <ReleaseDates AvailableReleaseCheckBox={AvailableReleaseCheckBox} />}
+            {releseDatesChecked && <ReleaseDates AvailableReleaseCheckBox={AvailableReleaseCheckBox} />} */}
           </FormGroup>
 
           <LocalizationProvider dateAdapter={AdapterDayjs}>

@@ -247,3 +247,19 @@ const DetailPage = () => {
 }
 
 export default DetailPage
+
+
+
+
+// let url;
+// let castSaga;
+// let reviewSaga;
+// if(params.tag === "movie"){
+//     url = Get_MovieDetail_url;
+//     castSaga = "get_cast_saga";
+//     reviewSaga = "get_Review_saga"
+// }else if (params.tag === "tv"){
+//     url = Get_TvDetail_url;
+//     castSaga = "get_tvCast_saga";
+//     reviewSaga = "get_TvReview_saga"
+// }

@@ -24,7 +24,6 @@ const SideBar = () => {
 
   // console.log(queryObj);
   function querySelector() {
-    console.log("side bar");
     setActiveBtn(false)
   }
   
@@ -67,7 +66,7 @@ const SideBar = () => {
           <p>Sort</p>
           <ChevronRightIcon />
         </div>
-        {drop0 && <SideBarDropDown0 />}
+        {drop0 && <SideBarDropDown0 querySelector={querySelector} />}
       </Paper>
 
       <Paper sx={style.paper}>
@@ -83,7 +82,7 @@ const SideBar = () => {
           <Typography gutterBottom component="p" sx={{ fontSize: 15, whiteSpace: "nowrap"}} >Where To Watch</Typography>
           <ChevronRightIcon />
         </div>
-        {drop2 && <SideBarDropDown2 />}
+        {drop2 && <SideBarDropDown2 querySelector={querySelector}/>}
       </Paper>
 
       <Button variant="contained" onClick={clickHandler} disabled = {activeBtn} sx={{ width: "100%", borderRadius: "16px", mt: 3 }}>Search</Button>

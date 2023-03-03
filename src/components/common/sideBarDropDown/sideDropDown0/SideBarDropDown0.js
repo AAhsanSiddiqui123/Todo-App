@@ -9,13 +9,14 @@ import { discoverActionCreater } from '../../../../Store/reducers/discoverReduce
 import { useSelector, useDispatch } from 'react-redux';
 
 
-export default function MultipleSelectChip() {
+export default function MultipleSelectChip(props) {
   const dispatch = useDispatch();
 
   const [state, setState] = React.useState('');
 
   const handleChange = (event) => {
     dispatch(discoverActionCreater.sortHandler(event.target.value));
+    props.querySelector();
     setState(event.target.value);
   };
 

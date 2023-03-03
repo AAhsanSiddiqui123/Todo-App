@@ -1,17 +1,27 @@
 import { createSlice, current } from '@reduxjs/toolkit';
 import dayjs from 'dayjs';
 
-var dateObj = new Date();
-var month = ("0" + (dateObj.getMonth() + 1)).slice(-2); //months from 1-12
-var day = dateObj.getUTCDate();
-var year = dateObj.getUTCFullYear();
-let currDate = year + "-" + month + "-" + day;
+// var dateObj = new Date();
+// var month = ("0" + (dateObj.getMonth() + 1)).slice(-2); //months from 1-12
+// var day = dateObj.getUTCDate();
+// var year = dateObj.getUTCFullYear();
+// let currDate = year + "-" + month + "-" + day;
+
+// const d1 = new Date(currDate);
+// const FromDate = d1.getTime();
+const date = new Date()
+const result = date.toLocaleDateString("en-GB", { // you can use undefined as first argument
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+})
+let to = dayjs(result).format("YYYY-MM-DD")
 
 
 const initialCounterState = {
   queryObj: {
     air_date: null,
-    air_date: currDate,
+    air_date: null,
     certification: null,
     certification_country: "PK",
     debug: null,
@@ -23,12 +33,12 @@ const initialCounterState = {
     primary_release_date: null,
     region: null,
     "release_date.gte": null,
-    "release_date.lte": currDate,
+    "release_date.lte": to,
     show_me: 0,
     sort_by: null,
     "vote_average.gte": 0,
     "vote_average.lte": 10,
-    "vote_count.gte": 100,
+    "vote_count.gte": 0,
     with_genres: null,
     with_keywords: null,
     with_networks: null,
@@ -51,17 +61,25 @@ const discoverReducer = createSlice({
       state.queryObj = { ...state.queryObj, sort_by: action.payload }
     },
 
+
+
+/////////////////////////////////////////////////////////////////////////    
+
+
+
     queryObjHandler(state, action) {
-      state.queryObj = { ...state.queryObj, with_ott_monetization_types: action.payload.join(" ") }
+      console.log("monitiztion");
+      state.queryObj = { ...state.queryObj, with_ott_monetization_types: `flatrate|${action.payload.join("|")}` }
     },
 
     releaseDateCheckBoxHandler(state, action) {
-      state.queryObj = { ...state.queryObj, with_release_type: action.payload.join() }
+    //   console.log("release data");
+    //   state.queryObj = { ...state.queryObj, with_release_type: action.payload.join(",") }
     },
 
     fromDateHandler(state, action) {
       console.log(action);
-      let from = dayjs(action.payload.currDate).format("YYYY-MM-DD");
+      let from = dayjs(action.payload).format("YYYY-MM-DD");
       state.queryObj = { ...state.queryObj, ["release_date.gte"]: from }
     },
 
@@ -95,8 +113,18 @@ const discoverReducer = createSlice({
         "with_runtime.gte": +action.payload[0],
         "with_runtime.lte": +action.payload[1]
       };
-    }
+    },
 
+
+/////////////////////////////////////////////////////
+
+     whereToWatchCountry(state, action) {
+       state.queryObj = { ...state.queryObj,  ott_region: action.payload };
+    },
+
+    whereToWatchOtt(state, action){
+      state.queryObj = { ...state.queryObj,  with_ott_providers: action.payload.join(" ") };
+    }
 
 
 

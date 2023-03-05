@@ -7,18 +7,29 @@ const initialCounterState = {
   topMovie:[],
   upMovie:[],
   tvShow:[],
+  filterMovie:[],
 
   peopleArray:[], 
   topCase: [], 
   reviews: [], 
   isLoading: false, 
   activePageNum: 1, 
-  loadMoreClicked:false };
+  loadMoreClicked:false
+ };
 
 const movieReducer = createSlice({
   name: 'movieReducer',
   initialState: initialCounterState,
   reducers: {
+
+
+    filterMovieHandler(state, action, count) {
+      if(action.count === 1){
+        state.filterMovie = action.payloadFilter.data.results;
+      }else{
+        state.filterMovie = [...state.filterMovie, ...action.payloadFilter.data.results];
+      }
+    },
 
     popularMovieHandler(state, action, count) {
       if(action.count === 1){

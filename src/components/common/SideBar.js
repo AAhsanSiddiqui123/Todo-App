@@ -7,6 +7,9 @@ import SideBarDropDown2 from "./sideBarDropDown/sideDropDown2/SideBarDropDown2";
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { useNavigate } from "react-router-dom";
+import { movieActionCreater } from "../../Store/reducers/movieReducer";
+
 
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -14,7 +17,9 @@ import { height } from '@mui/system';
 
 let queryString;
 const SideBar = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const [drop0, setDrop0] = React.useState(false);
   const [drop1, setDrop1] = React.useState(false);
   const [drop2, setDrop2] = React.useState(false);
@@ -22,13 +27,17 @@ const SideBar = () => {
   let queryObj = useSelector((state)=>state.discoverReducer.queryObj);
 
 
-  // console.log(queryObj);
   function querySelector() {
     setActiveBtn(false)
   }
   
   function clickHandler() {  
-    dispatch({ type: "discoverMovie_Saga", queryObj})
+    dispatch(movieActionCreater.loadMoreClickedHandler(false))
+    dispatch(movieActionCreater.activePageNumHandler(1));
+    localStorage.setItem("activePage", "filterPage");
+    dispatch({ type: "discoverMovie_Saga", action:{queryObj: queryObj, page:1 } })
+    navigate("/filterpage")
+    
   }
 
   const style = {

@@ -17,7 +17,7 @@ export default function SearchCard(props) {
     const navigate = useNavigate();
 
     function clickHandler() {
-        // navigate(`/movie/${props.data.id}`)
+        navigate(`/${props.data.media_type}/${props.data.id}`)
     }
     return (
         <Container>

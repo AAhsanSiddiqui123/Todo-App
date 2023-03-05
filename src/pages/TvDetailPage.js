@@ -39,7 +39,6 @@ const TvDetailPage = () => {
     const [state, setState] = React.useState({})
     let id = useParams();
 
-console.log(id);
 
     const dispatch = useDispatch();
     let topCast = useSelector((state) => state.movieReducer.topCase);
@@ -47,13 +46,11 @@ console.log(id);
     let isLoading = useSelector((state) => state.stateReducer.isLoading);
     let topCastIsLoading = useSelector((state) => state.stateReducer.topCastIsLoading);
 
-    console.log(topCastIsLoading);
 
     React.useEffect(() => {
         dispatch(movieActionCreater.loadMoreClickedHandler(false))
         dispatch(magageStateAction.updateHandler(true))
 
-        console.log(`${Get_TvDetail_url}/${id.id}`);
         axiosService({
             method: "GET",
             url: `${Get_TvDetail_url}/${id.id}`,
@@ -66,7 +63,6 @@ console.log(id);
 
             dispatch({ type: "get_tvCast_saga", payload: res.data.id })
             dispatch({ type: "get_TvReview_saga", payload: res.data.id })
-
             setState(res.data);
         })
 
@@ -75,7 +71,7 @@ console.log(id);
 
     var movieRealeseyear = (new Date(state.first_air_date)).getFullYear();
     let country = state?.production_countries?.[0]?.iso_3166_1
-    let posterImage = `https://image.tmdb.org/t/p/original/${state?.backdrop_path}`
+    let posterImage =state.backdrop_path ? `https://image.tmdb.org/t/p/original/${state?.backdrop_path}` : "#"
 
     var month = (new Date(reviews?.[0]?.created_at)).getUTCMonth() + 1;
     var day = (new Date(reviews?.[0]?.created_at)).getUTCDate();
@@ -112,20 +108,20 @@ console.log(id);
                         //  width: "300px"
                          }}
                         alt="green iguana"
-                        image={`https://image.tmdb.org/t/p/w500/${state?.poster_path}`}
+                        image={state.poster_path ? `https://image.tmdb.org/t/p/w500/${state?.poster_path}` :"#"}
                     />
                 </Grid>
                 <Grid item xs={12} sm={8} md={8} lg={8} xl={8}>
                     <Box>
                         <Typography variant='h2' sx={{ fontWeight: "700", fontSize: "35.2px" }}> {state.original_name} {`(${movieRealeseyear})` || ""} </Typography>
                         <Box>
-                            <Typography variant='p'>{state.release_date} {`(${country})`}</Typography>
+                            <Typography variant='p'>{state.first_air_date} {`(${country})`}</Typography>
                             {
                                 state.genres ? state.genres.map((curr, i) => {
                                     return <Typography variant='p' key={i}> {curr.name} </Typography>
                                 }) : []
                             }
-                            <Typography variant='p'>{` ${state.runtime}m`} </Typography>
+                            <Typography variant='p'>{`Episodes (${state.number_of_episodes})`} </Typography>
 
                         </Box>
                     </Box>

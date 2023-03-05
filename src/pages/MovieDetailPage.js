@@ -41,7 +41,6 @@ const DetailPage = () => {
     let id = useParams();
 
 
-
     const dispatch = useDispatch();
     let topCast = useSelector((state) => state.movieReducer.topCase);
     let reviews = useSelector((state) => state.movieReducer.reviews);
@@ -64,7 +63,7 @@ const DetailPage = () => {
 
             dispatch({ type: "get_cast_saga", payload: res.data.id })
             dispatch({ type: "get_Review_saga", payload: res.data.id })
-
+            console.log(res.data)
             setState(res.data);
         })
 
@@ -73,7 +72,7 @@ const DetailPage = () => {
 
     var movieRealeseyear = (new Date(state.release_date)).getFullYear();
     let country = state?.production_countries?.[0]?.iso_3166_1
-    let posterImage = `https://image.tmdb.org/t/p/original/${state?.backdrop_path}`
+    let posterImage = state.backdrop_path ? `https://image.tmdb.org/t/p/original/${state?.backdrop_path}` : "#"
 
     var month = (new Date(reviews?.[0]?.created_at)).getUTCMonth() + 1;
     var day = (new Date(reviews?.[0]?.created_at)).getUTCDate();
@@ -112,7 +111,7 @@ const DetailPage = () => {
                                     //  width: "300px"
                                 }}
                                 alt="green iguana"
-                                image={`https://image.tmdb.org/t/p/w500/${state?.poster_path}`}
+                                image= {state.poster_path ? `https://image.tmdb.org/t/p/w500/${state?.poster_path}` :"#"}
                             />
                         </Grid>
                         <Grid item xs={12} sm={8} md={8} lg={8} xl={8}>
@@ -250,7 +249,7 @@ export default DetailPage
 
 
 
-
+    
 // let url;
 // let castSaga;
 // let reviewSaga;

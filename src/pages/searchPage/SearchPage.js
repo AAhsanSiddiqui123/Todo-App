@@ -14,7 +14,6 @@ export default function HomePage(props) {
     let isloading = useSelector((state) => state.movieReducer.isLoading);
     let searchList = useSelector((state) => state.searchReducer.searchList);
 
-    // console.log(searchList);
     
     if (!isloading && searchList.length > 0) {
         searchList = searchList.map((curr, index) => {

@@ -86,23 +86,12 @@ function* getUpcomminMovie(action) {
 
 ////// Discover Movies
 function* discover(action) {
-    let params = action?.queryObj || null;
+    let params = action?.action?.queryObj;
+    let count = action?.action?.count;
 
 
-    // console.log(params?.with_genres);
-    // console.log(params?.["release_date.lte"]);
-
-    const d1 = new Date(params?.["release_date.gte"]);
-    const FromDate = d1.getTime();
-    console.log(FromDate)
-
-    const d2 = new Date(params?.['release_date.lte']);
-    const ToDate = d1.getTime();
-    console.log(ToDate);
-
-
-    // yield put({ type: movieActionCreater.loadingHandler, payload: { loading: true } });
-    let payload = yield axiosService({
+    yield put({ type: movieActionCreater.loadingHandler, payload: { loading: true } });
+    let payloadFilter = yield axiosService({
         method: "GET",
         url: `${Discover_url}/movie`,
         headers: {
@@ -118,7 +107,7 @@ function* discover(action) {
             //   first_air_date : null,
             //   first_air_date  : null,
             ott_region: params?.ott_region,
-            page: 1,
+            page: action?.action?.page,
             //   primary_release_date : null,
             //   primary_release_date  : null,
             region: "PK",
@@ -142,10 +131,9 @@ function* discover(action) {
 
         }
     })
-
-    console.log(payload);
-    // yield put({ type: movieActionCreater.loadingHandler, payload: { loading: false } });
-    // yield put({ type: movieActionCreater.upCommingMovie, payload,  count});
+    console.log(payloadFilter);
+    yield put({ type: movieActionCreater.loadingHandler, payload: { loading: false } });
+    yield put({ type: movieActionCreater.filterMovieHandler, payloadFilter, count});
 }
 
 

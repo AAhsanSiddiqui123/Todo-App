@@ -31,6 +31,8 @@ const Footer = () => {
   let activePageNum = useSelector((state) => state.movieReducer.activePageNum);
   let loadMoreClicked = useSelector((state) => state.movieReducer.loadMoreClicked);
   let isloading = useSelector((state) => state.movieReducer.isLoading);
+  let queryObj = useSelector((state)=>state.discoverReducer.queryObj);
+
 
   const dispatch = useDispatch();
 
@@ -57,11 +59,17 @@ const Footer = () => {
         activePageNum = activePageNum + 1;
         dispatch(movieActionCreater.activePageNumHandler(activePageNum))
         dispatch({ type: "UpCommingMovie_saga", action: { page: activePageNum } })
-     
-      }else if (activePage === "populartv" && loadMoreClicked === true) {
+
+      } else if (activePage === "populartv" && loadMoreClicked === true) {
         activePageNum = activePageNum + 1;
         dispatch(movieActionCreater.activePageNumHandler(activePageNum))
         dispatch({ type: "Tv_saga", action: { page: activePageNum } })
+      }
+
+      else if (activePage === "filterPage" && loadMoreClicked === true) {
+        activePageNum = activePageNum + 1;
+        dispatch(movieActionCreater.activePageNumHandler(activePageNum))
+        dispatch({ type: "discoverMovie_Saga", action: { queryObj:queryObj,  page: activePageNum } })
       }
 
     }
@@ -81,15 +89,15 @@ const Footer = () => {
 
   }, [loadMoreClicked, isloading])
 
-const styles={
-  footerStack:{
-    backgroundColor: "#032541", 
-    color: "white", 
-    display: "flex", 
-    alignItems: "center", 
-    width: "100%"
+  const styles = {
+    footerStack: {
+      backgroundColor: "#032541",
+      color: "white",
+      display: "flex",
+      alignItems: "center",
+      width: "100%"
+    }
   }
-}
   return (
     <ThemeProvider theme={theme}>
 
@@ -98,7 +106,7 @@ const styles={
 
           <Grid container sx={{}}>
 
-            <Grid item xs={12} sm={12} md={12} lg={12} xl={2} sx={{mr:5}}>
+            <Grid item xs={12} sm={12} md={12} lg={12} xl={2} sx={{ mr: 5 }}>
               <Stack sx={{ ml: "5px" }} spacing={3}>
                 <img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg" alt="The Movie Database (TMDB)" height="100" />
                 <Button variant="contained"  >Contained</Button>

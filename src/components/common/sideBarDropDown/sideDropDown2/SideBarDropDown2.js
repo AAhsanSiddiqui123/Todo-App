@@ -41,6 +41,7 @@ export default function MultipleSelectChip(props) {
 
     const handleChange = (e) => {
         dispatch(discoverActionCreater.whereToWatchCountry(e.target.value));
+        props.querySelector();
         setRegin(e.target.value);
     };
 
@@ -66,12 +67,8 @@ export default function MultipleSelectChip(props) {
     
     React.useEffect(()=>{
         dispatch(discoverActionCreater.whereToWatchOtt(providers));
+        props.querySelector();
     },[providers])
-
-
-
-
-
 
 
 

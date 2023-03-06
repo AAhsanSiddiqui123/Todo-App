@@ -94,7 +94,6 @@ const movieReducer = createSlice({
     },
 
     loadMoreClickedHandler(state, action){
-      console.log();
       state.loadMoreClicked = action.payload
     }
 

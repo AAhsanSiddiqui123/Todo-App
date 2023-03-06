@@ -63,7 +63,6 @@ const DetailPage = () => {
 
             dispatch({ type: "get_cast_saga", payload: res.data.id })
             dispatch({ type: "get_Review_saga", payload: res.data.id })
-            console.log(res.data)
             setState(res.data);
         })
 

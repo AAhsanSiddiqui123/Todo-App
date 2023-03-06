@@ -41,8 +41,6 @@ export default function MainCardContainer(props) {
     }
 
 
-    console.log(popularMovie)
-
     return (
         <>
             <Container style={{ maxWidth: "80%" }} >

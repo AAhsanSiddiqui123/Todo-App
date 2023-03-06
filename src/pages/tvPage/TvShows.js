@@ -40,7 +40,6 @@ export default function MainCardContainer(props) {
     }
 
 
-    console.log(tvShow)
 
     return (
         <>

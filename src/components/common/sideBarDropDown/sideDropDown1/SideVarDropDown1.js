@@ -56,7 +56,6 @@ export default function SideVarDropDown1(props) {
   const [personName, setPersonName] = React.useState([]);
   let queryObj = useSelector((state)=>state.discoverReducer.queryObj);
 
-  // console.log(queryObj);
 
   const handleChange = (event) => {
     const {
@@ -73,7 +72,6 @@ export default function SideVarDropDown1(props) {
   /////// Slide Bars
   const [valueSlider1, setValueSlider1] = React.useState([0, 7]);
   const handleChangeSlider1 = (event, newValue) => {
-    console.log("change");
     dispatch(discoverActionCreater.userScoreHandler(event.target.value));
     props.querySelector();
     setValueSlider1(event.target.value);
@@ -81,8 +79,6 @@ export default function SideVarDropDown1(props) {
 
   const [valueSlider2, setValueSlider2] = React.useState(0);
   const handleChangeSlider2 = (event, newValue) => {
-    console.log("change");
-    console.log(event.target.value);
     dispatch(discoverActionCreater.minimumUserVotesHandler(event.target.value));
     props.querySelector();
     setValueSlider2(event.target.value);
@@ -90,7 +86,6 @@ export default function SideVarDropDown1(props) {
 
   const [valueSlider3, setValueSlider3] = React.useState([120, 180]);
   const handleChangeSlider3 = (event, newValue) => {
-    console.log("change");
     dispatch(discoverActionCreater.runtimeHandler(event.target.value));
     props.querySelector();
     setValueSlider3(event.target.value);
@@ -101,7 +96,6 @@ export default function SideVarDropDown1(props) {
   ////Show me
   const [showme, setShowMe] = React.useState('Everything');
   const showMeHandler = (event) => {
-    console.log("change");
     // console.log(event.target.value)
     // setShowMe(event.target.value);
   };
@@ -115,7 +109,6 @@ export default function SideVarDropDown1(props) {
     setToglleAvailablityChecked(!availchecked);
   };
   function AvailableCheckBox(checkbox) {
-    console.log("change");
     dispatch(discoverActionCreater.queryObjHandler(checkbox));
     props.querySelector();
   }
@@ -129,18 +122,15 @@ export default function SideVarDropDown1(props) {
   };
 
   function AvailableReleaseCheckBox(checkbox) {
-    console.log(checkbox);
 
     let num = Number(checkbox.join(''));
     let result = num.toLocaleString() + num.toString().slice(num.toString().indexOf('.'))
-    console.log(result);
     dispatch(discoverActionCreater.releaseDateCheckBoxHandler(checkbox));
     props.querySelector();
   }
 
   const [date1, setDate1Value] = React.useState(dayjs('2014-08-18'));
   const dateFromChangeHandler = (newValue) => {
-    console.log("change");
     dispatch(discoverActionCreater.fromDateHandler(newValue));
     props.querySelector();
     setDate1Value(newValue);
@@ -155,7 +145,6 @@ export default function SideVarDropDown1(props) {
 
   const [date2, setDate2Value] = React.useState(dayjs(currDate));
   const dateToHandler = (dateChange) => {
-    console.log("change");
     let to = dayjs(dateChange).format("YYYY-MM-DD");
 
     let dateObj = {
@@ -172,7 +161,6 @@ export default function SideVarDropDown1(props) {
 
   ////// chips
   function chipHandler(chipValues) {
-    console.log("change");
     dispatch(discoverActionCreater.chipHandler(chipValues));
     props.querySelector()
   }
@@ -220,14 +208,6 @@ export default function SideVarDropDown1(props) {
           <FormGroup>
             <FormLabel sx={{ mt: 1, mb: 0 }} id="demo-radio-buttons-group-label">Release Dates </FormLabel>
 
-            {/* <FormControlLabel control={<Checkbox
-              size="small"
-              defaultChecked
-              // checked={releseDatesChecked}
-              onChange={releaseDateHandler}
-              inputProps={{ 'aria-label': 'controlled' }}
-            />} label="Search all releases?" />
-            {releseDatesChecked && <ReleaseDates AvailableReleaseCheckBox={AvailableReleaseCheckBox} />} */}
           </FormGroup>
 
           <LocalizationProvider dateAdapter={AdapterDayjs}>

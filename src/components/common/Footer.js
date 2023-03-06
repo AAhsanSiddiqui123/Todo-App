@@ -95,7 +95,6 @@ const Footer = () => {
       color: "white",
       display: "flex",
       alignItems: "center",
-      width: "100%"
     }
   }
   return (

@@ -1,16 +1,9 @@
 import { createSlice, current } from '@reduxjs/toolkit';
 import dayjs from 'dayjs';
 
-// var dateObj = new Date();
-// var month = ("0" + (dateObj.getMonth() + 1)).slice(-2); //months from 1-12
-// var day = dateObj.getUTCDate();
-// var year = dateObj.getUTCFullYear();
-// let currDate = year + "-" + month + "-" + day;
 
-// const d1 = new Date(currDate);
-// const FromDate = d1.getTime();
 const date = new Date()
-const result = date.toLocaleDateString("en-GB", { // you can use undefined as first argument
+const result = date.toLocaleDateString("en-GB", {
   year: "numeric",
   month: "2-digit",
   day: "2-digit",
@@ -68,23 +61,19 @@ const discoverReducer = createSlice({
 
 
     queryObjHandler(state, action) {
-      console.log("monitiztion");
       state.queryObj = { ...state.queryObj, with_ott_monetization_types: `flatrate|${action.payload.join("|")}` }
     },
 
     releaseDateCheckBoxHandler(state, action) {
-    //   console.log("release data");
     //   state.queryObj = { ...state.queryObj, with_release_type: action.payload.join(",") }
     },
 
     fromDateHandler(state, action) {
-      console.log(action);
       let from = dayjs(action.payload).format("YYYY-MM-DD");
       state.queryObj = { ...state.queryObj, ["release_date.gte"]: from }
     },
 
     toDateHandler(state, action) {
-      console.log(action);
       let to = dayjs(action.payload.dateChange).format("YYYY-MM-DD");
       state.queryObj = { ...state.queryObj, ["release_date.lte"]: to };
     },
@@ -94,7 +83,6 @@ const discoverReducer = createSlice({
     },
 
     userScoreHandler(state, action) {
-      console.log(action);
       state.queryObj =
       {
         ...state.queryObj,

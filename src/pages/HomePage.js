@@ -18,6 +18,8 @@ import Box from '@mui/material/Box';
 
 import HomePageCards from "../components/common/cards/HomePageCards";
 import { useSelector, useDispatch } from 'react-redux';
+import { movieActionCreater } from "../Store/reducers/movieReducer";
+
 
 let rndInt;
 export default function HomePage(props) {
@@ -41,6 +43,7 @@ export default function HomePage(props) {
 
     React.useEffect(() => {
         rndInt = Math.floor(Math.random() * 15) + 1
+        dispatch(movieActionCreater.loadMoreClickedHandler(false))
 
     }, [])
 
@@ -50,7 +53,6 @@ export default function HomePage(props) {
                 navigate(`/search`)
                 dispatch({ type: "search_saga", action: { query: input, page: 1 } });
             }, 2000)
-
         }
         return () => clearTimeout(getData)
     }, [input])
@@ -64,7 +66,7 @@ export default function HomePage(props) {
     }
 
 
-    let posterImage = `https://image.tmdb.org/t/p/original/${popularMovie?.[rndInt]?.backdrop_path}`
+    let posterImage =popularMovie?.[0]?.backdrop_path ? `https://image.tmdb.org/t/p/original/${popularMovie?.[rndInt]?.backdrop_path}` : "#";
 
 
     const styles = {

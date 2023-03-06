@@ -5,7 +5,6 @@ import { axiosService } from "../../../Services/axios.service"
 
 
 function* getPeople(action) {
-    console.log(action.action);
 
     let payload = yield axiosService({
         method: "GET",

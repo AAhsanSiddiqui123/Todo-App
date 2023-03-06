@@ -16,7 +16,6 @@ export default function TvShows(props) {
         dispatch({ type: "people_saga", action: "payload" })
 
     }, [])
-    console.log(peopleArray)
 
     return (
         <>

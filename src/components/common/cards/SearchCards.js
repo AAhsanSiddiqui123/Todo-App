@@ -30,7 +30,7 @@ export default function SearchCard(props) {
                             alt="green iguana"
                             height="150"
                             width="100"
-                            image={`https://image.tmdb.org/t/p/w500/${props.data.poster_path}`}
+                            image={props.data.poster_path  ? `https://image.tmdb.org/t/p/w500/${props.data.poster_path}`: "#"}
 
                         />
 
@@ -42,9 +42,6 @@ export default function SearchCard(props) {
                             <strong>{props.data.original_title || props.data.original_name}</strong>
                         </Typography>
 
-                        {/* <Typography gutterBottom variant="h8" component="div" sx={{ fontSize: 15 }} >
-                        {props.data.release_date || props.data.first_air_date}
-                        </Typography> */}
                         <Typography gutterBottom variant="h8" component="div" sx={{ fontSize: 13 }} >
                         {`${props?.data?.overview?.substring(0, 200)}...`}
                         </Typography>

@@ -38,42 +38,40 @@ export default function Chips(props) {
     },
   };
 
-  const [availMultiCheckBox, setAvailMultiCheckBox] = React.useState([]);
+  const [chipsVal, setChips] = React.useState([]);
 
   function chipHandler(e) {
     let value = e.target.closest(".test").getAttribute("value");
 
-    var index = availMultiCheckBox.indexOf(value);
+    var index = chipsVal.indexOf(value);
 
     if (index != -1) {
-      let newArray = availMultiCheckBox.filter((curr, i) => {
+      let newArray = chipsVal.filter((curr, i) => {
         return curr != value
       });
-      availMultiCheckBox.splice(index, 1)
-      setAvailMultiCheckBox([...newArray]);
+      chipsVal.splice(index, 1)
+      setChips([...newArray]);
     } else {
-      setAvailMultiCheckBox([...availMultiCheckBox, value])
+      setChips([...chipsVal, value])
     }
   }
 
+  React.useEffect(()=>{
+    if(chipsVal.length > 0 ){
+      props.chipHandler(chipsVal.join(","))
+    }
+
+  },[chipsVal])
+
   return (
     <Box
-
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        flexWrap: 'wrap',
-        listStyle: 'none',
-        p: 0.5,
-        mb: 2,
-      }}
+      sx={{display: 'flex',justifyContent: 'center',flexWrap: 'wrap',listStyle: 'none', p: 0.5, mb: 2,}}
       component="ul"
     >
-
       {chipData.map((data) => {
         return (
           <ListItem key={data.key}>
-            <Chip className='test' sx={boxSX} id={data.key} variant="outlined" label={data.label} value={data.value} onClick={chipHandler} />
+            <Chip  className='test' sx={boxSX} id={data.key} variant="outlined" label={data.label} value={data.value} onClick={chipHandler} />
           </ListItem>
         );
       })}

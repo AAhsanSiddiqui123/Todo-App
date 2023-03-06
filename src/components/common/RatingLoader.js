@@ -9,13 +9,11 @@ function CircularProgressWithLabel(props) {
  let mRating =  Math.round(props.value)
  let circleColor;
 
-//  if(mRating > 70){
-//   circleColor = "success"
-//  }else if(mRating > 50){
-//   circleColor = "warning"
-//  }else if(mRating > 30){
-//   circleColor = "danger"
-//  }
+ if(mRating >= 60 && mRating <= 100){
+  circleColor = "success"
+ }else if(mRating > 40 && mRating < 60){
+  circleColor = "warning"
+ }
 
 const styles={
   Loader:{ 
@@ -28,7 +26,7 @@ const styles={
 
   return (
     <Box sx={styles.Loader} bgcolor="black" borderRadius="100px">
-      <CircularProgress color="success" variant="determinate" {...props} />
+      <CircularProgress color={circleColor} variant="determinate" {...props} />
       <Box
         sx={{
           top: 0,

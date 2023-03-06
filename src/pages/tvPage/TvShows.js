@@ -40,13 +40,12 @@ export default function MainCardContainer(props) {
     }
 
 
-    // console.log(moviesArray)
 
     return (
         <>
             <Container style={{ maxWidth: "80%" }} >
                 <hr style={{ opacity: "none" }} />
-                <h1 className={style.activePage}>Popular Movies</h1>
+                <h1 className={style.activePage}>Popular TV Shows</h1>
 
                 <Grid container spacing={3}>
                     <SideBar />

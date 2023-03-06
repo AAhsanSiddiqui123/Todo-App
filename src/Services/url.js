@@ -2,6 +2,7 @@ const MainMovieUrl = 'https://api.themoviedb.org/3/movie';
 const MainTvUrl = 'https://api.themoviedb.org/3/tv';
 const MainPeopleUrl = "https://api.themoviedb.org/3/person";
 const SearchUrl = "https://api.themoviedb.org/3/search/multi";
+const discoverUrl = "https://api.themoviedb.org/3/discover";
 
 
 
@@ -36,3 +37,10 @@ exports.Get_People_url =  `${MainPeopleUrl}`;
 
 //search
 exports.Search_url =  `${SearchUrl}`;
+
+
+//discover
+exports.Discover_url =  `${discoverUrl}`;
+
+//countries list
+exports.Countries_url =  `https://api.themoviedb.org/3/configuration/countries?api_key=a501016df75ba02be8137f4996f56d90`;

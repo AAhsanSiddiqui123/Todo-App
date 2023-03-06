@@ -11,7 +11,6 @@ const magageState = createSlice({
     },
 
     castLoadingHandler(state, action){
-      console.log(action);
       state.topCastIsLoading = action.payload
     }
   },

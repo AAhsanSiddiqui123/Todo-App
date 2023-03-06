@@ -14,8 +14,6 @@ function* getReview(action) {
         },
         params: { api_key: "a501016df75ba02be8137f4996f56d90", language: "en-US" }
     })
-
-    console.log(payload);
     
     
     yield put({ type: movieActionCreater.reviewsHandler, payload: payload.data.results });

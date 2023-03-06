@@ -18,7 +18,6 @@ function* getCast(action) {
         params: { api_key: "a501016df75ba02be8137f4996f56d90", language: "en-US" }
     })
 
-    console.log("cast id,", action);
     
     yield put({ type: magageStateAction.castLoadingHandler, payload: false });
     yield put({ type: movieActionCreater.castHandler, payload: payload.data.cast });

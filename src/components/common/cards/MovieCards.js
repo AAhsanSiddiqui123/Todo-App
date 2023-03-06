@@ -22,7 +22,7 @@ export default function MovieCard(props) {
                     component="img"
                     alt="green iguana"
                     height="270"
-                    image={`https://image.tmdb.org/t/p/w500/${props.data.poster_path}`}
+                    image={props.data.poster_path ? `https://image.tmdb.org/t/p/w500/${props.data.poster_path}` : "#"}
                 />
                 <CircularStatic rating={props.data.vote_average} />
                 <Box sx={{p: 1}}>

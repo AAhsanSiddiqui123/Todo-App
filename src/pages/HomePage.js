@@ -18,6 +18,8 @@ import Box from '@mui/material/Box';
 
 import HomePageCards from "../components/common/cards/HomePageCards";
 import { useSelector, useDispatch } from 'react-redux';
+import { movieActionCreater } from "../Store/reducers/movieReducer";
+
 
 let rndInt;
 export default function HomePage(props) {
@@ -41,6 +43,7 @@ export default function HomePage(props) {
 
     React.useEffect(() => {
         rndInt = Math.floor(Math.random() * 15) + 1
+        dispatch(movieActionCreater.loadMoreClickedHandler(false))
 
     }, [])
 
@@ -50,7 +53,6 @@ export default function HomePage(props) {
                 navigate(`/search`)
                 dispatch({ type: "search_saga", action: { query: input, page: 1 } });
             }, 2000)
-
         }
         return () => clearTimeout(getData)
     }, [input])
@@ -64,7 +66,7 @@ export default function HomePage(props) {
     }
 
 
-    let posterImage = `https://image.tmdb.org/t/p/original/${popularMovie?.[rndInt]?.backdrop_path}`
+    let posterImage =popularMovie?.[0]?.backdrop_path ? `https://image.tmdb.org/t/p/original/${popularMovie?.[rndInt]?.backdrop_path}` : "#";
 
 
     const styles = {
@@ -95,12 +97,12 @@ export default function HomePage(props) {
     };
 
     return (
-        <Container style={{ maxWidth: "70%" }} >
+        <Container sx={{ maxWidth: {xl: "70%", lg:"70%", md:"70%", sm:"70%", xm:"100%"}}} >
             <Grid className='background' container style={styles.paperContainer} p={3}>
                 <Grid item sx={{ display: 'flex', alignItems: 'center', }} xm={12} sm={12} md={12} lg={12} xl={12} >
                     <Stack spacing={2} sx={{ width: "100%" }}>
                         <Typography variant='h2' sx={{ fontWeight: "700", fontSize: "35.2px" }}> Welcome. </Typography>
-                        <Typography variant='p' sx={{ fontWeight: "500", fontSize: "35.2px" }}>Millions of movies, TV shows and people to discover. Explore now.</Typography>
+                        <Typography variant='p' sx={{ fontWeight: "500", fontSize: "35.2px", fontSize:{xl: "32px", lg:"35.2px", md:"35.2px", sm:"35.2px", xm:"35.2px"} }}>Millions of movies, TV shows and people to discover. Explore now.</Typography>
 
                         <Box
                             component="form"

@@ -11,7 +11,7 @@ export default function MediaCard(props) {
     <Card sx={{ minWidth: "140px", height: "280px", borderRadius: "7px", mb: 3}}>
       <CardMedia
         sx={{ height: 175 }}
-        image={`https://image.tmdb.org/t/p/w500/${props.cast.profile_path}`}
+        image={props.cast.profile_path ? `https://image.tmdb.org/t/p/w500/${props.cast.profile_path}` : "#"}
         title="green iguana"
       />
       <CardContent>

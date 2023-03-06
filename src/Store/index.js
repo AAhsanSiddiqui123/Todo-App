@@ -3,7 +3,8 @@ import createSagaMiddleware from 'redux-saga';
 
 import manageStateReducer from './reducers/manageState';
 import movieReducer from "./reducers/movieReducer";
-import searchReducer from "./reducers/searchReducer"
+import searchReducer from "./reducers/searchReducer";
+import discoverReducer from './reducers/discoverReducer';
 
 import MovieSaga from "./sagas/movieSaga/moviesSaga";
 import getCastSaga from "./sagas/movieSaga/topCast";
@@ -26,13 +27,13 @@ const store = configureStore({
   reducer: {
     stateReducer: manageStateReducer,
     movieReducer: movieReducer,
-    searchReducer: searchReducer
+    searchReducer: searchReducer,
+    discoverReducer: discoverReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false
     }).concat(middleware),
-
 }
 
 );

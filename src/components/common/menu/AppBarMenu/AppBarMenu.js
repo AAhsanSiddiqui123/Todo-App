@@ -21,9 +21,6 @@ export default function BasicMenu(props) {
 
   const handleClose = (e) => {
     let selectedOption = e.nativeEvent.target.outerText;
-    // console.log(selectedOption)
-
-    console.log(heading, selectedOption)
     if (heading === "MOVIES") {
       if (selectedOption === "popular") {
 
@@ -44,7 +41,6 @@ export default function BasicMenu(props) {
       }
     }
     if (heading === "TV SHOWS") {
-      console.log(heading, selectedOption)
       if (selectedOption === "Popular") {
         localStorage.setItem("activePage", "populartv");
         navigate("/tv/popular")

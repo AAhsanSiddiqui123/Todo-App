@@ -8,7 +8,6 @@ const searchReducer = createSlice({
   reducers: {
 
     searchHandler(state, action) {
-        // console.log(action.payload);
       state.searchList = action.payload
     },
 
